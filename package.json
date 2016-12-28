@@ -1,0 +1,21 @@
+{
+  "name": "bud",
+  "version": "0.0.1",
+  "description": "Your simple budget management app.",
+  "main": "./src/server/index.js",
+  "repository": "git@github.com:Magellol/bud.git",
+  "author": "Thomas Lefebvre <lefebvre515@gmail.com>",
+  "scripts": {
+    "dev": "NODE_ENV='development' nodemon ./src/server",
+    "start": "node ./src/server"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dotenv": "^2.0.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
