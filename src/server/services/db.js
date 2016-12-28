@@ -6,10 +6,15 @@
 const Sequelize = require('sequelize');
 const config = require('config').datasource;
 
-module.exports = new Sequelize(config.database, config.username, config.password, {
+const connection = new Sequelize(config.database, config.username, config.password, {
   dialect: config.dialect,
   pool: {
     max: 5,
     min: 0
   }
 });
+
+module.exports = {
+  connection,
+  Sequelize
+};
