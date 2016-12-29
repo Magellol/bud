@@ -1,14 +1,17 @@
-const Db = require('../services/db');
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    username: {
+      type: DataTypes.STRING(60),
+      allowNull: false,
+      unique: true
+    }
+  }, {
+    classMethods: {
+      associate(models) {
+        User.hasMany(models.ExpenseCategory);
+      }
+    }
+  });
 
-module.exports = Db.connection.define('user', {
-  id: {
-    type: Db.Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  username: {
-    type: Db.Sequelize.STRING(60),
-    allowNull: false,
-    unique: true
-  }
-});
+  return User;
+};
