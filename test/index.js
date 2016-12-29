@@ -4,6 +4,10 @@ const Sequelize = require('sequelize');
 const { Models, connection } = require('../src/server/models');
 const fixtures = require('./fixtures');
 
+describe('Unit tests', function() {
+  require('./services');
+});
+
 describe('Integration tests', function () {
 
   /**
