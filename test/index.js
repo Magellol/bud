@@ -49,4 +49,6 @@ describe('Integration tests', function () {
       deferrable: Sequelize.Deferrable.SET_DEFERRED
     }, executeTransation);
   });
+
+  require('./routes');
 });
