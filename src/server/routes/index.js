@@ -1,4 +1,5 @@
 const config = require('config');
+const bodyParser = require('body-parser');
 const users = require('./users');
 const {
   formatError
@@ -6,6 +7,8 @@ const {
 
 module.exports = function apiRoutes(express) {
   const router = express.Router();
+
+  router.use(bodyParser.json());
 
   /**
    * Post request validator middleware.

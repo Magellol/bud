@@ -1,3 +1,4 @@
 describe('#Routes', function () {
-  require('./api/users-test');
+  require('./middlewares-test');
+  require('./users-test');
 });
