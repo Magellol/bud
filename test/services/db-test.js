@@ -1,9 +1,9 @@
 const { expect } = require('chai');
-const Sequelize = require('sequelize');
 const db = require('../../src/server/services/db');
+const { connection } = require('../../src/server/models');
 
-describe('::Database', function () {
-  it('Should export a Sequelize object', function () {
-    expect(db).to.be.an.instanceof(Sequelize);
+describe('Database', function () {
+  it('Should export an instance of Sequelize', function () {
+    expect(db).to.be.an.instanceof(connection.Sequelize);
   });
 });
