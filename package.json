@@ -7,7 +7,9 @@
   "author": "Thomas Lefebvre <lefebvre515@gmail.com>",
   "scripts": {
     "dev": "NODE_ENV='development' nodemon ./src/server",
-    "start": "node ./src/server"
+    "start": "node ./src/server",
+    "db:migrate": "sequelize db:migrate",
+    "db:rollback": "sequelize db:migrate:undo"
   },
   "devDependencies": {
     "chai": "^3.5.0",
