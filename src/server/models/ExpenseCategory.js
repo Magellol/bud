@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate(models) {
-        ExpenseCategory.belongsTo(models.User)
+        ExpenseCategory.belongsTo(models.User);
+        ExpenseCategory.hasMany(models.Expense);
       }
     }
   });

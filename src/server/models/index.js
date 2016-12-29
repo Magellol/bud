@@ -3,7 +3,8 @@ const database = require('../services/db');
 
 const definitions = [
   'User',
-  'ExpenseCategory'
+  'ExpenseCategory',
+  'Expense'
 ];
 
 const Models = definitions.reduce((acc, modelName) => {
