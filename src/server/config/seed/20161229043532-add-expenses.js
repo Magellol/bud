@@ -12,14 +12,14 @@ module.exports = {
         {
           amount: 65.00,
           name: 'My awesome expense',
-          expenseCategoryId: category.get('id'),
+          ExpenseCategoryId: category.get('id'),
           createdAt: now,
           updatedAt: now
         },
         {
           amount: 145.99,
           name: 'TV on black friday baby',
-          expenseCategoryId: category.get('id'),
+          ExpenseCategoryId: category.get('id'),
           createdAt: now,
           updatedAt: now
         }

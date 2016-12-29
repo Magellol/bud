@@ -11,13 +11,13 @@ module.exports = {
       return queryInterface.bulkInsert('ExpenseCategories', [
         {
           name: 'Video Games',
-          userId: user.get('id'),
+          UserId: user.get('id'),
           createdAt: now,
           updatedAt: now
         },
         {
           name: 'Groceries',
-          userId: user.get('id'),
+          UserId: user.get('id'),
           createdAt: now,
           updatedAt: now
         }
