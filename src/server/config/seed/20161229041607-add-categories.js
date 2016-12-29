@@ -11,15 +11,15 @@ module.exports = {
       return queryInterface.bulkInsert('ExpenseCategories', [
         {
           name: 'Video Games',
-          user_id: user.get('id'),
-          created_at: now,
-          updated_at: now
+          userId: user.get('id'),
+          createdAt: now,
+          updatedAt: now
         },
         {
           name: 'Groceries',
-          user_id: user.get('id'),
-          created_at: now,
-          updated_at: now
+          userId: user.get('id'),
+          createdAt: now,
+          updatedAt: now
         }
       ]);
     });

@@ -5,8 +5,8 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [
       {
         username: 'Magellol',
-        created_at: now,
-        updated_at: now
+        createdAt: now,
+        updatedAt: now
       }
     ])
   }

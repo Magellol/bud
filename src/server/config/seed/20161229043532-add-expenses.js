@@ -12,16 +12,16 @@ module.exports = {
         {
           amount: 65.00,
           name: 'My awesome expense',
-          expense_category_id: category.get('id'),
-          created_at: now,
-          updated_at: now
+          expenseCategoryId: category.get('id'),
+          createdAt: now,
+          updatedAt: now
         },
         {
           amount: 145.99,
           name: 'TV on black friday baby',
-          expense_category_id: category.get('id'),
-          created_at: now,
-          updated_at: now
+          expenseCategoryId: category.get('id'),
+          createdAt: now,
+          updatedAt: now
         }
       ]);
     });

@@ -8,9 +8,6 @@ module.exports = new Sequelize(
   {
     dialect: config.get('dialect'),
     host: config.get('host'),
-    define: {
-      underscored: true
-    },
     pool: {
       max: 5,
       min: 0
