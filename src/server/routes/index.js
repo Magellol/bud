@@ -1,8 +1,11 @@
 const config = require('config');
 const bodyParser = require('body-parser');
+const { connection: DbConnection } = require('../models');
 const users = require('./users');
 const {
-  formatError
+  formatError,
+  formatFailure,
+  formatValidationErrors
 } = require('../helpers/responses');
 
 module.exports = function apiRoutes(express) {
@@ -48,14 +51,33 @@ module.exports = function apiRoutes(express) {
   /**
    * Error middleware being executed every time the next() method is being called with
    * an error object in it. This will format a JSON response with a message and an error code.
+   *
+   * If we encounter a validation error, we'll dispatch it to the next error middleware.
    */
   router.use((error, req, resp, next) => {
+    if (error instanceof DbConnection.Sequelize.ValidationError) {
+      return next(error);
+    }
+
     const status = error.status || 500;
     const response = formatError(error.message, status);
 
     if (config.debug) {
       console.error(error.stack);
     }
+
+    return resp.status(status).json(response);
+  });
+
+  /**
+   * Validation error middleware.
+   * Handles responses when a validation error has been encountered.
+   * The only way to get in here is through the general error middleware (the first one).
+   */
+  router.use((error, req, resp, next) => {
+    const status = 422;
+    const formatted = formatValidationErrors(error.errors);
+    const response = formatFailure(formatted);
 
     return resp.status(status).json(response);
   });

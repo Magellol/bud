@@ -11,6 +11,16 @@ function format(status, data) {
   };
 }
 
+function formatValidationErrors(errors = []) {
+  return errors.reduce((errors, error) => {
+    const fieldname = error.path;
+
+    return Object.assign({}, errors, {
+      [fieldname]: errors[fieldname] ? [...errors[fieldname], error.message] : [error.message]
+    })
+  }, {});
+}
+
 function formatSuccess(data = null) {
   return format(RESPONSE_STATUSES.ok, data);
 }
@@ -50,5 +60,6 @@ function formatError(message, code = null) {
 module.exports = {
   formatFailure,
   formatError,
-  formatSuccess
+  formatSuccess,
+  formatValidationErrors
 };

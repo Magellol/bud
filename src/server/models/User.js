@@ -3,7 +3,19 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING(60),
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: 'You must provide a username'
+        },
+        isAlpha: {
+          msg: 'Your username can only contain letters'
+        },
+        len: {
+          args: [3, 60],
+          msg: 'Your username must be between 3 and 60 characters long.'
+        }
+      }
     }
   }, {
     classMethods: {
