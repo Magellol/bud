@@ -1,7 +1,11 @@
 /**
  * Config file for sequelized migrations.
  */
-process.env.NODE_ENV = 'development'; // TODO temporary workaround.
+
+// TODO
+// This is not pretty but I have to figure out a way to pass 'development' as env
+// when on a local machine without hardcoding it.
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 require('./bootstrap');
 

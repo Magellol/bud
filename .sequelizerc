@@ -3,5 +3,6 @@ const path = require('path');
 module.exports = {
   'config': path.join(__dirname, 'src/server/config', 'sequelize.js'),
   'migrations-path': path.join(__dirname, 'src/server/config/migrations'),
+  'seeders-path': path.join(__dirname, 'src/server/config/seed'),
   'underscored': true
 };
