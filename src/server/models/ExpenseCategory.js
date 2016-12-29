@@ -3,7 +3,16 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING(100),
       allowNull: false
-    }
+    },
+    UserId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+        deferrable: sequelize.Deferrable.INITIALLY_IMMEDIATE
+      }
+    },
   }, {
     classMethods: {
       associate(models) {
