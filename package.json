@@ -7,8 +7,8 @@
   "author": "Thomas Lefebvre <lefebvre515@gmail.com>",
   "scripts": {
     "dev": "NODE_ENV='development' nodemon ./src/server",
+    "test": "NODE_ENV=${NODE_ENV:-'test'} mocha ./test",
     "start": "node ./src/server",
-    "test": "echo No tests found && exit 1",
     "db:migrate": "sequelize db:migrate",
     "db:rollback": "sequelize db:migrate:undo",
     "db:seed": "sequelize db:seed:all"

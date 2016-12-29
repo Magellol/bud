@@ -1,1 +1,1 @@
-// Test main file.
+require('../src/server/config/bootstrap');
