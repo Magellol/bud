@@ -1,23 +1,5 @@
 const path = require('path');
-const config = require('config').datasource;
-const Sequelize = require('sequelize');
-
-const connection = new Sequelize(
-  config.get('database'),
-  config.get('username'),
-  config.get('password'),
-  {
-    dialect: config.get('dialect'),
-    host: config.get('host'),
-    define: {
-      underscored: true
-    },
-    pool: {
-      max: 5,
-      min: 0
-    }
-  }
-);
+const database = require('../services/db');
 
 const definitions = [
   'User',
@@ -26,7 +8,7 @@ const definitions = [
 
 const Models = definitions.reduce((acc, modelName) => {
   const filePath = path.join(__dirname, modelName);
-  const model = connection.import(filePath);
+  const model = database.import(filePath);
 
   return Object.assign({}, acc, {
     [model.name]: model
@@ -51,7 +33,6 @@ Object.values(Models).map(model => {
 });
 
 module.exports = {
-  connection,
-  Sequelize,
-  Models
+  Models,
+  connection: database
 };
