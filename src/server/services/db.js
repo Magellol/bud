@@ -1,13 +1,14 @@
 const Sequelize = require('sequelize');
-const config = require('config').datasource;
+const config = require('config');
 
 module.exports = new Sequelize(
-  config.get('database'),
-  config.get('username'),
-  config.get('password'),
+  config.get('datasource.database'),
+  config.get('datasource.username'),
+  config.get('datasource.password'),
   {
-    dialect: config.get('dialect'),
-    host: config.get('host'),
+    dialect: config.get('datasource.dialect'),
+    host: config.get('datasource.host'),
+    logging: config.get('debug') ? console.log : false,
     pool: {
       max: 5,
       min: 0

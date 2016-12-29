@@ -18,7 +18,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
-          key: 'id'
+          key: 'id',
+          deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
         }
       },
       createdAt: {

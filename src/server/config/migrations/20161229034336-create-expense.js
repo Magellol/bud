@@ -22,7 +22,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: 'ExpenseCategories',
-          key: 'id'
+          key: 'id',
+          deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
         }
       },
       createdAt: {
