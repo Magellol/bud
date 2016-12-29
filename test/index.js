@@ -7,6 +7,7 @@ const fixtures = require('./fixtures');
 describe('Unit tests', function() {
   require('./services');
   require('./models');
+  require('./helpers');
 });
 
 describe('Integration tests', function () {
