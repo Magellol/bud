@@ -2,8 +2,15 @@ const { expect } = require('chai');
 const {
   formatSuccess,
   formatFailure,
-  formatError
+  formatError,
+  formatValidationErrors
 } = require('../../src/server/helpers/responses');
+
+describe('formatValidationErrors', function () {
+  it.skip('Should return an object of formatted errors', function () {
+    // formatValidationErrors()
+  });
+});
 
 describe('formatSuccess', function () {
   it('Should return an object with the status "success" and some data', function () {
