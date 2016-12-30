@@ -7,8 +7,28 @@ const {
 } = require('../../src/server/helpers/responses');
 
 describe('formatValidationErrors', function () {
-  it.skip('Should return an object of formatted errors', function () {
-    // formatValidationErrors()
+  it('Should return an object of formatted errors', function () {
+    const errors = [
+      {
+        path: 'username',
+        message: 'Cannot be empty'
+      },
+      {
+        path: 'username',
+        message: 'Must be 3 characters long'
+      },
+      {
+        path: 'password',
+        message: 'Cannot be empty'
+      }
+    ];
+
+    const result = formatValidationErrors(errors);
+
+    expect(result).to.be.deep.equal({
+      username: ['Cannot be empty', 'Must be 3 characters long'],
+      password: ['Cannot be empty']
+    });
   });
 });
 
