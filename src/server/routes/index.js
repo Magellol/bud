@@ -19,17 +19,16 @@ module.exports = function apiRoutes(express) {
    * If we do, we move on. But if we don't we hand an error to the error middleware.
    */
   router.post('*', (req, resp, next) => {
-      if (typeof req.body === 'undefined' || typeof req.body.payload === 'undefined') {
+    if (typeof req.body === 'undefined' || typeof req.body.payload === 'undefined') {
+      // TODO
+      // Use helper.
+      const error = new Error('Post requests require having a "payload" property in the post data');
+      error.status = 422;
 
-        // TODO
-        // Use helper.
-        const error = new Error('Post requests require having a "payload" property in the post data');
-        error.status = 422;
+      return next(error);
+    }
 
-        return next(error);
-      }
-
-      return next();
+    return next();
   });
 
   router.use('/users', users(router));
@@ -40,7 +39,6 @@ module.exports = function apiRoutes(express) {
    * So we're assuming it doesn't exist and throw a 404.
    */
   router.use((req, resp, next) => {
-
     // TODO
     // Helper.
     const error = new Error('Ressource does not exist');
@@ -63,7 +61,7 @@ module.exports = function apiRoutes(express) {
     const response = formatError(error.message, status);
 
     if (config.debug) {
-      console.error(error.stack);
+      console.error(error.stack); // eslint-disable-line no-console
     }
 
     return resp.status(status).json(response);
@@ -74,7 +72,7 @@ module.exports = function apiRoutes(express) {
    * Handles responses when a validation error has been encountered.
    * The only way to get in here is through the general error middleware (the first one).
    */
-  router.use((error, req, resp, next) => {
+  router.use((error, req, resp, next) => { // eslint-disable-line no-unused-vars
     const status = 422;
     const formatted = formatValidationErrors(error.errors);
     const response = formatFailure(formatted);

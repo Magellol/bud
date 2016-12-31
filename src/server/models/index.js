@@ -16,21 +16,21 @@ const Models = definitions.reduce((acc, modelName) => {
   });
 }, {});
 
-Object.values(Models).map(model => {
+Object.values(Models).map((model) => {
   const prop = model.associate;
   if (typeof prop === 'undefined') {
-    return;
+    return false;
   }
 
   if (typeof prop !== 'function') {
     throw new Error(
       `Failure at establishing associations for model "${model.name}". ` +
-      `Invalid "associate" property has been found in its model definition. ` +
+      'Invalid "associate" property has been found in its model definition. ' +
       `Expected "function" but received instead "${typeof prop}".`
     );
   }
 
-  model.associate(Models);
+  return model.associate(Models);
 });
 
 module.exports = {

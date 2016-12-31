@@ -12,12 +12,12 @@ function format(status, data) {
 }
 
 function formatValidationErrors(errors = []) {
-  return errors.reduce((errors, error) => {
+  return errors.reduce((formatted, error) => {
     const fieldname = error.path;
 
-    return Object.assign({}, errors, {
-      [fieldname]: errors[fieldname] ? [...errors[fieldname], error.message] : [error.message]
-    })
+    return Object.assign({}, formatted, {
+      [fieldname]: formatted[fieldname] ? [...formatted[fieldname], error.message] : [error.message]
+    });
   }, {});
 }
 
@@ -32,21 +32,20 @@ function formatFailure(data = null) {
 function formatError(message, code = null) {
   if (typeof message !== 'string') {
     throw new Error(
-      `Could not format an error message. ` +
+      'Could not format an error message. ' +
       `The "message" argument must be a string. "${typeof message}" was given instead.`
     );
   }
 
-  message = message.trim();
-  if (message.length === 0) {
+  if (message.trim().length === 0) {
     throw new Error(
-      `Could not format an error message. ` +
-      `The "message" argument was empty.`
+      'Could not format an error message. ' +
+      'The "message" argument was empty.'
     );
   }
 
   const error = {
-    message,
+    message: message.trim(),
     status: RESPONSE_STATUSES.error
   };
 

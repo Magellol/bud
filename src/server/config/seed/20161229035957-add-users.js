@@ -1,13 +1,13 @@
-const now = new Date;
+const now = new Date();
 
 module.exports = {
-  up(queryInterface, Sequelize) {
+  up(queryInterface) {
     return queryInterface.bulkInsert('Users', [
       {
         username: 'Magellol',
         createdAt: now,
         updatedAt: now
       }
-    ])
+    ]);
   }
 };

@@ -2,8 +2,8 @@ const { wrap } = require('co');
 const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 
-module.exports = function(router) {
-  router.get('/', wrap(function* (req, resp, next) {
+module.exports = function userRoutes(router) {
+  router.get('/', wrap(function* (req, resp) {
     const users = yield Models.User.findAll();
     const response = users.map(user => user.get());
 
@@ -17,7 +17,7 @@ module.exports = function(router) {
     try {
       const result = yield user.save();
       return resp.json(formatSuccess(result));
-    } catch(error) {
+    } catch (error) {
       return next(error);
     }
   }));

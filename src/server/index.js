@@ -11,7 +11,7 @@ App.use('/api', apiRoutes(express));
 const port = config.get('port');
 App.listen(port, () => {
   if (config.debug) {
-    console.log(`Listening at ${port}`);
+    console.log(`Listening at ${port}`); // eslint-disable-line no-console
   }
 });
 
