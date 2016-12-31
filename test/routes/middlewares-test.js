@@ -43,8 +43,7 @@ describe('Auth middleware', function () {
 
 describe('POST middleware', function () {
   it('Should return an error message when no payload is sent', function () {
-    const agent = chai.request.agent(server);
-    const request = agent.post('/api/users/new');
+    const request = chai.request(server).post('/api/users/new');
 
     return expect(request).to.be.rejected
       .then((error) => {
