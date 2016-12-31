@@ -2,16 +2,16 @@ require('./config/bootstrap');
 
 const config = require('config');
 const express = require('express');
-const api = require('./routes/api');
+const apiRoutes = require('./routes');
 
 const App = express();
 
-App.use('/api', api(express));
+App.use('/api', apiRoutes(express));
 
 const port = config.get('port');
 App.listen(port, () => {
   if (config.debug) {
-    console.log(`Listening at ${port}`)
+    console.log(`Listening at ${port}`);
   }
 });
 
