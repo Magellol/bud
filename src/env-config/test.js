@@ -7,5 +7,8 @@ module.exports = {
   port: process.env.PORT_TEST,
   datasource: {
     database: process.env.DATASOURCE_TEST_DATABASE
+  },
+  session: {
+    store: false
   }
 };

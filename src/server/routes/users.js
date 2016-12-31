@@ -1,5 +1,5 @@
 const { wrap } = require('co');
-const { Models, connection } = require('../models');
+const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 const { createValidationError } = require('../helpers/errors');
 
@@ -12,21 +12,19 @@ module.exports = function userRoutes(router) {
   }));
 
   router.post('/login', wrap(function* (req, resp, next) {
-    if (req.session.user) {
-      return resp.json(formatSuccess());
-    }
-
     const { username } = req.body.payload;
     const user = yield Models.User.findOne({
       where: { username }
     });
+
+    // That'll reset the session if attempting to login with a bad user.
+    req.session.user = user; // eslint-disable-line no-param-reassign
 
     if (user === null) {
       const error = createValidationError('username', 'We could not find the user you are looking for');
       return next(error);
     }
 
-    req.session.user = user; // eslint-disable-line no-param-reassign
     return resp.json(formatSuccess());
   }));
 

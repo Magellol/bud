@@ -86,3 +86,37 @@ describe('/users/new', function () {
     expect(body.data.id).to.be.equal(lastInsertedUser.get('id'));
   }));
 });
+
+describe('/users/login', function () {
+  it('Should set the session user', wrap(function* () {
+    const agent = chai.request.agent(server);
+    const user = yield Models.User.findOne();
+
+    const response = yield agent
+      .post('/api/users/login')
+      .send({
+        payload: { username: user.get('username') }
+      });
+
+    expect(response).to.have.cookie('connect.sid');
+  }));
+
+  it('Should throw an error when the user could not be found', function () {
+    const request = chai.request(server)
+      .post('/api/users/login')
+      .send({
+        payload: { username: '1111111111111' }
+      });
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        const { body } = error.response;
+
+        expect(error.response).to.have.status(422);
+        expect(body.status).to.be.equal('fail');
+        expect(body.data).to.be.deep.equal({
+          username: ['We could not find the user you are looking for']
+        });
+      });
+  });
+});
