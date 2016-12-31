@@ -13,9 +13,7 @@ chai.use(chaiAsPromised);
 describe('Auth middleware', function () {
   it('Should return an error because we\'re trying to access a private route without creds.', function () {
     const request = chai.request(server)
-      // Even if the route does not exist, we're doing the cred check in the middleware chain.
-      // TODO change this route to be a private route when we have one.
-      .post('/api/users/hello');
+      .get('/api/categories');
 
     return expect(request).to.be.rejected
       .then((error) => {
@@ -28,8 +26,12 @@ describe('Auth middleware', function () {
       });
   });
 
-  it.skip('Should proceed the request if we have valid credentials', wrap(function* () {
-    // We need a private route to test against and we don't have any so far...
+  it('Should proceed the request if we have valid credentials', wrap(function* () {
+    const agent = yield getAuthedAgent();
+    const response = yield agent.get('/api/categories');
+
+    expect(response).to.have.status(200);
+    expect(response.body.status).to.be.equal('success');
   }));
 
   it('Should proceed the request without creds for a public url', wrap(function* () {

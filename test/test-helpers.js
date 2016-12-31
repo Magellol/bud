@@ -10,9 +10,10 @@ chai.use(chaiHttp);
  * Get an authed agent, to test against the private server routes.
  * @return {Promise} fulfill with the authed agent object.
  */
-function getAuthedAgent() {
+function getAuthedAgent(userId = 1) {
   return co(function* () {
     const user = yield Models.User.findOne({
+      where: { id: userId },
       attributes: ['id', 'username']
     });
 
