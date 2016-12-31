@@ -3,7 +3,9 @@ const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 const { createValidationError } = require('../helpers/errors');
 
-module.exports = function userRoutes(router) {
+module.exports = function userRoutes(express) {
+  const router = express.Router();
+
   router.get('/', wrap(function* (req, resp) {
     const users = yield Models.User.findAll();
     const response = users.map(user => user.get());
