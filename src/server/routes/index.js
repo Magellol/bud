@@ -2,6 +2,7 @@ const config = require('config');
 const bodyParser = require('body-parser');
 const { connection: DbConnection } = require('../models');
 const users = require('./users');
+const session = require('express-session');
 const {
   formatError,
   formatFailure,
@@ -12,6 +13,7 @@ module.exports = function apiRoutes(express) {
   const router = express.Router();
 
   router.use(bodyParser.json());
+  router.use(session(config.get('session')));
 
   /**
    * Post request validator middleware.

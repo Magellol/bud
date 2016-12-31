@@ -11,5 +11,14 @@ module.exports = {
     username: process.env.DATASOURCE_USERNAME,
     password: process.env.DATASOURCE_PASSWORD,
     dialect: 'mysql'
+  },
+  session: {
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: new Error('Session store must be defined'),
+    cookie: {
+      maxAge: (2 * 86400000) // 2 days.
+    }
   }
 };
