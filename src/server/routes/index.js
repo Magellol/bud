@@ -10,11 +10,34 @@ const {
   formatValidationErrors
 } = require('../helpers/responses');
 
+const publicRoutes = {
+  '/api/users': 'GET',
+  '/api/users/login': 'POST',
+  '/api/users/new': 'POST'
+};
+
 module.exports = function apiRoutes(express) {
   const router = express.Router();
 
   router.use(bodyParser.json());
   router.use(session(config.get('session')));
+
+  /**
+   * Middleware validating if we're trying to access public or private routes.
+   * By default they are all private and you must whitelist them manually.
+   */
+  router.use((req, resp, next) => {
+    if (typeof publicRoutes[req.originalUrl] !== 'undefined' && publicRoutes[req.originalUrl] === req.method) {
+      return next();
+    }
+
+    if (req.session.user) {
+      return next();
+    }
+
+    const error = createError('Valid credentials are required to access this ressource', 401);
+    return next(error);
+  });
 
   /**
    * Post request validator middleware.

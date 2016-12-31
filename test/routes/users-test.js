@@ -99,6 +99,9 @@ describe('/users/login', function () {
       });
 
     expect(response).to.have.cookie('connect.sid');
+    expect(response).to.have.status(200);
+    expect(response.body.status).to.be.equal('success');
+    expect(response.body.data).to.be.equal(null);
   }));
 
   it('Should throw an error when the user could not be found', function () {
