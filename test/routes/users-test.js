@@ -4,6 +4,7 @@ const chaiHttp = require('chai-http');
 const chaiAsPromised = require('chai-as-promised');
 const server = require('../../src/server');
 const { Models } = require('../../src/server/models');
+
 const { expect } = chai;
 
 chai.use(chaiHttp);
@@ -30,11 +31,11 @@ describe('/users/new', function () {
     const request = chai.request(server)
       .post('/api/users/new')
       .send({
-        payload: {username: oneUser.get('username')}
+        payload: { username: oneUser.get('username') }
       });
 
     return expect(request).to.be.rejected
-      .then(error => {
+      .then((error) => {
         const { body } = error.response;
 
         expect(error.response).to.have.status(422);
@@ -49,11 +50,11 @@ describe('/users/new', function () {
     const request = chai.request(server)
       .post('/api/users/new')
       .send({
-        payload: {username: '__'}
+        payload: { username: '__' }
       });
 
     return expect(request).to.be.rejected
-      .then(error => {
+      .then((error) => {
         const { body } = error.response;
 
         expect(error.response).to.have.status(422);
@@ -71,7 +72,7 @@ describe('/users/new', function () {
     const request = yield chai.request(server)
       .post('/api/users/new')
       .send({
-        payload: {username: 'DonkeyKong'}
+        payload: { username: 'DonkeyKong' }
       });
 
     const { body } = request;

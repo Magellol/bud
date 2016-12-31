@@ -68,7 +68,6 @@ describe('formatFailure', function () {
         foo: 'bar'
       }
     });
-
   });
 
   it('Should return an object with the status "fail" and no data.', function () {
@@ -78,23 +77,23 @@ describe('formatFailure', function () {
       status: 'fail',
       data: null
     });
-  })
+  });
 });
 
-describe('formatError', function() {
+describe('formatError', function () {
   it('Should throw an error when the first argument passed in is not a string.', function () {
     expect(() => formatError(true)).to.throw(
       Error,
-      `Could not format an error message. ` +
-      `The "message" argument must be a string. "boolean" was given instead.`
+      'Could not format an error message. ' +
+      'The "message" argument must be a string. "boolean" was given instead.'
     );
   });
 
   it('Should throw an error if the message argument is an empty string', function () {
     expect(() => formatError('')).to.throw(
       Error,
-      `Could not format an error message. ` +
-      `The "message" argument was empty.`
+      'Could not format an error message. ' +
+      'The "message" argument was empty.'
     );
   });
 

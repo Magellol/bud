@@ -1,0 +1,13 @@
+{
+  "globals": {
+    "describe": true,
+    "before": true,
+    "beforeEach": true,
+    "it": true
+  },
+  "rules": {
+    "global-require": 0,
+    "func-names": 0,
+    "prefer-arrow-callback": 0
+  }
+}

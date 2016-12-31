@@ -1,3 +1,3 @@
-describe('#Helpers', function () {
-  require('./responses-test');
-});
+describe('#Helpers', () => (
+  require('./responses-test')
+));
