@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         len: {
           args: [3, 60],
-          msg: 'Your username must be between 3 and 60 characters long.'
+          msg: 'Your username must be between 3 and 60 characters long'
         }
       }
     }
