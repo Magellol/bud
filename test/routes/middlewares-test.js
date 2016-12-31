@@ -3,7 +3,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const chaiAsPromised = require('chai-as-promised');
 const server = require('../../src/server');
-const { getAuthedAgent } = require('../helpers');
+const { getAuthedAgent } = require('../test-helpers');
 
 const { expect } = chai;
 
