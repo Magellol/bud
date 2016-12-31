@@ -1,8 +1,9 @@
 const config = require('config');
 const bodyParser = require('body-parser');
 const { connection: DbConnection } = require('../models');
-const users = require('./users');
+const userRoutes = require('./users');
 const session = require('express-session');
+const { createError } = require('../helpers/errors');
 const {
   formatError,
   formatFailure,
@@ -22,18 +23,14 @@ module.exports = function apiRoutes(express) {
    */
   router.post('*', (req, resp, next) => {
     if (typeof req.body === 'undefined' || typeof req.body.payload === 'undefined') {
-      // TODO
-      // Use helper.
-      const error = new Error('Post requests require having a "payload" property in the post data');
-      error.status = 422;
-
+      const error = createError('Post requests require having a "payload" property in the post data', 422);
       return next(error);
     }
 
     return next();
   });
 
-  router.use('/users', users(router));
+  router.use('/users', userRoutes(router));
 
   /**
    * Last regular middleware defined.
@@ -41,10 +38,7 @@ module.exports = function apiRoutes(express) {
    * So we're assuming it doesn't exist and throw a 404.
    */
   router.use((req, resp, next) => {
-    // TODO
-    // Helper.
-    const error = new Error('Ressource does not exist');
-    error.status = 404;
+    const error = createError('Ressource does not exist', 404);
     return next(error);
   });
 
