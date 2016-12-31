@@ -2,7 +2,7 @@ const { wrap } = require('co');
 const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 
-module.exports = function expenseCategoriyRoutes(express) {
+module.exports = function expenseCategoryRoutes(express) {
   const router = express.Router();
 
   router.get('/', wrap(function* (req, resp) {
