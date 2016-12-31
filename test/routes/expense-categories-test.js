@@ -12,6 +12,7 @@ describe('/categories', function () {
   it('Should return a list of categories', wrap(function* () {
     const userId = 1;
     const validCategories = yield Models.ExpenseCategory.findAll({
+      attributes: ['id'],
       where: { userId }
     });
 

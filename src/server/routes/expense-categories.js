@@ -8,6 +8,7 @@ module.exports = function expenseCategoryRoutes(express) {
   router.get('/', wrap(function* (req, resp) {
     const { id: userId } = req.session.user;
     const categories = yield Models.ExpenseCategory.findAll({
+      attributes: ['id', 'name'],
       where: { userId }
     }).map(category => category.get());
 
