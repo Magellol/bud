@@ -1,5 +1,17 @@
+@value purple, yellow from '../../helpers/colors.css';
+@value sansSerif from '../../helpers/fonts.css';
+
 .logo {
-  color: blue;
+  color: purple;
+  font-family: sansSerif;
+}
+
+.logo.medium {
+  font-size: 64px;
+}
+
+.logo.small {
+  font-size: 24px;
 }
 
 .dot {
