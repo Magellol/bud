@@ -1,7 +1,18 @@
-import React from 'react';
+// TODO
+// This is not a real global component that can be used anywhere, hence its location
+// it's not right...
 
-export default props => (
-  <div>
+import React from 'react';
+import s from './App.css';
+
+const App = props => (
+  <div className={s.wrapper}>
     {props.children}
   </div>
 );
+
+App.propTypes = {
+  children: React.PropTypes.element.isRequired
+};
+
+export default App;

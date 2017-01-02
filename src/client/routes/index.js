@@ -4,7 +4,6 @@ import Root from './Root';
 module.exports = {
   path: '/',
   component: App,
-  indexRoute: {
-    component: Root
-  }
+  indexRoute: Root,
+  childRoutes: []
 };
