@@ -3,9 +3,11 @@ require('./config/bootstrap');
 const config = require('config');
 const express = require('express');
 const apiRoutes = require('./routes');
+const clientRoutes = require('../client/client-routes');
 
 const App = express();
 
+App.use('/', clientRoutes(express));
 App.use('/api', apiRoutes(express));
 
 const port = config.get('port');
