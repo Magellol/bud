@@ -21,4 +21,8 @@ describe('ExpenseCategory', function () {
     expect(assoc.Expenses).to.be.an.instanceof(Sequelize.Association.HasMany);
     expect(assoc.User).to.be.an.instanceof(Sequelize.Association.BelongsTo);
   });
+
+  it.skip('Should throw validation errors', function () {
+    // Write tests to test the validation rules.
+  });
 });

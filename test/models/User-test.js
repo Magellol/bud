@@ -20,4 +20,30 @@ describe('User', function () {
     expect(Object.values(assoc).length).to.be.equal(1);
     expect(assoc.ExpenseCategories).to.be.an.instanceof(Sequelize.Association.HasMany);
   });
+
+  it('Should error out when username is not valid', function () {
+    const tests = [
+      [false, 'The name must be a string'],
+      ['', 'You must provide a username'],
+      ['hello world', 'Your username can only contain letters'],
+      ['a', 'Your username must be between 3 and 60 characters long']
+    ];
+
+    const promises = tests.map((test) => {
+      const [username] = test;
+      const user = Models.User.build({ username });
+
+      return user.validate();
+    });
+
+    return Promise.all(promises)
+      .then((listOfErrors) => {
+        expect(listOfErrors).to.not.include(null, 'Passed validation');
+
+        const messages = listOfErrors.map(error => error.errors[0].message);
+        const expectedMessages = tests.map(test => test[1]);
+
+        expect(messages).to.be.deep.equal(expectedMessages);
+      });
+  });
 });

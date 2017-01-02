@@ -25,3 +25,46 @@ describe('/categories', function () {
     expect(body.data.length).to.be.equal(validCategories.length);
   }));
 });
+
+describe('/categories/new', function () {
+  it('Should return an error response when it does not validate', wrap(function* () {
+    const user = 1;
+    const agent = yield getAuthedAgent(user);
+
+    const request = agent
+      .post('/api/categories/new')
+      .send({
+        payload: { name: false }
+      });
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        const { body } = error.response;
+        expect(error.response).to.have.status(422);
+        expect(body.status).to.be.equal('fail');
+        expect(body.data).to.be.deep.equal({
+          name: ['The name must be a string']
+        });
+      });
+  }));
+
+  it('Should create a new category', wrap(function* () {
+    const user = 1;
+    const agent = yield getAuthedAgent(user);
+    const response = yield agent
+      .post('/api/categories/new')
+      .send({
+        payload: { name: 'My new category' }
+      });
+
+    const { body } = response;
+    const { UserId, name } = body.data;
+
+    expect(response).to.have.status(200);
+    expect(body.status).to.be.equal('success');
+    expect({ UserId, name }).to.be.deep.equal({
+      name: 'My new category',
+      UserId: user
+    });
+  }));
+});

@@ -5,6 +5,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
+        isString(value) {
+          if (typeof value !== 'string') {
+            throw new Error('The name must be a string');
+          }
+        },
         notEmpty: {
           msg: 'You must provide a username'
         },
