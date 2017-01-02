@@ -5,14 +5,35 @@ const { formatSuccess } = require('../helpers/responses');
 module.exports = function expenseCategoryRoutes(express) {
   const router = express.Router();
 
-  router.get('/', wrap(function* (req, resp) {
+  router.get('/', wrap(function* (req, resp, next) {
     const { id: userId } = req.session.user;
-    const categories = yield Models.ExpenseCategory.findAll({
-      attributes: ['id', 'name'],
-      where: { userId }
-    }).map(category => category.get());
 
-    return resp.json(formatSuccess(categories));
+    try {
+      const categories = yield Models.ExpenseCategory.findAll({
+        attributes: ['id', 'name'],
+        where: { userId }
+      }).map(category => category.get());
+
+      return resp.json(formatSuccess(categories));
+    } catch (error) {
+      return next(error);
+    }
+  }));
+
+  router.post('/new', wrap(function* (req, resp, next) {
+    const { name } = req.body.payload;
+
+    try {
+      const category = Models.ExpenseCategory.build({
+        name,
+        UserId: req.session.user.id
+      });
+
+      const result = yield category.save();
+      return resp.json(formatSuccess(result));
+    } catch (error) {
+      return next(error);
+    }
   }));
 
   return router;

@@ -3,6 +3,8 @@ const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 const { createValidationError } = require('../helpers/errors');
 
+// TODO
+// Do some try...catch to these routes to handle DB level errors for example, to avoid crashing node.
 module.exports = function userRoutes(express) {
   const router = express.Router();
 
