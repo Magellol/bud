@@ -1,5 +1,8 @@
 import React from 'react';
+import Logo from '../../components/Logo';
 
 export default () => (
-  <div>Root.</div>
+  <div>
+    <Logo />
+  </div>
 );

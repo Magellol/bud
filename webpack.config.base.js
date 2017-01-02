@@ -19,5 +19,10 @@ module.exports = {
       }
     ]
   },
+  postcss: [
+    require('autoprefixer')({ // eslint-disable-line global-require
+      browsers: '> 1%'
+    })
+  ],
   plugins: []
 };
