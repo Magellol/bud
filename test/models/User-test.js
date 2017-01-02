@@ -20,4 +20,8 @@ describe('User', function () {
     expect(Object.values(assoc).length).to.be.equal(1);
     expect(assoc.ExpenseCategories).to.be.an.instanceof(Sequelize.Association.HasMany);
   });
+
+  it.skip('Should throw validation errors', function () {
+    // Write tests to test the validation rules.
+  });
 });
