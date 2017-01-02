@@ -4,13 +4,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(100),
       allowNull: false,
       validate: {
-        notEmpty: {
-          msg: 'You must provide a name'
-        },
         isString(value) {
           if (typeof value !== 'string') {
             throw new Error('The name must be a string');
           }
+        },
+        notEmpty: {
+          msg: 'You must provide a name'
         },
         is: {
           msg: 'The name can only include letters, numbers and spaces',
