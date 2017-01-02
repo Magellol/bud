@@ -1,9 +1,9 @@
 import App from '../components/App';
-import Root from './Root';
+import Home from './Home';
 
 module.exports = {
   path: '/',
   component: App,
-  indexRoute: Root,
+  indexRoute: Home,
   childRoutes: []
 };

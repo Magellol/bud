@@ -1,0 +1,18 @@
+@value sansSerif from '../../../../../../helpers/fonts.css';
+@value grayDarker, grayLighter from '../../../../../../helpers/colors.css';
+
+.wrapper {
+  border-bottom: 1px solid grayLighter;
+  padding: 10px 0 10px 10px;
+}
+
+.wrapper.first {
+  border-top: 1px solid grayLighter;
+}
+
+.username {
+  color: grayDarker;
+  font-family: sansSerif;
+  font-size: 26px;
+  font-weight: lighter;
+}

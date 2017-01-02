@@ -1,0 +1,13 @@
+.logo {
+  align-self: center;
+  margin-bottom: 45px;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  padding: 0 30px;
+}
