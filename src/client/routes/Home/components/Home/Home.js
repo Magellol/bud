@@ -22,7 +22,7 @@ const Home = React.createClass({
   },
 
   componentDidMount() {
-    return get(ENDPOINTS.users).then(response => this.setState({ users: response.data }));
+    return get(ENDPOINTS.users).then(({ data: users }) => this.setState({ users }));
   },
 
   setErrors(errors) {
