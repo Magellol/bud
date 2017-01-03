@@ -3,6 +3,7 @@ import Logo from '../../../../components/Logo';
 import User from './components/User';
 import s from './Home.css';
 import { post, get } from '../../../../helpers/requests';
+import { ucfirst } from '../../../../helpers/strings';
 
 const ENDPOINTS = {
   users: '/api/users',
@@ -13,7 +14,8 @@ const Home = React.createClass({
   getInitialState() {
     return {
       username: '',
-      users: []
+      users: [],
+      validationErrors: {}
     };
   },
 
@@ -21,21 +23,36 @@ const Home = React.createClass({
     return get(ENDPOINTS.users).then(response => this.setState({ users: response.data }));
   },
 
+  setErrors(errors) {
+    return this.setState({
+      validationErrors: errors
+    });
+  },
+
   handleCreateUser(event) {
     event.preventDefault();
 
     const { username } = this.state;
     return post(ENDPOINTS.newUser, { username })
-      .then((response) => {
-        if (response.status === 'success') {
-          return this.setState({
-            users: [...this.state.users, response.data]
-          });
+      .then(({ status, data }) => {
+        if (status !== 'success') {
+          return this.setErrors(data);
         }
 
-        // TODO Handle validation errors.
+        return this.setState({
+          users: [...this.state.users, data],
+          username: '',
+          validationErrors: []
+        });
       })
-      .catch(error => console.error(error)); // TODO proper handling.
+      // Ideally we should log this error in somewhere, so we know about what happened.
+      .catch(() => {
+        const errors = {
+          username: ['Could not create a new user. Please try again.']
+        };
+
+        return this.setErrors(errors);
+      });
   },
 
   handleUpdateUsername(event) {
@@ -49,8 +66,17 @@ const Home = React.createClass({
     ));
   },
 
+  renderValidationErrors(errors) {
+    const [firstError] = errors; // By choice, we only display one message at the time.
+    return (
+      <span className={s.errorMessage}>
+        {ucfirst(firstError)}
+      </span>
+    );
+  },
+
   render() {
-    const { users } = this.state;
+    const { users, validationErrors } = this.state;
 
     return (
       <div className={s.wrapper}>
@@ -67,6 +93,8 @@ const Home = React.createClass({
             value={this.state.username}
             onChange={this.handleUpdateUsername}
           />
+
+          {validationErrors.username && this.renderValidationErrors(validationErrors.username)}
         </form>
       </div>
     );

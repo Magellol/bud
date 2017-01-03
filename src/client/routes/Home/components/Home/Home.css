@@ -1,4 +1,5 @@
-@value grayLighter from '../../../../helpers/colors.css';
+@value sansSerif from '../../../../helpers/fonts.css';
+@value grayLightest, red from '../../../../helpers/colors.css';
 
 .logo {
   margin-bottom: 45px;
@@ -18,10 +19,17 @@
   composes: wrapper from './components/User/User.css';
   composes: username from './components/User/User.css';
   border: 0;
+  margin-bottom: 5px;
   width: 100%;
 }
 
 .input:focus {
   outline: 0;
-  background-color: grayLighter;
+  background-color: grayLightest;
+}
+
+.errorMessage {
+  color: red;
+  font-family: sansSerif;
+  font-size: 12px;
 }
