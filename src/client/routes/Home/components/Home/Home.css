@@ -15,17 +15,43 @@
   padding: 0 30px;
 }
 
+.usersWrapper {
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.usersWrapper.show {
+  opacity: 1;
+}
+
+.inputWrapper {
+  position: relative;
+  border-bottom: 1px solid grayLighter;
+  margin-bottom: 10px;
+}
+
+.inputWrapper:after {
+  content: '×';
+  position: absolute;
+  font-size: 28px;
+  opacity: 0;
+  top: 16px;
+  right: 10px;
+  color: red;
+  transform: scale(.8);
+  transition: opacity .2s ease, transform .3s ease;
+}
+
+.inputWrapper.hasError:after {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .input {
   composes: wrapper from './components/User/User.css';
   composes: username from './components/User/User.css';
   border: 0;
-  border-bottom: 1px solid grayLighter;
-  margin-bottom: 5px;
   width: 100%;
-}
-
-.input.hasError {
-  border-bottom: 1px solid red;
 }
 
 .input:focus {

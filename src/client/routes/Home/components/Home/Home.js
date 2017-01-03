@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+// import Transition from 'react-addons-css-transition-group';
 import Logo from '../../../../components/Logo';
 import User from './components/User';
 import s from './Home.css';
@@ -78,9 +79,14 @@ const Home = React.createClass({
 
   render() {
     const { users, validationErrors } = this.state;
-    const inputClassNames = classnames({
-      [s.input]: true,
+    const inputWapperClasses = classnames({
+      [s.inputWrapper]: true,
       [s.hasError]: typeof validationErrors.username !== 'undefined'
+    });
+
+    const userWrapperClasses = classnames({
+      [s.usersWrapper]: true,
+      [s.show]: users.length !== 0
     });
 
     return (
@@ -89,18 +95,22 @@ const Home = React.createClass({
           <Logo />
         </div>
 
-        {users && this.renderUsers(users)}
+        <div className={userWrapperClasses}>
+          {users && this.renderUsers(users)}
 
-        <form onSubmit={this.handleCreateUser}>
-          <input
-            className={inputClassNames}
-            placeholder="Add"
-            value={this.state.username}
-            onChange={this.handleUpdateUsername}
-          />
+          <form onSubmit={this.handleCreateUser}>
+            <div className={inputWapperClasses}>
+              <input
+                className={s.input}
+                placeholder="Add"
+                value={this.state.username}
+                onChange={this.handleUpdateUsername}
+              />
+            </div>
 
-          {validationErrors.username && this.renderValidationErrors(validationErrors.username)}
-        </form>
+            {validationErrors.username && this.renderValidationErrors(validationErrors.username)}
+          </form>
+        </div>
       </div>
     );
   }
