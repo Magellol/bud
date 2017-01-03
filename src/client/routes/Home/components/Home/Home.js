@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import Logo from '../../../../components/Logo';
 import User from './components/User';
 import s from './Home.css';
@@ -77,6 +78,10 @@ const Home = React.createClass({
 
   render() {
     const { users, validationErrors } = this.state;
+    const inputClassNames = classnames({
+      [s.input]: true,
+      [s.hasError]: typeof validationErrors.username !== 'undefined'
+    });
 
     return (
       <div className={s.wrapper}>
@@ -88,7 +93,7 @@ const Home = React.createClass({
 
         <form onSubmit={this.handleCreateUser}>
           <input
-            className={s.input}
+            className={inputClassNames}
             placeholder="Add"
             value={this.state.username}
             onChange={this.handleUpdateUsername}
