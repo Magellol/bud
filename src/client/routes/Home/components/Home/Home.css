@@ -2,7 +2,7 @@
 @value grayLighter, grayLightest, red from '../../../../helpers/colors.css';
 
 .logo {
-  margin-bottom: 45px;
+  margin-bottom: 75px;
   text-align: center;
 }
 
@@ -39,7 +39,7 @@
   right: 10px;
   color: red;
   transform: scale(.8);
-  transition: opacity .2s ease, transform .3s ease;
+  transition: opacity .2s, transform .3s ease;
 }
 
 .inputWrapper.hasError:after {
@@ -60,6 +60,8 @@
 }
 
 .errorMessage {
+  composes: fadeIn from '../../../../helpers/animations.css';
+  animation-duration: .2s;
   color: red;
   font-family: sansSerif;
   font-size: 12px;

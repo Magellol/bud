@@ -102,7 +102,7 @@ const Home = React.createClass({
             <div className={inputWapperClasses}>
               <input
                 className={s.input}
-                placeholder="Add"
+                placeholder="Create a new user"
                 value={this.state.username}
                 onChange={this.handleUpdateUsername}
               />
