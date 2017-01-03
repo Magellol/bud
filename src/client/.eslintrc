@@ -4,8 +4,4 @@
     "node": true,
     "es6": true
   }
-  "rules": {
-    "global-require": 0,
-    "func-names": 0
-  }
 }
