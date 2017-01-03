@@ -15,13 +15,13 @@ function request(endpoint, options) {
  * @return {Promise}          Promise that fullfils into a json response.
  */
 export function post(endpoint, body = {}) {
-  const options = Object.assign({}, {
+  const options = {
     headers: {
       'Content-Type': 'application/json'
     },
     method: 'POST',
     body: JSON.stringify({ payload: body })
-  });
+  };
 
   return request(endpoint, options);
 }
