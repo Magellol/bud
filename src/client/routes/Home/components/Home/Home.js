@@ -1,14 +1,9 @@
 import React from 'react';
-import { connect, PromiseState } from 'react-refetch';
 import Logo from '../../../../components/Logo';
 import User from './components/User';
 import s from './Home.css';
 
 const Home = React.createClass({
-  propTypes: {
-    users: React.PropTypes.instanceOf(PromiseState)
-  },
-
   getInitialState() {
     return {
       username: ''
@@ -17,8 +12,6 @@ const Home = React.createClass({
 
   handleCreateUser(event) {
     event.preventDefault();
-
-    console.log(event);
   },
 
   handleUpdateUsername(event) {
@@ -33,15 +26,11 @@ const Home = React.createClass({
   },
 
   render() {
-    const { users } = this.props;
-
     return (
       <div className={s.wrapper}>
         <div className={s.logo}>
           <Logo />
         </div>
-
-        {users.fulfilled && this.renderUsers(users.value.data)}
 
         <form onSubmit={this.handleCreateUser}>
           <input
@@ -56,17 +45,4 @@ const Home = React.createClass({
   }
 });
 
-export default connect(() => ({
-  users: '/api/users',
-  createUser(username) {
-    return {
-      createUserResponse: {
-        url: '/api/users/new',
-        method: 'POST',
-        body: JSON.stringify({
-          payload: { username }
-        })
-      }
-    };
-  }
-}))(Home);
+export default Home;
