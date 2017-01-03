@@ -5,6 +5,7 @@
     "prefer-arrow-callback": 0,
     "react/jsx-filename-extension": [
       2, { "extensions": [".js"] }
-    ]
+    ],
+    "react/jsx-boolean-value": [2, "always"]
   }
 }
