@@ -1,6 +1,8 @@
+@value grayLighter from '../../../../helpers/colors.css';
+
 .logo {
-  align-self: center;
   margin-bottom: 45px;
+  text-align: center;
 }
 
 .wrapper {
@@ -10,4 +12,16 @@
   justify-content: center;
   min-height: 100%;
   padding: 0 30px;
+}
+
+.input {
+  composes: wrapper from './components/User/User.css';
+  composes: username from './components/User/User.css';
+  border: 0;
+  width: 100%;
+}
+
+.input:focus {
+  outline: 0;
+  background-color: grayLighter;
 }

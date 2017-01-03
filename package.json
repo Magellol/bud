@@ -10,7 +10,6 @@
     "test:server": "NODE_ENV=${NODE_ENV:-'test'} mocha ./test",
     "test:client": "NODE_ENV=${NODE_ENV:-'test'} mocha ./src/client/**/*-test.js --require ./src/scripts/null-compiler --require babel-core/register",
     "test": "yarn run test:server && yarn run test:client",
-
     "watch": "webpack --config webpack.config.development.js --watch",
     "start": "node ./src/server",
     "lint": "eslint ./",
@@ -50,6 +49,7 @@
     "postcss-loader": "^1.2.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-refetch": "^1.0.0",
     "react-router": "^3.0.0",
     "sequelize": "^3.28.0",
     "sequelize-cli": "^2.5.1",
