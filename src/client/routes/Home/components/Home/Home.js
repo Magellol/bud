@@ -50,7 +50,7 @@ const Home = React.createClass({
       // Ideally we should log this error in somewhere, so we know about what happened.
       .catch(() => {
         const errors = {
-          username: ['Could not create a new user. Please try again.']
+          username: ['Something super weird happened, that did not work. Please try again.']
         };
 
         return this.setErrors(errors);
