@@ -20,5 +20,8 @@ module.exports = {
     cookie: {
       maxAge: (2 * 86400000) // 2 days.
     }
+  },
+  app: {
+    host: process.env.APP_HOST
   }
 };

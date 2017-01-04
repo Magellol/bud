@@ -7,8 +7,8 @@ const clientRoutes = require('../client/client-routes');
 
 const App = express();
 
-App.use('/', clientRoutes(express));
 App.use('/api', apiRoutes(express));
+App.use('/', clientRoutes(express));
 
 const port = config.get('port');
 App.listen(port, () => {

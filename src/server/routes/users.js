@@ -15,6 +15,10 @@ module.exports = function userRoutes(express) {
     return resp.json(formatSuccess(response));
   }));
 
+  router.get('/me', (req, resp) => (
+    resp.json(formatSuccess({ username: req.session.user.username }))
+  ));
+
   router.post('/login', wrap(function* (req, resp, next) {
     const { username } = req.body.payload;
     const user = yield Models.User.findOne({
