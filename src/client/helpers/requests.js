@@ -5,7 +5,11 @@
  * @return {Promise}         Promise that fullfils into a json response.
  */
 function request(endpoint, options) {
-  return fetch(endpoint, options).then(response => response.json());
+  const allOptions = Object.assign({}, options, {
+    credentials: 'same-origin' // Needed for sending cookies back to the server.
+  });
+
+  return fetch(endpoint, allOptions).then(response => response.json());
 }
 
 /**

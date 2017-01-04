@@ -9,7 +9,8 @@ import { ucfirst } from '../../../../helpers/strings';
 
 const ENDPOINTS = {
   users: '/api/users',
-  newUser: '/api/users/new'
+  newUser: '/api/users/new',
+  loginUser: '/api/users/login'
 };
 
 const Home = React.createClass({
@@ -34,22 +35,27 @@ const Home = React.createClass({
   handleCreateUser(event) {
     event.preventDefault();
 
+    this.setErrors({});
+
     const { username } = this.state;
     return post(ENDPOINTS.newUser, { username })
       .then(({ status, data }) => {
         if (status !== 'success') {
-          return this.setErrors(data);
+          // TODO use helper.
+          const error = new Error('Validation failed.');
+          error.errors = data;
+
+          throw error;
         }
 
         return this.setState({
           users: [...this.state.users, data],
           username: '',
-          validationErrors: []
+          validationErrors: {}
         });
       })
-      // Ideally we should log this error in somewhere, so we know about what happened.
-      .catch(() => {
-        const errors = {
+      .catch((error) => {
+        const errors = error.errors || {
           username: ['Something super weird happened, that did not work. Please try again.']
         };
 
@@ -62,9 +68,30 @@ const Home = React.createClass({
     this.setState({ username });
   },
 
+  handleLogin(username) {
+    return post(ENDPOINTS.loginUser, { username })
+      .then(({ status }) => {
+        if (status !== 'success') {
+          throw new Error('The user could not be logged in. Server said nope.');
+        }
+
+        return this.props.router.push('/dashboard'); // eslint-disable-line react/prop-types
+      })
+      .catch(error => console.error(error)); // TODO Do something better, perhaps a flash message?
+  },
+
   renderUsers(users) {
     return users.map((user, index) => (
-      <User username={user.username} first={index === 0} key={user.id} />
+      <button
+        key={user.id}
+        className={s.userButton}
+        onClick={() => this.handleLogin(user.username)}
+      >
+        <User
+          username={user.username}
+          first={index === 0}
+        />
+      </button>
     ));
   },
 
