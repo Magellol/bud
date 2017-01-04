@@ -13,6 +13,7 @@ module.exports = {
     dialect: 'mysql'
   },
   session: {
+    name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
