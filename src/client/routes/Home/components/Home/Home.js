@@ -13,6 +13,12 @@ const ENDPOINTS = {
   loginUser: '/api/users/login'
 };
 
+// TODO
+// The user form could live on its own component if we ever need to use it elsewhere.
+// It could have some props and also a afterCreate function prop to pass a callback function to handle
+// after the user got created.
+//
+// Also, the input style could also live in its own component, we're going to need it.
 const Home = React.createClass({
   getInitialState() {
     return {
