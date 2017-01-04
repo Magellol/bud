@@ -4,6 +4,7 @@ const chaiHttp = require('chai-http');
 const chaiAsPromised = require('chai-as-promised');
 const server = require('../../src/server');
 const { Models } = require('../../src/server/models');
+const config = require('config');
 
 const { expect } = chai;
 
@@ -98,7 +99,7 @@ describe('/users/login', function () {
         payload: { username: user.get('username') }
       });
 
-    expect(response).to.have.cookie('connect.sid');
+    expect(response).to.have.cookie(config.get('session.name'));
     expect(response).to.have.status(200);
     expect(response.body.status).to.be.equal('success');
     expect(response.body.data).to.be.equal(null);
@@ -115,6 +116,7 @@ describe('/users/login', function () {
       .then((error) => {
         const { body } = error.response;
 
+        expect(error.response).to.not.have.cookie(config.get('session.name'));
         expect(error.response).to.have.status(422);
         expect(body.status).to.be.equal('fail');
         expect(body.data).to.be.deep.equal({

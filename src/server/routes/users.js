@@ -21,19 +21,28 @@ module.exports = function userRoutes(express) {
 
   router.post('/login', wrap(function* (req, resp, next) {
     const { username } = req.body.payload;
-    const user = yield Models.User.findOne({
-      where: { username }
-    });
 
-    // That'll reset the session if attempting to login with a bad user.
-    req.session.user = user; // eslint-disable-line no-param-reassign
+    try {
+      const user = yield Models.User.findOne({
+        where: { username }
+      });
 
-    if (user === null) {
-      const error = createValidationError('username', 'We could not find the user you are looking for');
+      if (user === null) {
+        const error = createValidationError('username', 'We could not find the user you are looking for');
+        return req.session.destroy(() => next(error));
+      }
+
+      return req.session.regenerate((error) => {
+        if (error) {
+          return next(error);
+        }
+
+        req.session.user = user; // eslint-disable-line no-param-reassign
+        return resp.json(formatSuccess());
+      });
+    } catch (error) {
       return next(error);
     }
-
-    return resp.json(formatSuccess());
   }));
 
   router.post('/new', wrap(function* (req, resp, next) {
