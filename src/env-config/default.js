@@ -13,6 +13,7 @@ module.exports = {
     dialect: 'mysql'
   },
   session: {
+    name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
@@ -20,5 +21,8 @@ module.exports = {
     cookie: {
       maxAge: (2 * 86400000) // 2 days.
     }
+  },
+  app: {
+    host: process.env.APP_HOST
   }
 };

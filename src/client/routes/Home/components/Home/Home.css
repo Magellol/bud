@@ -1,6 +1,9 @@
+@value sansSerif from '../../../../helpers/fonts.css';
+@value grayLighter, grayLightest, red from '../../../../helpers/colors.css';
+
 .logo {
-  align-self: center;
-  margin-bottom: 45px;
+  margin-bottom: 75px;
+  text-align: center;
 }
 
 .wrapper {
@@ -10,4 +13,71 @@
   justify-content: center;
   min-height: 100%;
   padding: 0 30px;
+}
+
+.usersWrapper {
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.usersWrapper.show {
+  opacity: 1;
+}
+
+.inputWrapper {
+  position: relative;
+  border-bottom: 1px solid grayLighter;
+  margin-bottom: 10px;
+}
+
+.inputWrapper:after {
+  content: '×';
+  position: absolute;
+  font-size: 28px;
+  opacity: 0;
+  top: 16px;
+  right: 10px;
+  color: red;
+  transform: scale(.8);
+  transition: opacity .2s, transform .3s ease;
+}
+
+.inputWrapper.hasError:after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.input {
+  composes: wrapper from './components/User/User.css';
+  composes: username from './components/User/User.css';
+  border: 0;
+  width: 100%;
+}
+
+.input:focus {
+  outline: 0;
+  background-color: grayLightest;
+}
+
+.errorMessage {
+  composes: fadeIn from '../../../../helpers/animations.css';
+  animation-duration: .2s;
+  color: red;
+  font-family: sansSerif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.userButton {
+  background: none;
+  border: 0;
+  display: block;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.userButton:hover {
+  cursor: pointer;
+  background:
 }
