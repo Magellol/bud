@@ -2,8 +2,12 @@
 @value grayDarker, grayLighter from '../../../../helpers/colors.css';
 
 .wrapper {
+  align-items: center;
   border-bottom: 1px solid grayLighter;
-  padding: 20px 0 20px 20px;
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  justify-content: space-between;
 }
 
 .wrapper.first {
@@ -15,4 +19,8 @@
   font-family: sansSerif;
   font-size: 24px;
   font-weight: lighter;
+}
+
+.icon {
+  fill: grayLighter;
 }

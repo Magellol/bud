@@ -1,5 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
+import Icon from '../../../../components/Icon';
+import SVGs from '../../../../constants/svgs';
 import s from './User.css';
 
 const User = (props) => {
@@ -11,6 +13,13 @@ const User = (props) => {
   return (
     <div className={classes}>
       <span className={s.username}>{props.username}</span>
+
+      <Icon
+        icon={SVGs.chevronRight}
+        size={20}
+        className={s.icon}
+      />
+
     </div>
   );
 };
