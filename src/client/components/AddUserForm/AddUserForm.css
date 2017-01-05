@@ -1,0 +1,50 @@
+@value sansSerif from '../../helpers/fonts.css';
+@value grayLighter, grayLightest, red from '../../helpers/colors.css';
+
+.inputWrapper {
+  position: relative;
+  border-bottom: 1px solid grayLighter;
+  margin-bottom: 10px;
+}
+
+.inputWrapper:after {
+  content: '×';
+  position: absolute;
+  font-size: 28px;
+  opacity: 0;
+  top: 16px;
+  right: 10px;
+  color: red;
+  transform: scale(.8);
+  transition: opacity .2s, transform .3s ease;
+}
+
+.inputWrapper.hasError:after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.input {
+  border: 0;
+  border-bottom: 1px solid grayLighter;
+  color: grayDarker;
+  font-family: sansSerif;
+  font-size: 24px;
+  font-weight: lighter;
+  padding: 20px 0 20px 20px;
+  width: 100%;
+}
+
+.input:focus {
+  outline: 0;
+  background-color: grayLightest;
+}
+
+.errorMessage {
+  composes: fadeIn from '../../helpers/animations.css';
+  animation-duration: .2s;
+  color: red;
+  font-family: sansSerif;
+  font-size: 12px;
+  font-weight: bold;
+}

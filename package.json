@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "NODE_ENV='development' nodemon ./src/server",
     "test:server": "NODE_ENV=${NODE_ENV:-'test'} mocha ./test",
-    "test:client": "NODE_ENV=${NODE_ENV:-'test'} mocha ./src/client/**/*-test.js --require ./src/scripts/null-compiler --require babel-core/register",
+    "test:client": "NODE_ENV=${NODE_ENV:-'test'} mocha ./src/client/**/*-test.js --require ./src/scripts/null-compiler --require ./src/scripts/jsdom-node --require babel-core/register",
     "test": "yarn run test:server && yarn run test:client",
     "watch": "webpack --config webpack.config.development.js --watch",
     "start": "node ./src/server",
@@ -28,9 +28,12 @@
     "eslint-plugin-import": "^2.1.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
+    "fetch-mock": "^5.8.1",
+    "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
-    "react-addons-test-utils": "^15.4.1"
+    "react-addons-test-utils": "^15.4.1",
+    "sinon": "^1.17.7"
   },
   "dependencies": {
     "autoprefixer": "^6.6.0",
