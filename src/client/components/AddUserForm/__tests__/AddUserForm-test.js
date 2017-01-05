@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
-import { stub } from 'sinon';
+import { stub, mock } from 'sinon';
 import fetchMock from 'fetch-mock';
 import AddUserForm from '../AddUserForm';
 
@@ -121,9 +121,16 @@ describe('AddUserForm', function () {
   });
 
   it('Should update the state after calling handleUpdateUsername', function () {
-    const form = mount(<AddUserForm afterCreate={afterCreateMock} />);
+    const form = shallow(<AddUserForm afterCreate={afterCreateMock} />);
+    const instance = form.instance();
 
-    form.instance().handleUpdateUsername(eventMock);
-    expect(form.state('username')).to.be.equal('allTheBears');
+    const mocked = mock(instance);
+    mocked.expects('setState').once().withArgs({
+      username: 'allTheBears'
+    });
+
+    instance.handleUpdateUsername(eventMock);
+
+    mocked.verify();
   });
 });
