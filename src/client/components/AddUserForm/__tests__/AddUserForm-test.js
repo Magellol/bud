@@ -28,7 +28,7 @@ describe('AddUserForm', function () {
   });
 
   it('Should render error message when we change the validation state', function () {
-    const form = mount(<AddUserForm afterCreate={afterCreateMock} />);
+    const form = shallow(<AddUserForm afterCreate={afterCreateMock} />);
 
     form.setState({
       validationError: 'this is an error'
@@ -47,7 +47,7 @@ describe('AddUserForm', function () {
       }
     });
 
-    const form = mount(<AddUserForm afterCreate={afterCreateMock} />);
+    const form = shallow(<AddUserForm afterCreate={afterCreateMock} />);
 
     form.setState({
       username: 'bear',
@@ -78,7 +78,7 @@ describe('AddUserForm', function () {
       }
     });
 
-    const form = mount(<AddUserForm afterCreate={afterCreateMock} />);
+    const form = shallow(<AddUserForm afterCreate={afterCreateMock} />);
 
     form.setState({
       username: 'bear'
