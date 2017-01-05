@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 // import Transition from 'react-addons-css-transition-group';
 import Logo from '../../../../components/Logo';
-import User from './components/User';
+import User from '../User';
 import s from './Home.css';
 import { post, get } from '../../../../helpers/requests';
 import { ucfirst } from '../../../../helpers/strings';

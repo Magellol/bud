@@ -47,8 +47,8 @@
 }
 
 .input {
-  composes: wrapper from './components/User/User.css';
-  composes: username from './components/User/User.css';
+  composes: wrapper from '../User/User.css';
+  composes: username from '../User/User.css';
   border: 0;
   width: 100%;
 }

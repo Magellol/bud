@@ -1,5 +1,5 @@
-@value sansSerif from '../../../../../../helpers/fonts.css';
-@value grayDarker, grayLighter from '../../../../../../helpers/colors.css';
+@value sansSerif from '../../../../helpers/fonts.css';
+@value grayDarker, grayLighter from '../../../../helpers/colors.css';
 
 .wrapper {
   border-bottom: 1px solid grayLighter;
