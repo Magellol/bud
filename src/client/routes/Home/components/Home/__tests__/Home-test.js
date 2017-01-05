@@ -11,12 +11,10 @@ describe('Home', function () {
   });
 
   it('Should have an instance of logo', function () {
+    const home = shallow(<Home />);
     const logo = home.find(Logo);
-
     expect(logo.length).to.be.equal(1);
   });
 
-  it.skip('Should display users', function () {
-    // It should display all users.
-  });
+  // it('Should have an instance of')
 });

@@ -120,7 +120,7 @@ describe('AddUserForm', function () {
     expect(stubbedHandleUpdateUsername.calledOnce).to.be.equal(true);
   });
 
-  it.only('Should update the state after calling handleUpdateUsername', function () {
+  it('Should update the state after calling handleUpdateUsername', function () {
     const form = shallow(<AddUserForm afterCreate={afterCreateMock} />);
     const instance = form.instance();
 
