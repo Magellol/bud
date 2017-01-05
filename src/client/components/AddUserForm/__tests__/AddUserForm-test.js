@@ -85,7 +85,8 @@ describe('AddUserForm', function () {
     });
 
     return form.instance().handleSubmit(eventMock)
-      .then(() => {
+      .then((result) => {
+        expect(result).to.be.equal(undefined);
         expect(form.state('username')).to.be.equal('bear');
         expect(form.state('validationError')).to.be.equal('This is a validation error');
 
