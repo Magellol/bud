@@ -25,7 +25,7 @@ describe('Icon', function () {
     expect(icon.type()).to.be.equal('svg');
     expect(width).to.be.equal('10px');
     expect(height).to.be.equal('10px');
-    expect(viewBox).to.be.equal('0 0 1792 1792');
+    expect(viewBox).to.be.equal('0 0 20 20');
     expect(className).to.be.equal('myCustomClass');
 
     const path = icon.childAt(0);

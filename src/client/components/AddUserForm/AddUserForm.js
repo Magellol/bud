@@ -1,8 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
+import Icon from '../../components/Icon';
 import s from './AddUserForm.css';
 import { post } from '../../helpers/requests';
 import { ucfirst } from '../../helpers/strings';
+import SVGs from '../../constants/svgs';
 
 const ENDPOINTS = {
   newUser: '/api/users/new'
@@ -61,19 +63,25 @@ const AddUserForm = React.createClass({
   render() {
     const { validationError } = this.state;
 
-    const inputWapperClasses = classnames({
-      [s.inputWrapper]: true,
+    const iconClasses = classnames({
+      [s.icon]: true,
       [s.hasError]: validationError !== null
     });
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className={inputWapperClasses}>
+        <div className={s.inputWrapper}>
           <input
             className={s.input}
             placeholder="Create a new user"
             value={this.state.username}
             onChange={this.handleUpdateUsername}
+          />
+
+          <Icon
+            icon={SVGs.times}
+            className={iconClasses}
+            size={20}
           />
         </div>
 

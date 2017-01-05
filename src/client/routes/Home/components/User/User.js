@@ -16,7 +16,7 @@ const User = (props) => {
 
       <Icon
         icon={SVGs.chevronRight}
-        size={20}
+        size={25}
         className={s.icon}
       />
 

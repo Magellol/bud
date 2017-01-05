@@ -19,6 +19,6 @@ describe('Home/User', function () {
 
     expect(icon.length).to.be.equal(1);
     expect(iconValue).to.be.equal(SVGs.chevronRight);
-    expect(size).to.be.equal(20);
+    expect(size).to.be.equal(25);
   });
 });
