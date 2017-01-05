@@ -1,4 +1,4 @@
-@value purple, grayLighter from '../../helpers/colors.css';
+@value purple, grayDarker, grayLighter from '../../helpers/colors.css';
 @value sansSerif from '../../helpers/fonts.css';
 
 .form {
@@ -6,8 +6,9 @@
 }
 
 .inputWrapper {
-  border: 1px solid grayLighter;
+  border-bottom: 4px solid purple;
   position: relative;
+  max-width: 250px;
 }
 
 .inputWrapper:before {

@@ -2,6 +2,10 @@ import React from 'react';
 import s from './AddExpenseForm.css';
 
 const AddExpenseForm = React.createClass({
+  propTypes: {
+    categories: React.PropTypes.node.isRequired
+  },
+
   getInitialState() {
     return {
       amount: '',
@@ -32,6 +36,9 @@ const AddExpenseForm = React.createClass({
         </div>
 
         <div className={s.categoriesWrapper}>
+          {
+            this.props.categories.map(category => console.log(category))
+          }
         </div>
 
       </form>
