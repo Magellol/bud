@@ -24,6 +24,7 @@ describe('AddUserForm', function () {
 
     expect(form.state('username')).to.be.equal('');
     expect(form.state('validationError')).to.be.equal(null);
+    expect(form.state('pendingRequest')).to.be.equal(false);
     expect(form.childAt(1).length).to.be.equal(0);
   });
 
@@ -37,6 +38,22 @@ describe('AddUserForm', function () {
     expect(form.childAt(1).html()).to.be.equal('<span>This is an error</span>');
   });
 
+  it('Should cancel the request is we already have one pending', function () {
+    fetchMock.post('/api/users/new', {});
+
+    const form = shallow(<AddUserForm afterCreate={afterCreateMock} />);
+    form.setState({
+      pendingRequest: true
+    });
+
+    const result = form.instance().handleSubmit(eventMock);
+
+    expect(result).to.be.equal(false);
+    expect(fetchMock.called('/api/users/new')).to.be.equal(false);
+
+    fetchMock.restore();
+  });
+
   it('Should create the user and update the states when handleSubmit() is successful', function () {
     fetchMock.post('/api/users/new', {
       body: {
@@ -48,13 +65,16 @@ describe('AddUserForm', function () {
     });
 
     const form = shallow(<AddUserForm afterCreate={afterCreateMock} />);
-
     form.setState({
       username: 'bear',
-      validationError: 'Hell yeah'
+      validationError: 'Hell yeah',
+      pendingRequest: false
     });
 
-    return form.instance().handleSubmit(eventMock)
+    const request = form.instance().handleSubmit(eventMock);
+
+    expect(form.state('pendingRequest')).to.be.equal(true);
+    return request
       .then((result) => {
         // This actually tests if the afterCreate prop function is being called and returned.
         expect(result).to.be.deep.equal({
@@ -63,6 +83,7 @@ describe('AddUserForm', function () {
 
         expect(form.state('username')).to.be.equal('');
         expect(form.state('validationError')).to.be.equal(null);
+        expect(form.state('pendingRequest')).to.be.equal(false);
 
         fetchMock.restore();
       });
@@ -89,6 +110,7 @@ describe('AddUserForm', function () {
         expect(result).to.be.equal(undefined);
         expect(form.state('username')).to.be.equal('bear');
         expect(form.state('validationError')).to.be.equal('This is a validation error');
+        expect(form.state('pendingRequest')).to.be.equal(false);
 
         fetchMock.restore();
       });

@@ -19,6 +19,7 @@ const AddUserForm = React.createClass({
   getInitialState() {
     return {
       username: '',
+      pendingRequest: false,
       validationError: null
     };
   },
@@ -32,13 +33,20 @@ const AddUserForm = React.createClass({
   handleSubmit(event) {
     event.preventDefault();
 
-    this.setError(null);
-    const { username } = this.state;
+    if (this.state.pendingRequest === true) {
+      return false;
+    }
 
+    this.setState({
+      validationError: null,
+      pendingRequest: true
+    });
+
+    const { username } = this.state;
     return post(ENDPOINTS.newUser, { username })
       .then(({ status, data }) => {
         if (status === 'success') {
-          this.setState({ username: '' });
+          this.setState({ username: '', pendingRequest: false });
           return this.props.afterCreate(data);
         }
 
@@ -52,7 +60,10 @@ const AddUserForm = React.createClass({
 
         throw error;
       })
-      .catch(error => this.setError(error.message));
+      .catch((error) => {
+        this.setError(error.message);
+        this.setState({ pendingRequest: false });
+      });
   },
 
   handleUpdateUsername(event) {
