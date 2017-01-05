@@ -36,11 +36,7 @@ const AddUserForm = React.createClass({
     return post(ENDPOINTS.newUser, { username })
       .then(({ status, data }) => {
         if (status === 'success') {
-          this.setState({
-            username: '',
-            validationError: null
-          });
-
+          this.setState({ username: '' });
           return this.props.afterCreate(data);
         }
 
