@@ -1,13 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import Home from '../Home';
 import Logo from '../../../../../components/Logo';
 
-const home = shallow(<Home />);
-
 describe('Home', function () {
   it('Should render properly', function () {
+    const home = shallow(<Home />);
     expect(home.length).to.be.equal(1);
   });
 
