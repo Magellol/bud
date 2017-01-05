@@ -1,10 +1,5 @@
 import React from 'react';
 
-/**
- * @link https://github.com/encharm/Font-Awesome-SVG-PNG/tree/master/black/svg
- * You'll get the coordinates from there.
- */
-
 const Icon = props => (
   <svg
     className={props.className}
