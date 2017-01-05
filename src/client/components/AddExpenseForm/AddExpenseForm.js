@@ -1,4 +1,5 @@
 import React from 'react';
+import RadioButton from '../RadioButton';
 import s from './AddExpenseForm.css';
 
 const AddExpenseForm = React.createClass({
@@ -13,9 +14,14 @@ const AddExpenseForm = React.createClass({
     };
   },
 
-  handleChange(event) {
+  handleAmountChange(event) {
     const { value: amount } = event.target;
     this.setState({ amount });
+  },
+
+  handleCategoryChange(event) {
+    const { value: category } = event.target;
+    this.setState({ category });
   },
 
   handleSubmit(event) {
@@ -30,15 +36,14 @@ const AddExpenseForm = React.createClass({
           <input
             className={s.input}
             placeholder="0.00"
-            onChange={this.handleChange}
+            onChange={this.handleAmountChange}
             value={this.state.amount}
           />
         </div>
 
         <div className={s.categoriesWrapper}>
-          {
-            this.props.categories.map(category => console.log(category))
-          }
+          <RadioButton label="option 1" checked={this.state.category === "1"} onChange={this.handleCategoryChange} value="1" />
+          <RadioButton label="option 2" checked={this.state.category === "2"} onChange={this.handleCategoryChange} value="2" />
         </div>
 
       </form>

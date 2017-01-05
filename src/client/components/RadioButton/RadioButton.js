@@ -2,14 +2,16 @@ import React, { PropTypes } from 'react';
 import s from './RadioButton.css';
 
 const RadioButton = props => (
-  <label>
+  <label className={s.wrapper}>
     <input
+      className={s.radio}
       value={props.value}
       onChange={props.onChange}
       checked={props.checked}
       type="radio"
     />
-    <span>{props.label}</span>
+
+    <span className={s.label}>{props.label}</span>
   </label>
 );
 

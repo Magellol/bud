@@ -10,7 +10,7 @@ const eventMock = {
 
 const categories = [1, 2, 3];
 
-describe.only('AddExpenseForm', function () {
+describe('AddExpenseForm', function () {
   it('Should render with its initial state', function () {
     const form = shallow(<AddExpenseForm categories={categories} />);
 
@@ -31,14 +31,14 @@ describe.only('AddExpenseForm', function () {
       amount: 25
     });
 
-    instance.handleChange(eventMock);
+    instance.handleAmountChange(eventMock);
     mocked.verify();
   });
 
-  it('Should call handleChange() when input changes', function () {
+  it('Should call handleAmountChange() when input changes', function () {
     const form = shallow(<AddExpenseForm categories={categories} />);
     const instance = form.instance();
-    const stubbed = stub(instance, 'handleChange');
+    const stubbed = stub(instance, 'handleAmountChange');
 
     instance.forceUpdate();
     form.find('input').simulate('change');

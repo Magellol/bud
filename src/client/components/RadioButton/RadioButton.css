@@ -1,0 +1,58 @@
+@value gray, grayLighter, grayDarker, purple from '../../helpers/colors.css';
+@value sansSerif from '../../helpers/fonts.css';
+
+
+.wrapper {
+  display: block;
+}
+
+.label {
+  composes: wrapper from '../../routes/Home/components/User/User.css';
+  composes: username from '../../routes/Home/components/User/User.css';
+  position: relative;
+  display: block;
+  transition: color .2s ease;
+  border-top: 1px solid grayLighter;
+}
+
+.label:hover {
+  cursor: pointer;
+}
+
+.label:hover:after {
+  background-color: gray;
+}
+
+.label:before,
+.label:after {
+  background-color: grayLighter;
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  margin-top: -10px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  right: 0;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.label:before {
+  background-color: purple;
+  opacity: 0;
+  z-index: 2;
+  transform: scale(.3);
+}
+
+.radio {
+  display: none;
+}
+
+.radio:checked + .label {
+  color: purple;
+}
+
+.radio:checked + .label:before {
+  opacity: 1;
+  transform: scale(.6);
+}
