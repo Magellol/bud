@@ -3,6 +3,7 @@ import classnames from 'classnames';
 // import Transition from 'react-addons-css-transition-group';
 import Logo from '../../../../components/Logo';
 import User from '../User';
+import AddUserForm from '../../../../components/AddUserForm';
 import s from './Home.css';
 import { post, get } from '../../../../helpers/requests';
 
@@ -12,10 +13,6 @@ const ENDPOINTS = {
 };
 
 // TODO
-// The user form could live on its own component if we ever need to use it elsewhere.
-// It could have some props and also a afterCreate function prop to pass a callback function to handle
-// after the user got created.
-//
 // Also, the input style could also live in its own component, we're going to need it.
 const Home = React.createClass({
   getInitialState() {
@@ -38,6 +35,12 @@ const Home = React.createClass({
         return this.props.router.push('/dashboard'); // eslint-disable-line react/prop-types
       })
       .catch(error => console.error(error)); // TODO Do something better, perhaps a flash message?
+  },
+
+  handleAfterCreateUser(user) {
+    return this.setState(prevState => ({
+      users: [...prevState.users, user]
+    }));
   },
 
   renderUsers(users) {
@@ -72,6 +75,8 @@ const Home = React.createClass({
         <div className={userWrapperClasses}>
           {users && this.renderUsers(users)}
         </div>
+
+        <AddUserForm afterCreate={this.handleAfterCreateUser} />
       </div>
     );
   }

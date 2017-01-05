@@ -10,7 +10,8 @@ const ENDPOINTS = {
 
 const AddUserForm = React.createClass({
   propTypes: {
-    afterCreate: React.PropTypes.func
+    // Will receive the user object as first argument.
+    afterCreate: React.PropTypes.func.isRequired
   },
 
   getInitialState() {
@@ -35,11 +36,12 @@ const AddUserForm = React.createClass({
     return post(ENDPOINTS.newUser, { username })
       .then(({ status, data }) => {
         if (status === 'success') {
-          this.props.afterCreate(data);
-          return this.setState({
+          this.setState({
             username: '',
             validationError: null
           });
+
+          return this.props.afterCreate(data);
         }
 
         const { username: errorMessages } = data;
