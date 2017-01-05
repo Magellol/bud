@@ -1,5 +1,3 @@
-import Home from './components/Home/';
+import Home from './components/Home';
 
-export default {
-  component: Home
-};
+export default Home;

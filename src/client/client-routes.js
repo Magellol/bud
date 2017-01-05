@@ -45,6 +45,11 @@ module.exports = function clientRoutes(express) {
    *
    * Further more each React route that are private will query their own server route
    * and handle the response as well.
+   *
+   * TODO
+   * So this isn't great, especially with how we tell React router
+   * to display proper routes based on the authentification.
+   * We basically query twice the same url when we do server side loading.
    */
   router.get('/dashboard', (req, resp, next) => {
     const url = `${config.get('app.host')}:${config.get('port')}/api/users/me`;

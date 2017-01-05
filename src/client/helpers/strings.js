@@ -4,7 +4,7 @@ export function ucfirst(string) { // eslint-disable-line import/prefer-default-e
   if (type !== 'string') {
     throw new Error(
       'ucfirst() can only work with strings directly. ' +
-      `Received ${type} instead.`
+      `Received "${type}" instead.`
     );
   }
 
