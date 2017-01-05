@@ -47,7 +47,7 @@ module.exports = function clientRoutes(express) {
    * and handle the response as well.
    *
    * TODO
-   * So this isn't great, * especially with how we tell React router
+   * So this isn't great, especially with how we tell React router
    * to display proper routes based on the authentification.
    * We basically query twice the same url when we do server side loading.
    */
