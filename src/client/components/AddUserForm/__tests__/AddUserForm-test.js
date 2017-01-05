@@ -37,7 +37,7 @@ describe('AddUserForm', function () {
     expect(form.childAt(1).html()).to.be.equal('<span>This is an error</span>');
   });
 
-  it('Should query the api and succeed', function () {
+  it('Should create the user and update the states when handleSubmit() is successful', function () {
     fetchMock.post('/api/users/new', {
       body: {
         status: 'success',
@@ -63,6 +63,31 @@ describe('AddUserForm', function () {
 
         expect(form.state('username')).to.be.equal('');
         expect(form.state('validationError')).to.be.equal(null);
+
+        fetchMock.restore();
+      });
+  });
+
+  it('Should fail and set the validation error state when we handleSubmit() failed', function () {
+    fetchMock.post('/api/users/new', {
+      body: {
+        status: 'fail',
+        data: {
+          username: ['This is a validation error']
+        }
+      }
+    });
+
+    const form = mount(<AddUserForm afterCreate={afterCreateMock} />);
+
+    form.setState({
+      username: 'bear'
+    });
+
+    return form.instance().handleSubmit(eventMock)
+      .then(() => {
+        expect(form.state('username')).to.be.equal('bear');
+        expect(form.state('validationError')).to.be.equal('This is a validation error');
 
         fetchMock.restore();
       });
