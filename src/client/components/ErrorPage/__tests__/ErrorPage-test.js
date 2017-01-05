@@ -10,7 +10,7 @@ const error = shallow(
   </ErrorPage>
 );
 
-describe.only('ErrorPage', function () {
+describe('ErrorPage', function () {
   it('Should render properly', function () {
     expect(error.length).to.be.equal(1);
   });

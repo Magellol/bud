@@ -21,5 +21,6 @@ describe('NotFoundError', function () {
 
     expect(link.length).to.be.equal(1);
     expect(link.props().to).to.be.equal('/');
+    expect(link.props().children).to.be.equal('Head back to home page.');
   });
 });
