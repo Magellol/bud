@@ -1,0 +1,5 @@
+.wrapper {
+  max-height: 155px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

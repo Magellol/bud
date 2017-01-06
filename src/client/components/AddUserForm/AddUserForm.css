@@ -3,12 +3,11 @@
 
 .inputWrapper {
   position: relative;
-  border-bottom: 1px solid grayLighter;
   margin-bottom: 10px;
 }
 
 .input {
-  background: transparent;
+  background-color: transparent;
   border: 0;
   border-bottom: 1px solid grayLighter;
   color: grayDarker;
@@ -17,11 +16,12 @@
   font-weight: lighter;
   padding: 20px 45px 20px 20px;
   width: 100%;
+  transition: background .2s ease;
 }
 
 .input:focus {
+  background-color: white;
   outline: 0;
-  background-color: grayLightest;
 }
 
 .errorMessage {

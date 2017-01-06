@@ -1,0 +1,4 @@
+@value xsMin: (min-width: 480px);
+@value smMin: (min-width: 768px);
+@value mdMin: (min-width: 992px);
+@value lgMin: (min-width: 1200px);

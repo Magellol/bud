@@ -39,6 +39,7 @@ describe('Home', function () {
 
     expect(home.state('users')).to.be.instanceOf(Array);
     expect(home.state('users').length).to.be.equal(0);
+    expect(home.state('initiallyLoaded')).to.be.equal(false);
   });
 
   it('Should query users when mounted and updated its state', function () {
@@ -51,7 +52,8 @@ describe('Home', function () {
     const mocked = mock(instance);
 
     mocked.expects('setState').once().withArgs({
-      users: [1, 2, 3]
+      users: [1, 2, 3],
+      initiallyLoaded: true
     });
 
     return instance.componentDidMount()

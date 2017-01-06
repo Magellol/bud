@@ -1,0 +1,19 @@
+@value gray, grayLighter, purple from '../../helpers/colors.css';
+
+.button {
+  background: transparent;
+  font-size: 20px;
+  border: 1px solid grayLighter;
+  border-radius: 50px;
+  padding: 10px 35px;
+  color: purple;
+  transition: background .2s ease;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: 0;
+}

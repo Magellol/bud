@@ -1,0 +1,68 @@
+@value gray, grayLighter, grayLightest, grayDarker, purple from '../../helpers/colors.css';
+@value sansSerif from '../../helpers/fonts.css';
+
+
+.wrapper {
+  display: block;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.label {
+  composes: wrapper from '../../routes/Home/components/User/User.css';
+  composes: username from '../../routes/Home/components/User/User.css';
+  position: relative;
+  display: block;
+  transition: color .2s ease;
+}
+
+.label:hover {
+  cursor: pointer;
+}
+
+.label:focus {
+  background: transparent;
+}
+
+.label:hover:after {
+  background-color: gray;
+}
+
+.label:before,
+.label:after {
+  background-color: grayLighter;
+  border: 2px solid transparent;
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  margin-top: -12px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  right: 20px;
+  transition: background-color .3s ease, transform .2s ease;
+}
+
+.label:before {
+  background-color: purple;
+  opacity: 0;
+  z-index: 2;
+  transform: scale(.3);
+}
+
+.radio {
+  display: none;
+}
+
+.radio:checked + .label {
+  color: purple;
+}
+
+.radio:checked + .label:after {
+  background-color: transparent;
+  border: 2px solid gray;
+}
+
+.radio:checked + .label:before {
+  opacity: 1;
+  transform: scale(.6);
+}
