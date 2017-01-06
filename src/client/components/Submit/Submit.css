@@ -12,7 +12,6 @@
 
 .button:hover {
   cursor: pointer;
-  background: grayLighter;
 }
 
 .button:focus {
