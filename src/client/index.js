@@ -1,4 +1,4 @@
-/* global document */
+import 'whatwg-fetch'; // I swear that's the only polyfill.
 
 import React from 'react';
 import { render } from 'react-dom';
