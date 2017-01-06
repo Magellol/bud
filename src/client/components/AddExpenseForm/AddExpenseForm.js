@@ -45,6 +45,7 @@ const AddExpenseForm = React.createClass({
         <div className={s.categoriesWrapper}>
           <RadioButton label="Groceries" checked={this.state.category === "1"} onChange={this.handleCategoryChange} value="1" />
           <RadioButton label="Video Games" checked={this.state.category === "2"} onChange={this.handleCategoryChange} value="2" />
+          <RadioButton label="Restaurants" checked={this.state.category === "3"} onChange={this.handleCategoryChange} value="3" />
         </div>
 
       </form>

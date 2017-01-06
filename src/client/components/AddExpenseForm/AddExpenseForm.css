@@ -6,7 +6,7 @@
 }
 
 .inputWrapper {
-  border-bottom: 4px solid purple;
+  border-bottom: 6px solid purple;
   position: relative;
   max-width: 250px;
   margin-bottom: 45px;
@@ -33,9 +33,14 @@
   margin-top: 20px;
 }
 
+.categoriesWrapper label:first-child {
+  border-top: 1px solid grayLighter;
+}
+
 .label {
   color: gray;
   text-transform: uppercase;
   font-family: sansSerif;
+  font-weight: lighter;
   margin-bottom: 10px;
 }
