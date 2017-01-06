@@ -12,17 +12,43 @@ const ENDPOINTS = {
   loginUser: '/api/users/login'
 };
 
-// TODO
-// Also, the input style could also live in its own component, we're going to need it.
 const Home = React.createClass({
   getInitialState() {
     return {
-      users: []
+      users: [],
+      initiallyLoaded: false
     };
   },
 
   componentDidMount() {
     return get(ENDPOINTS.users).then(({ data: users }) => this.setState({ users }));
+  getClasses(el) {
+    const { initiallyLoaded } = this.state;
+
+    const classes = {
+      logo: {
+        [s.logo]: true,
+        [s.loaded]: initiallyLoaded
+      },
+      usersWrapper: {
+        [s.usersWrapper]: true,
+        [s.display]: initiallyLoaded
+      },
+      formWrapper: {
+        [s.formWrapper]: true,
+        [s.show]: initiallyLoaded === true
+      }
+    };
+
+    if (typeof classes[el] === 'undefined') {
+      throw new Error(
+        `Classes are not defined for element "${el}". ` +
+        `Accepted values are ${Object.keys(classes)}. ` +
+        'Check render method of Home.'
+      );
+    }
+
+    return classnames(classes[el]);
   },
 
   handleLogin(username) {
@@ -61,22 +87,19 @@ const Home = React.createClass({
   render() {
     const { users } = this.state;
 
-    const userWrapperClasses = classnames({
-      [s.usersWrapper]: true,
-      [s.show]: users.length !== 0
-    });
-
     return (
       <div className={s.wrapper}>
-        <div className={s.logo}>
+        <div className={this.getClasses('logo')}>
           <Logo />
         </div>
 
-        <div className={userWrapperClasses}>
+        <div className={this.getClasses('usersWrapper')}>
           {users && this.renderUsers(users)}
         </div>
 
-        <AddUserForm afterCreate={this.handleAfterCreateUser} />
+        <div className={this.getClasses('formWrapper')}>
+          <AddUserForm afterCreate={this.handleAfterCreateUser} />
+        </div>
       </div>
     );
   }
