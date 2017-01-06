@@ -1,0 +1,19 @@
+@value purple from '../../helpers/colors.css';
+
+.loader {
+  width: 100px;
+  height: 30px;
+}
+
+.box {
+  composes: push from '../../helpers/animations.css';
+  animation-duration: 2.5s;
+  animation-timing-function: cubic-bezier(.79, 0, .47, .97);
+  animation-iteration-count: infinite;
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+  border: 2px solid purple;
+  border-radius: 3px;
+  transform: translate(0, 0) rotate(0deg);
+}
