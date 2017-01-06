@@ -1,6 +1,7 @@
 import React from 'react';
 import RadioButton from '../RadioButton';
 import s from './AddExpenseForm.css';
+import Submit from '../Submit';
 
 const AddExpenseForm = React.createClass({
   propTypes: {
@@ -34,6 +35,8 @@ const AddExpenseForm = React.createClass({
         <p className={s.label}>Expense</p>
         <div className={s.inputWrapper}>
           <input
+            type="number"
+            min="0.01"
             className={s.input}
             placeholder="0.00"
             onChange={this.handleAmountChange}
@@ -48,6 +51,9 @@ const AddExpenseForm = React.createClass({
           <RadioButton label="Restaurants" checked={this.state.category === "3"} onChange={this.handleCategoryChange} value="3" />
         </div>
 
+        <div className={s.submitWrapper}>
+          <Submit label="Add expense" />
+        </div>
       </form>
     );
   }

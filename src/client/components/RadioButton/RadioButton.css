@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
+.label:focus {
+  background: transparent;
+}
+
 .label:hover:after {
   background-color: gray;
 }
@@ -29,7 +33,7 @@
   content: '';
   position: absolute;
   border-radius: 50%;
-  margin-top: -10px;
+  margin-top: -12px;
   top: 50%;
   width: 20px;
   height: 20px;
