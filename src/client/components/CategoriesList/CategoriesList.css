@@ -1,5 +1,24 @@
+@value sansSerif from '../../helpers/fonts.css';
+@value grayLighter from '../../helpers/colors.css';
+
 .wrapper {
-  max-height: 155px;
+  height: 155px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.show {
+  composes: fadeIn from '../../helpers/animations.css';
+  animation-duration: .3s;
+}
+
+.emptyCategories {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: sansSerif;
+  font-size: 33px;
+  color: grayLighter;
 }

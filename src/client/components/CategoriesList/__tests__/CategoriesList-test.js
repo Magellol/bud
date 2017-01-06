@@ -37,6 +37,18 @@ describe('CategoriesList', function () {
     );
     expect(list.state('categories')).to.be.instanceOf(Array);
     expect(list.state('categories').length).to.be.equal(0);
+    expect(list.state('initiallyLoaded')).to.be.equal(false);
+  });
+
+  it('It should say there is no categories after fetching them and the state is empty', function () {
+    const list = shallow(
+      <CategoriesList onSelection={onSelectionMock} shouldCheck={shouldCheckMock} />
+    );
+
+    list.setState({ categories: [], initiallyLoaded: true });
+
+    const child = list.childAt(0);
+    expect(child.text()).to.be.equal('You don’t have any categories :(');
   });
 
   it('It should not have any RadioButton at mounting', function () {

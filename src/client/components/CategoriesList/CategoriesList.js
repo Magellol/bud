@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 import RadioButton from '../RadioButton';
 import { get } from '../../helpers/requests';
 import ENDPOINTS from '../../constants/endpoints';
@@ -14,6 +15,7 @@ const CategoriesList = React.createClass({
 
   getInitialState() {
     return {
+      initiallyLoaded: false,
       categories: []
     };
   },
@@ -25,14 +27,26 @@ const CategoriesList = React.createClass({
           throw new Error('Categories could not be fetched');
         }
 
-        return this.setState({ categories: data });
+        return this.setState({ categories: data, initiallyLoaded: true });
       })
       .catch(error => console.error(error)); // TODO error handling.
   },
 
   render() {
+    const { categories, initiallyLoaded } = this.state;
+    const wrapperClasses = classnames({
+      [s.wrapper]: true,
+      [s.show]: initiallyLoaded
+    });
+
     return (
-      <div className={s.wrapper}>
+      <div className={wrapperClasses}>
+        {
+          (initiallyLoaded && categories.length === 0)
+          ? <span className={s.emptyCategories}>You don’t have any categories :(</span>
+          : null
+        }
+
         {
           this.state.categories.map(category => (
             <RadioButton
