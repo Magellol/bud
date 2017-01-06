@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import RadioButton from '../RadioButton';
 import { get } from '../../helpers/requests';
 import ENDPOINTS from '../../constants/endpoints';
+import s from './CategoriesList.css';
 
 const CategoriesList = React.createClass({
   propTypes: {
@@ -31,7 +32,7 @@ const CategoriesList = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className={s.wrapper}>
         {
           this.state.categories.map(category => (
             <RadioButton

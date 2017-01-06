@@ -38,7 +38,7 @@
   top: 50%;
   width: 20px;
   height: 20px;
-  right: 0;
+  right: 20px;
   transition: background-color .3s ease, transform .2s ease;
 }
 

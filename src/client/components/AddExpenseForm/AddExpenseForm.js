@@ -42,13 +42,11 @@ const AddExpenseForm = React.createClass({
 
         <p className={s.label}>Goes in</p>
 
-        <div className={s.scrollable}>
-          <div className={s.categoriesWrapper}>
-            <CategoriesList
-              onChange={this.handleCategoryChange}
-              shouldCheck={value => this.state.category === value}
-            />
-          </div>
+        <div className={s.categoriesWrapper}>
+          <CategoriesList
+            onChange={this.handleCategoryChange}
+            shouldCheck={value => this.state.category === value}
+          />
         </div>
 
         <div className={s.submitWrapper}>
