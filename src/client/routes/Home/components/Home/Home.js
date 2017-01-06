@@ -21,7 +21,11 @@ const Home = React.createClass({
   },
 
   componentDidMount() {
-    return get(ENDPOINTS.users).then(({ data: users }) => this.setState({ users }));
+    return get(ENDPOINTS.users).then(({ data: users }) => (
+      this.setState({ users, initiallyLoaded: true })
+    ));
+  },
+
   getClasses(el) {
     const { initiallyLoaded } = this.state;
 
