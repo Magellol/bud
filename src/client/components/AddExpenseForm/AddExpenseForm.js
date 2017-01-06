@@ -21,9 +21,8 @@ const AddExpenseForm = React.createClass({
     });
   },
 
-  handleCategoryChange(event) {
-    const { value } = event.target;
-    this.setState({ category: parseInt(value, 10) });
+  handleCategorySelection(category) {
+    return this.setState({ category });
   },
 
   handleSubmit(event) {
@@ -31,6 +30,8 @@ const AddExpenseForm = React.createClass({
   },
 
   render() {
+    const { category: currentCategory } = this.state;
+
     return (
       <form className={s.form} onSubmit={this.handleSubmit} noValidate={true}>
         <p className={s.label}>Expense</p>
@@ -51,7 +52,7 @@ const AddExpenseForm = React.createClass({
             name="name"
             type="text"
             className={s.input}
-            placeholder="Name your expense"
+            placeholder="Luke's birthday"
             onChange={this.handleInputChange}
             value={this.state.name}
           />
@@ -59,10 +60,17 @@ const AddExpenseForm = React.createClass({
 
 
         <div className={s.categoriesWrapper}>
-          <p className={s.label}>Goes in</p>
+          <p className={s.label}>
+            Goes in {
+              currentCategory && <span className={s.categoryName}>{currentCategory.name}</span>
+            }
+          </p>
+
           <CategoriesList
-            onChange={this.handleCategoryChange}
-            shouldCheck={value => this.state.category === value}
+            onSelection={this.handleCategorySelection}
+            shouldCheck={
+              id => (currentCategory ? currentCategory.id === id : false)
+            }
           />
         </div>
 

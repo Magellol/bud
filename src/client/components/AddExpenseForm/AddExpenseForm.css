@@ -33,7 +33,7 @@
 }
 
 .categoriesWrapper {
-  margin-top: 25px;
+  margin-top: 35px;
 }
 
 .categoriesWrapper label:first-child {
@@ -53,4 +53,8 @@
   font-family: sansSerif;
   font-weight: lighter;
   margin-bottom: 8px;
+}
+
+.categoryName {
+  color: purple;
 }

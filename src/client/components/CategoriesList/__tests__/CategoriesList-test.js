@@ -6,7 +6,7 @@ import CategoriesList from '../CategoriesList';
 import RadioButton from '../../RadioButton';
 import ENDPOINTS from '../../../constants/endpoints';
 
-const onChangeMock = () => null;
+const onSelectionMock = () => null;
 const shouldCheckMock = () => true;
 
 const categorieFixtures = [
@@ -24,23 +24,32 @@ const categorieFixtures = [
 
 describe('CategoriesList', function () {
   it('Should render', function () {
-    const list = shallow(<CategoriesList onChange={onChangeMock} shouldCheck={shouldCheckMock} />);
+    const list = shallow(
+      <CategoriesList onSelection={onSelectionMock} shouldCheck={shouldCheckMock} />
+    );
+
     expect(list.length).to.be.equal(1);
   });
 
   it('Should have its initial state', function () {
-    const list = shallow(<CategoriesList onChange={onChangeMock} shouldCheck={shouldCheckMock} />);
+    const list = shallow(
+      <CategoriesList onSelection={onSelectionMock} shouldCheck={shouldCheckMock} />
+    );
     expect(list.state('categories')).to.be.instanceOf(Array);
     expect(list.state('categories').length).to.be.equal(0);
   });
 
   it('It should not have any RadioButton at mounting', function () {
-    const list = shallow(<CategoriesList onChange={onChangeMock} shouldCheck={shouldCheckMock} />);
+    const list = shallow(
+      <CategoriesList onSelection={onSelectionMock} shouldCheck={shouldCheckMock} />
+    );
     expect(list.find(RadioButton).exists()).to.be.equal(false);
   });
 
   it('It should have RadioButtons when categories state is set', function () {
-    const list = shallow(<CategoriesList onChange={onChangeMock} shouldCheck={shouldCheckMock} />);
+    const list = shallow(
+      <CategoriesList onSelection={onSelectionMock} shouldCheck={shouldCheckMock} />
+    );
 
     list.setState({ categories: categorieFixtures });
 
@@ -50,7 +59,7 @@ describe('CategoriesList', function () {
     expect(radios.length).to.be.equal(2);
     expect(firstRadio.props.label).to.be.equal('Cat 1');
     expect(firstRadio.props.value).to.be.equal(1);
-    expect(firstRadio.props.onChange).to.be.equal(onChangeMock);
+    expect(firstRadio.props.onChange).to.be.instanceOf(Function);
     expect(firstRadio.props.checked).to.be.equal(true); // shouldCheckMock() => true.
   });
 
@@ -59,7 +68,9 @@ describe('CategoriesList', function () {
       body: { status: 'success', data: categorieFixtures }
     });
 
-    const list = shallow(<CategoriesList onChange={onChangeMock} shouldCheck={shouldCheckMock} />);
+    const list = shallow(
+      <CategoriesList onSelection={onSelectionMock} shouldCheck={shouldCheckMock} />
+    );
 
     return list.instance().componentDidMount().then(() => {
       expect(list.state('categories')).to.be.deep.equal(categorieFixtures);
