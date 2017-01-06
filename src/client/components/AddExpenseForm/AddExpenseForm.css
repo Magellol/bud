@@ -6,31 +6,34 @@
 }
 
 .inputWrapper {
-  border-bottom: 5px solid purple;
+  border: 1px solid grayLighter;
   position: relative;
-  max-width: 200px;
-  margin-bottom: 35px;
+  max-width: 100%;
+  margin-bottom: 5px;
 }
 
-.inputWrapper:before {
+.inputWrapper.amount:before {
   content: '$';
   color: purple;
   position: absolute;
   left: 15px;
-  top: 18px;
-  font-family: sans-serif;
-  font-size: 25px;
+  top: 10px;
+  font-family: sansSerif;
+  font-size: 22px;
+}
+
+.inputWrapper.amount .input {
+  padding: 10px 20px 10px 40px;
 }
 
 .input {
   composes: input from '../AddUserForm/AddUserForm.css';
-  padding-left: 40px;
   padding-right: 20px;
   border: 0;
 }
 
 .categoriesWrapper {
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .categoriesWrapper label:first-child {
@@ -49,5 +52,5 @@
   text-transform: uppercase;
   font-family: sansSerif;
   font-weight: lighter;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
