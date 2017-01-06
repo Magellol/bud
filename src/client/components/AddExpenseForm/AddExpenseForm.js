@@ -1,13 +1,9 @@
 import React from 'react';
-import RadioButton from '../RadioButton';
+import CategoriesList from '../CategoriesList';
 import s from './AddExpenseForm.css';
 import Submit from '../Submit';
 
 const AddExpenseForm = React.createClass({
-  propTypes: {
-    categories: React.PropTypes.node.isRequired
-  },
-
   getInitialState() {
     return {
       amount: '',
@@ -21,8 +17,8 @@ const AddExpenseForm = React.createClass({
   },
 
   handleCategoryChange(event) {
-    const { value: category } = event.target;
-    this.setState({ category });
+    const { value } = event.target;
+    this.setState({ category: parseInt(value, 10) });
   },
 
   handleSubmit(event) {
@@ -48,9 +44,10 @@ const AddExpenseForm = React.createClass({
 
         <div className={s.scrollable}>
           <div className={s.categoriesWrapper}>
-            <RadioButton label="Groceries" checked={this.state.category === "1"} onChange={this.handleCategoryChange} value="1" />
-            <RadioButton label="Video Games" checked={this.state.category === "2"} onChange={this.handleCategoryChange} value="2" />
-            <RadioButton label="Restaurants" checked={this.state.category === "3"} onChange={this.handleCategoryChange} value="3" />
+            <CategoriesList
+              onChange={this.handleCategoryChange}
+              shouldCheck={value => this.state.category === value}
+            />
           </div>
         </div>
 

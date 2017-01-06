@@ -6,11 +6,7 @@ import User from '../User';
 import AddUserForm from '../../../../components/AddUserForm';
 import s from './Home.css';
 import { post, get } from '../../../../helpers/requests';
-
-const ENDPOINTS = {
-  users: '/api/users',
-  loginUser: '/api/users/login'
-};
+import ENDPOINTS from '../../../../constants/endpoints';
 
 const Home = React.createClass({
   getInitialState() {
@@ -21,7 +17,7 @@ const Home = React.createClass({
   },
 
   componentDidMount() {
-    return get(ENDPOINTS.users).then(({ data: users }) => (
+    return get(ENDPOINTS.allUsers).then(({ data: users }) => (
       this.setState({ users, initiallyLoaded: true })
     ));
   },

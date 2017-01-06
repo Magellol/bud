@@ -4,11 +4,8 @@ import Icon from '../../components/Icon';
 import s from './AddUserForm.css';
 import { post } from '../../helpers/requests';
 import { ucfirst } from '../../helpers/strings';
+import ENDPOINTS from '../../constants/endpoints';
 import SVGs from '../../constants/svgs';
-
-const ENDPOINTS = {
-  newUser: '/api/users/new'
-};
 
 const AddUserForm = React.createClass({
   propTypes: {

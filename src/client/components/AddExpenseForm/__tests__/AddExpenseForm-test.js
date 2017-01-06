@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import { mock, stub } from 'sinon';
 import AddExpenseForm from '../AddExpenseForm';
+import CategoriesList from '../../CategoriesList';
 
 const eventMock = {
   target: { value: 25 }
@@ -18,7 +19,6 @@ describe('AddExpenseForm', function () {
 
     expect(form.length).to.be.equal(1);
     expect(amount).to.be.equal('');
-    expect(category).to.be.equal(null);
     expect(category).to.be.equal(null);
   });
 
@@ -46,7 +46,10 @@ describe('AddExpenseForm', function () {
     expect(stubbed.calledOnce).to.be.equal(true);
   });
 
-  it.skip('Should display category radio buttons', function () {
+  it('Should have an instance of CategoryList', function () {
+    const form = shallow(<AddExpenseForm categories={categories} />);
+    const list = form.find(CategoriesList);
 
+    expect(list.length).to.be.equal(1);
   });
 });
