@@ -8,6 +8,7 @@
 }
 
 .input {
+  background: transparent;
   border: 0;
   border-bottom: 1px solid grayLighter;
   color: grayDarker;

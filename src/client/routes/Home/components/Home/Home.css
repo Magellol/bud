@@ -1,6 +1,10 @@
 .logo {
-  margin-bottom: 75px;
   text-align: center;
+  transition: transform .5s ease;
+}
+
+.loaded {
+  transform: translate3d(0, -70%, 0);
 }
 
 .wrapper {
@@ -9,15 +13,6 @@
   flex-direction: column;
   justify-content: center;
   min-height: 100%;
-}
-
-.usersWrapper {
-  opacity: 0;
-  transition: opacity .5s ease;
-}
-
-.usersWrapper.show {
-  opacity: 1;
 }
 
 .userButton {
@@ -32,4 +27,25 @@
 .userButton:hover {
   cursor: pointer;
   background:
+}
+
+.usersWrapper {
+  visibility: hidden;
+}
+
+.display {
+  composes: fadeInUp from '../../../../helpers/animations.css';
+  animation-duration: .8s;
+  visibility: visible;
+}
+
+.formWrapper {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
+}
+
+.formWrapper.show {
+  visibility: visible;
+  opacity: 1;
 }
