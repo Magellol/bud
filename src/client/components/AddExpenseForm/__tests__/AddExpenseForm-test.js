@@ -75,4 +75,18 @@ describe('AddExpenseForm', function () {
 
     expect(list.length).to.be.equal(1);
   });
+
+  it('Should set the category state when handleCategorySelection is invoked', function () {
+    const form = shallow(<AddExpenseForm categories={categories} />);
+    const instance = form.instance();
+    const mocked = mock(instance);
+    const category = { id: 1, name: 'Restaurant' };
+
+    mocked.expects('setState').once().withArgs({ category });
+    instance.forceUpdate();
+
+    instance.handleCategorySelection(category);
+
+    mocked.verify();
+  });
 });

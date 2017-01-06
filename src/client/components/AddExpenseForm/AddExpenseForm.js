@@ -21,9 +21,8 @@ const AddExpenseForm = React.createClass({
     });
   },
 
-  handleCategoryChange(event) {
-    const { value } = event.target;
-    this.setState({ category: parseInt(value, 10) });
+  handleCategorySelection(category) {
+    return this.setState({ category });
   },
 
   handleSubmit(event) {
@@ -61,7 +60,7 @@ const AddExpenseForm = React.createClass({
         <div className={s.categoriesWrapper}>
           <p className={s.label}>Goes in</p>
           <CategoriesList
-            onChange={this.handleCategoryChange}
+            onSelection={this.handleCategorySelection}
             shouldCheck={value => this.state.category === value}
           />
         </div>

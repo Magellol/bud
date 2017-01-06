@@ -6,7 +6,7 @@ import s from './CategoriesList.css';
 
 const CategoriesList = React.createClass({
   propTypes: {
-    onChange: PropTypes.func.isRequired,
+    onSelection: PropTypes.func.isRequired,
     // Function to know if the radio button must be checked. It'll get the current
     // radio button value as first argument
     shouldCheck: PropTypes.func.isRequired
@@ -39,7 +39,7 @@ const CategoriesList = React.createClass({
               key={category.id}
               label={category.name}
               value={category.id}
-              onChange={this.props.onChange}
+              onChange={event => this.props.onSelection(category, event)}
               checked={this.props.shouldCheck(category.id)}
             />
           ))
