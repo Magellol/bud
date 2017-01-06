@@ -80,7 +80,7 @@ const AddUserForm = React.createClass({
     });
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} action="#">
         <div className={s.inputWrapper}>
           <input
             className={s.input}
