@@ -31,7 +31,7 @@ const AddExpenseForm = React.createClass({
   render() {
     return (
       <form className={s.form} onSubmit={this.handleSubmit}>
-
+        <p className={s.label}>Expense</p>
         <div className={s.inputWrapper}>
           <input
             className={s.input}
@@ -41,9 +41,10 @@ const AddExpenseForm = React.createClass({
           />
         </div>
 
+        <p className={s.label}>Goes in</p>
         <div className={s.categoriesWrapper}>
-          <RadioButton label="option 1" checked={this.state.category === "1"} onChange={this.handleCategoryChange} value="1" />
-          <RadioButton label="option 2" checked={this.state.category === "2"} onChange={this.handleCategoryChange} value="2" />
+          <RadioButton label="Groceries" checked={this.state.category === "1"} onChange={this.handleCategoryChange} value="1" />
+          <RadioButton label="Video Games" checked={this.state.category === "2"} onChange={this.handleCategoryChange} value="2" />
         </div>
 
       </form>

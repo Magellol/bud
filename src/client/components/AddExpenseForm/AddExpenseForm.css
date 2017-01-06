@@ -1,4 +1,4 @@
-@value purple, grayDarker, grayLighter from '../../helpers/colors.css';
+@value gray, purple, grayDarker, grayLighter from '../../helpers/colors.css';
 @value sansSerif from '../../helpers/fonts.css';
 
 .form {
@@ -9,6 +9,7 @@
   border-bottom: 4px solid purple;
   position: relative;
   max-width: 250px;
+  margin-bottom: 45px;
 }
 
 .inputWrapper:before {
@@ -24,9 +25,17 @@
 .input {
   composes: input from '../AddUserForm/AddUserForm.css';
   padding-left: 40px;
+  padding-right: 20px;
   border: 0;
 }
 
 .categoriesWrapper {
-  margin-top: 45px;
+  margin-top: 20px;
+}
+
+.label {
+  color: gray;
+  text-transform: uppercase;
+  font-family: sansSerif;
+  margin-bottom: 10px;
 }
