@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const { connection, Models } = require('../../src/server/models');
+const { testModelValidation } = require('../test-helpers');
 const User = require('../../src/server/models/User');
 
 const { Sequelize } = connection;
@@ -26,24 +27,13 @@ describe('User', function () {
       [false, 'The name must be a string'],
       ['', 'You must provide a username'],
       ['hello world', 'Your username can only contain letters'],
-      ['a', 'Your username must be between 3 and 60 characters long']
+      ['a', 'Your username must be between 3 and 20 characters long']
     ];
 
-    const promises = tests.map((test) => {
-      const [username] = test;
-      const user = Models.User.build({ username });
-
-      return user.validate();
+    return testModelValidation(tests, {
+      model: Models.User,
+      defaultFields: {},
+      fieldToTest: 'username'
     });
-
-    return Promise.all(promises)
-      .then((listOfErrors) => {
-        expect(listOfErrors).to.not.include(null, 'Passed validation');
-
-        const messages = listOfErrors.map(error => error.errors[0].message);
-        const expectedMessages = tests.map(test => test[1]);
-
-        expect(messages).to.be.deep.equal(expectedMessages);
-      });
   });
 });

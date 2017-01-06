@@ -63,7 +63,7 @@ describe('/users/new', function () {
         expect(body.data).to.be.deep.equal({
           username: [
             'Your username can only contain letters',
-            'Your username must be between 3 and 60 characters long'
+            'Your username must be between 3 and 20 characters long'
           ]
         });
       });
