@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const { connection, Models } = require('../../src/server/models');
+const { testModelValidation } = require('../test-helpers');
 const ExpenseCategory = require('../../src/server/models/ExpenseCategory');
 
 const { Sequelize } = connection;
@@ -22,7 +23,18 @@ describe('ExpenseCategory', function () {
     expect(assoc.User).to.be.an.instanceof(Sequelize.Association.BelongsTo);
   });
 
-  it.skip('Should throw validation errors', function () {
-    // Write tests to test the validation rules.
+  it('Should error out for invalid names', function () {
+    const tests = [
+      [false, 'The name must be a string'],
+      ['', 'You must provide a name'],
+      ['hello world_', 'The name can only include letters, numbers and spaces'],
+      ['a', 'The category name must be between 3 and 30 characters long']
+    ];
+
+    return testModelValidation(tests, {
+      model: Models.ExpenseCategory,
+      defaultFields: {},
+      fieldToTest: 'name'
+    });
   });
 });

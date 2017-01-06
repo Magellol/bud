@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
-      type: DataTypes.STRING(60),
+      type: DataTypes.STRING(20),
       allowNull: false,
       unique: true,
       validate: {
@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Your username can only contain letters'
         },
         len: {
-          args: [3, 60],
-          msg: 'Your username must be between 3 and 60 characters long'
+          args: [3, 20],
+          msg: 'Your username must be between 3 and 20 characters long'
         }
       }
     }

@@ -11,7 +11,7 @@ module.exports = {
       },
       username: {
         allowNull: false,
-        type: Sequelize.STRING(60),
+        type: Sequelize.STRING(20),
         unique: true
       },
       createdAt: {
