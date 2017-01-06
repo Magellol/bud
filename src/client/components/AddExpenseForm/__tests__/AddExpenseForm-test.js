@@ -5,21 +5,20 @@ import { mock, stub } from 'sinon';
 import AddExpenseForm from '../AddExpenseForm';
 import CategoriesList from '../../CategoriesList';
 
-const eventMock = {
-  target: { value: 25 }
-};
-
 const categories = [1, 2, 3];
 
 describe('AddExpenseForm', function () {
   it('Should render with its initial state', function () {
     const form = shallow(<AddExpenseForm categories={categories} />);
 
-    const { amount, category } = form.state();
+    const { amount, category, name, validationErrors } = form.state();
 
     expect(form.length).to.be.equal(1);
     expect(amount).to.be.equal('');
+    expect(name).to.be.equal('');
     expect(category).to.be.equal(null);
+    expect(validationErrors).to.be.instanceOf(Array);
+    expect(validationErrors.length).to.be.equal(0);
   });
 
   it('Should change the amount state when the input value changes', function () {
@@ -31,19 +30,43 @@ describe('AddExpenseForm', function () {
       amount: 25
     });
 
-    instance.handleAmountChange(eventMock);
+    const event = {
+      target: { name: 'amount', value: 25 }
+    };
+
+    instance.handleInputChange(event);
+    mocked.verify();
+  });
+
+  it('Should change the name state when the input value changes', function () {
+    const form = shallow(<AddExpenseForm categories={categories} />);
+    const instance = form.instance();
+
+    const mocked = mock(instance);
+    mocked.expects('setState').once().withArgs({
+      name: 'hola'
+    });
+
+    const event = {
+      target: { name: 'name', value: 'hola' }
+    };
+
+    instance.handleInputChange(event);
     mocked.verify();
   });
 
   it('Should call handleAmountChange() when input changes', function () {
     const form = shallow(<AddExpenseForm categories={categories} />);
     const instance = form.instance();
-    const stubbed = stub(instance, 'handleAmountChange');
+    const stubbed = stub(instance, 'handleInputChange');
 
     instance.forceUpdate();
-    form.find('input').simulate('change');
 
-    expect(stubbed.calledOnce).to.be.equal(true);
+    const inputs = form.find('input');
+    inputs.at(0).simulate('change');
+    inputs.at(1).simulate('change');
+
+    expect(stubbed.calledTwice).to.be.equal(true);
   });
 
   it('Should have an instance of CategoryList', function () {
