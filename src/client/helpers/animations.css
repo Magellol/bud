@@ -20,10 +20,50 @@
   }
 }
 
+@keyframes push {
+  0% {
+    transform: translate(0, 0) rotate(-45deg);
+  }
+  5% {
+    transform: translate(0, 0) rotate(-50deg);
+  }
+  20% {
+    transform: translate(1em, 0) rotate(47deg);
+  }
+  25% {
+    transform: translate(1em, 0) rotate(45deg);
+  }
+  30% {
+    transform: translate(1em, 0) rotate(40deg);
+  }
+  45% {
+    transform: translate(2em, 0) rotate(137deg);
+  }
+  50% {
+    transform: translate(2em, 0) rotate(135deg);
+  }
+  55% {
+    transform: translate(2em, 0) rotate(130deg);
+  }
+  70% {
+    transform: translate(3em, 0) rotate(217deg);
+  }
+  75% {
+    transform: translate(3em, 0) rotate(220deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(-225deg);
+  }
+}
+
 .fadeIn {
   animation-name: fadeIn;
 }
 
 .fadeInUp {
   animation-name: fadeInUp;
+}
+
+.push {
+  animation-name: push;
 }
