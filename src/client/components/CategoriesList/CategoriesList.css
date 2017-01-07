@@ -2,7 +2,7 @@
 @value grayLighter from '../../helpers/colors.css';
 
 .wrapper {
-  height: 155px;
+  height: 165px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
