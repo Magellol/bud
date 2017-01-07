@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const { connection: DbConnection } = require('../models');
 const userRoutes = require('./users');
 const expenseCategoryRoutes = require('./expense-categories');
+const expenseRoutes = require('./expenses');
 const session = require('express-session');
 const { createError } = require('../helpers/errors');
 const {
@@ -56,6 +57,7 @@ module.exports = function apiRoutes(express) {
 
   router.use('/users', userRoutes(express));
   router.use('/categories', expenseCategoryRoutes(express));
+  router.use('/expenses', expenseRoutes(express));
 
   /**
    * Last regular middleware defined.
