@@ -6,10 +6,31 @@
 }
 
 .inputWrapper {
-  border: 1px solid grayLighter;
+  border-bottom: 3px solid purple;
   position: relative;
-  max-width: 100%;
+  max-width: 70%;
   margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.name {
+  composes: fadeInUp from '../../helpers/animations.css';
+  animation-duration: .2s;
+  border-bottom: 1px solid grayLighter;
+  margin-top: 10px;
+  transition: opacity .2s ease;
+}
+
+.addName {
+  composes: button from '../Submit/Submit.css';
+  font-size: 13px !important;
+  padding: 6px 12px !important; /* Css modules are messing with me...*/
+  margin-left: 15px;
+}
+
+.addNameButtonWrapper {
+  display: flex;
+  align-items: center;
 }
 
 .inputWrapper.amount:before {
@@ -17,13 +38,13 @@
   color: purple;
   position: absolute;
   left: 15px;
-  top: 10px;
+  top: 14px;
   font-family: sansSerif;
   font-size: 22px;
 }
 
 .inputWrapper.amount .input {
-  padding: 10px 20px 10px 40px;
+  padding: 15px 20px 15px 40px;
 }
 
 .input {
@@ -33,7 +54,7 @@
 }
 
 .categoriesWrapper {
-  margin-top: 35px;
+  margin-top: 45px;
 }
 
 .categoriesWrapper label:first-child {
@@ -48,11 +69,12 @@
 }
 
 .label {
-  color: gray;
+  color: grayDarker;
   text-transform: uppercase;
   font-family: sansSerif;
   font-weight: lighter;
-  margin-bottom: 8px;
+  margin-bottom: 0;
+  margin-top: 2px;
 }
 
 .categoryName {

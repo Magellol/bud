@@ -11,14 +11,27 @@ describe('AddExpenseForm', function () {
   it('Should render with its initial state', function () {
     const form = shallow(<AddExpenseForm categories={categories} />);
 
-    const { amount, category, name, validationErrors } = form.state();
+    const { amount, category, name, validationErrors, showName } = form.state();
 
     expect(form.length).to.be.equal(1);
     expect(amount).to.be.equal('');
+    expect(showName).to.be.equal(false);
     expect(name).to.be.equal('');
     expect(category).to.be.equal(null);
     expect(validationErrors).to.be.instanceOf(Array);
     expect(validationErrors.length).to.be.equal(0);
+  });
+
+  it('Should call renderNameInput() when the showName state is set', function () {
+    const form = shallow(<AddExpenseForm categories={categories} />);
+    const instance = form.instance();
+    const stubbed = stub(instance, 'renderNameInput');
+
+    instance.forceUpdate();
+
+    form.setState({ showName: true });
+
+    expect(stubbed.calledOnce).to.be.equal(true);
   });
 
   it('Should change the amount state when the input value changes', function () {
@@ -59,6 +72,8 @@ describe('AddExpenseForm', function () {
     const form = shallow(<AddExpenseForm categories={categories} />);
     const instance = form.instance();
     const stubbed = stub(instance, 'handleInputChange');
+
+    form.setState({ showName: true });
 
     instance.forceUpdate();
 
