@@ -56,4 +56,25 @@ describe('/expenses/new', function () {
         });
       });
   }));
+
+  it('Should create a new expense when requested', wrap(function* () {
+    const userId = 1;
+    const agent = yield getAuthedAgent(userId);
+    const category = yield Models.ExpenseCategory.findOne({
+      where: { UserId: userId }
+    });
+
+    const response = yield agent.post('/api/expenses/new')
+      .send({
+        payload: { ExpenseCategoryId: category.get('id'), amount: '57.67', name: 'My awesome expense' }
+      });
+
+    const { body } = response;
+    expect(response).to.have.status(HttpCodes.allGood);
+
+    expect(body.status).to.be.equal('success');
+    expect(body.data.ExpenseCategoryId).to.be.equal(category.get('id'));
+    expect(body.data.amount).to.be.equal('57.67');
+    expect(body.data.name).to.be.equal('My awesome expense');
+  }));
 });
