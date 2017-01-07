@@ -86,8 +86,9 @@ const AddExpenseForm = React.createClass({
 
         <div className={s.categoriesWrapper}>
           <p className={s.label}>
-            Goes in
-            {currentCategory && <span className={s.categoryName}>{currentCategory.name}</span>}
+            Goes in {
+              currentCategory && <span className={s.categoryName}>{currentCategory.name}</span>
+            }
           </p>
 
           <CategoriesList
