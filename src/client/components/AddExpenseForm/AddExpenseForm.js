@@ -61,7 +61,7 @@ const AddExpenseForm = React.createClass({
       <form className={s.form} onSubmit={this.handleSubmit} noValidate={true}>
 
         <div className={s.addNameButtonWrapper}>
-          <p className={s.label}>Expense</p>
+          <p className={s.label} style={{ marginBottom: 0 }}>Expense</p>
           <button
             className={s.addName}
             onClick={this.handleToggleName}
