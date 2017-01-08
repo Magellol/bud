@@ -13,7 +13,8 @@ const AddExpenseForm = React.createClass({
       name: '',
       showName: false,
       category: null,
-      validationErrors: []
+      validationError: null,
+      requestDone: false
     };
   },
 
@@ -38,25 +39,28 @@ const AddExpenseForm = React.createClass({
     event.preventDefault();
     const { amount, category, name, showName } = this.state;
 
+    this.setState({ requestDone: false, validationError: null });
+
     return post(ENDPOINTS.newExpense, {
       amount,
       ExpenseCategoryId: category ? category.id : null,
       name: showName === true ? name : null
-    }).then(({ status, data }) => {
+    })
+    .then(({ status, data }) => {
       if (status === 'success') {
         return this.setState({
           amount: '',
           category: null,
           name: '',
-          validationErrors: []
+          validationError: null,
+          requestDone: true,
         });
       }
 
-      return this.setState({ validationErrors: data });
+      const [messages] = Object.values(data);
+      throw new Error(messages[0]); // Only show the first error message.
     })
-    .catch(error => {
-      console.error(error);
-    });
+    .catch(error => this.setState({ validationError: error.message }));
   },
 
   renderNameInput() {
