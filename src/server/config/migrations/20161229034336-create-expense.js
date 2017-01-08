@@ -15,7 +15,7 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING(30),
-        allowNull: false
+        allowNull: true
       },
       ExpenseCategoryId: {
         allowNull: false,
