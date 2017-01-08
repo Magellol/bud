@@ -28,10 +28,7 @@ describe('/expenses/new', function () {
         expect(error.response).to.have.status(HttpCodes.validationError);
         expect(body.status).to.be.equal('fail');
         expect(body.data).to.be.deep.equal({
-          ExpenseCategoryId: [
-            'The category associated to the expense does not exist. ' +
-            'Therefore the expense could not be added. It requires a valid category.'
-          ]
+          ExpenseCategoryId: ['An expense must be associated to a category']
         });
       });
   }));
@@ -66,7 +63,7 @@ describe('/expenses/new', function () {
 
     const response = yield agent.post('/api/expenses/new')
       .send({
-        payload: { ExpenseCategoryId: category.get('id'), amount: '57.67', name: 'My awesome expense' }
+        payload: { ExpenseCategoryId: category.get('id'), amount: '57.67', name: 'M-y super\' awesome expense' }
       });
 
     const { body } = response;
@@ -75,6 +72,6 @@ describe('/expenses/new', function () {
     expect(body.status).to.be.equal('success');
     expect(body.data.ExpenseCategoryId).to.be.equal(category.get('id'));
     expect(body.data.amount).to.be.equal('57.67');
-    expect(body.data.name).to.be.equal('My awesome expense');
+    expect(body.data.name).to.be.equal('M-y super\' awesome expense');
   }));
 });

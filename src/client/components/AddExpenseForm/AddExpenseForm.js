@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import CategoriesList from '../CategoriesList';
 import s from './AddExpenseForm.css';
 import Submit from '../Submit';
+import { post } from '../../helpers/requests';
+import ENDPOINTS from '../../constants/endpoints';
 
 const AddExpenseForm = React.createClass({
   getInitialState() {
@@ -33,10 +35,28 @@ const AddExpenseForm = React.createClass({
   },
 
   handleSubmit(event) {
-    // When submitting the name (null or string),
-    // check if the user decided to hide the name first, if he did, set the name to be null
-    // we keep it in the state in case the user don't actually want to delete it.
     event.preventDefault();
+    const { amount, category, name, showName } = this.state;
+
+    return post(ENDPOINTS.newExpense, {
+      amount,
+      ExpenseCategoryId: category ? category.id : null,
+      name: showName === true ? name : null
+    }).then(({ status, data }) => {
+      if (status === 'success') {
+        return this.setState({
+          amount: '',
+          category: null,
+          name: '',
+          validationErrors: []
+        });
+      }
+
+      return this.setState({ validationErrors: data });
+    })
+    .catch(error => {
+      console.error(error);
+    });
   },
 
   renderNameInput() {
@@ -63,6 +83,7 @@ const AddExpenseForm = React.createClass({
         <div className={s.addNameButtonWrapper}>
           <p className={s.label} style={{ marginBottom: 0 }}>Expense</p>
           <button
+            type="button"
             className={s.addName}
             onClick={this.handleToggleName}
           >

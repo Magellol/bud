@@ -31,7 +31,7 @@ describe('Expense', function () {
       [[true], 'The amount must be a decimal (i.e 20.00)'],
       [{}, 'The amount must be a decimal (i.e 20.00)'],
       [{ a: 1 }, 'The amount must be a decimal (i.e 20.00)'],
-      ['', 'You must provide an amount'],
+      ['', 'You must provide a valid amount'],
       ['a', 'The amount must be a decimal (i.e 20.00)'],
       ['0', 'Your amount cannot be less than one cent'],
       [0, 'Your amount cannot be less than one cent'],

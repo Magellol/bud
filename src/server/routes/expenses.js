@@ -18,8 +18,7 @@ module.exports = function expenseRoutes(express) {
       if (category === null) {
         throw createValidationError(
           'ExpenseCategoryId',
-          'The category associated to the expense does not exist. ' +
-          'Therefore the expense could not be added. It requires a valid category.'
+          'An expense must be associated to a category'
         );
       }
 

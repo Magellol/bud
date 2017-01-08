@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'You must provide an amount'
+          msg: 'You must provide a valid amount'
         },
         isDecimal: {
           msg: 'The amount must be a decimal (i.e 20.00)'
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         is: {
           msg: 'The name can only include letters, numbers and spaces',
-          args: /^[a-zA-Z0-9 ]+$/
+          args: /^[a-zA-Z0-9 '-]+$/
         },
         len: {
           args: [3, 30],
