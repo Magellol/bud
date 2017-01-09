@@ -84,11 +84,7 @@
 }
 
 .errorMessage {
-  composes: fadeIn from '../../helpers/animations.css';
-  animation-duration: .2s;
-  color: red;
+  composes: errorMessage from '../AddUserForm/AddUserForm.css';
   text-align: center;
-  font-family: sansSerif;
   margin-bottom: 0;
-  font-size: 13px;
 }
