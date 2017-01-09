@@ -2,6 +2,7 @@
 @value sansSerif from '../../helpers/fonts.css';
 
 .form {
+  box-sizing: border-box;
   margin-top: 30px;
   padding: 0 30px;
 }

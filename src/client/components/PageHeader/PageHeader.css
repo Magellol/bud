@@ -2,6 +2,7 @@
 @value grayLighter, grayDarker, gray, yellow, purple from '../../helpers/colors.css';
 
 .wrapper {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
