@@ -57,7 +57,7 @@ const AddExpenseForm = React.createClass({
         });
       }
 
-      const [messages] = Object.values(data);
+      const [messages] = Object.keys(data).map(v => data[v]);
       throw new Error(messages[0]); // Only show the first error message.
     })
     .catch(error => this.setState({ validationError: error.message }));
@@ -79,7 +79,11 @@ const AddExpenseForm = React.createClass({
   },
 
   render() {
-    const { category: currentCategory, showName } = this.state;
+    const { category: currentCategory, showName, validationError } = this.state;
+    const submitWrapperClasses = classnames({
+      [s.submitWrapper]: true,
+      [s.hasError]: validationError !== null
+    });
 
     return (
       <form className={s.form} onSubmit={this.handleSubmit} noValidate={true}>
@@ -110,21 +114,17 @@ const AddExpenseForm = React.createClass({
         { showName && this.renderNameInput() }
 
         <div className={s.categoriesWrapper}>
-          <p className={s.label}>
-            Goes in {
-              currentCategory && <span className={s.categoryName}>{currentCategory.name}</span>
-            }
-          </p>
-
           <CategoriesList
             onSelection={this.handleCategorySelection}
             shouldCheck={id => (currentCategory ? currentCategory.id === id : false)}
           />
         </div>
 
-        <div className={s.submitWrapper}>
+        <div className={submitWrapperClasses}>
           <Submit label="Add expense" />
         </div>
+        {validationError && <p className={s.errorMessage}>{validationError}</p>}
+
       </form>
     );
   }

@@ -1,4 +1,4 @@
-@value gray, purple, grayDarker, grayLighter from '../../helpers/colors.css';
+@value gray, purple, grayDarker, grayLighter, red from '../../helpers/colors.css';
 @value sansSerif from '../../helpers/fonts.css';
 
 .form {
@@ -16,7 +16,7 @@
 .name {
   composes: fadeInUp from '../../helpers/animations.css';
   animation-duration: .2s;
-  border-bottom: 1px solid grayLighter;
+  border-left: 3px solid grayLighter;
   margin-top: 10px;
   transition: opacity .2s ease;
 }
@@ -49,12 +49,12 @@
 
 .input {
   composes: input from '../AddUserForm/AddUserForm.css';
-  padding-right: 20px;
+  padding: 15px;
   border: 0;
 }
 
 .categoriesWrapper {
-  margin-top: 45px;
+  margin-top: 30px;
 }
 
 .categoriesWrapper label:first-child {
@@ -68,6 +68,11 @@
   align-items: center;
 }
 
+.hasError {
+  composes: shake from '../../helpers/animations.css';
+  animation-duration: .4s;
+}
+
 .label {
   color: grayDarker;
   text-transform: uppercase;
@@ -79,4 +84,14 @@
 .categoryName {
   color: purple;
   font-weight: bold;
+}
+
+.errorMessage {
+  composes: fadeIn from '../../helpers/animations.css';
+  animation-duration: .2s;
+  color: red;
+  text-align: center;
+  font-family: sansSerif;
+  margin-bottom: 0;
+  font-size: 13px;
 }
