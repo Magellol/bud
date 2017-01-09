@@ -143,7 +143,11 @@ const AddExpenseForm = React.createClass({
             disabled={requestStatus === 'pending'}
           />
         </div>
-        {validationError && <ErrorMessage message={validationError} />}
+        {validationError &&
+          <div className={s.errorWrapper}>
+            <ErrorMessage message={validationError} />
+          </div>
+        }
 
       </form>
     );
