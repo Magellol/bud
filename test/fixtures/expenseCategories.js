@@ -1,4 +1,6 @@
-const now = new Date();
+const moment = require('moment');
+
+const now = moment();
 
 module.exports = [
   {
@@ -14,5 +16,12 @@ module.exports = [
     UserId: 2,
     createdAt: now,
     updatedAt: now
+  },
+  {
+    id: 3,
+    name: 'Category 3',
+    UserId: 1,
+    createdAt: moment(now).year(1980).month('january'),
+    updatedAt: moment(now).year(1980).month('january')
   }
 ];
