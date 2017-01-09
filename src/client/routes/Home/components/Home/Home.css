@@ -13,6 +13,7 @@
   flex-direction: column;
   justify-content: center;
   min-height: 100%;
+  padding: 0 30px;
 }
 
 .userButton {
