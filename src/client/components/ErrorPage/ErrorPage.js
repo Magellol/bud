@@ -3,9 +3,11 @@ import PageHeader from '../PageHeader';
 import s from './ErrorPage.css';
 
 const ErrorPage = props => (
-  <div className={s.wrapper}>
+  <div>
     <PageHeader />
-    {props.children}
+    <div className={s.wrapper}>
+      {props.children}
+    </div>
   </div>
 );
 
