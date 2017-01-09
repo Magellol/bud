@@ -1,3 +1,4 @@
+const moment = require('moment');
 const { wrap } = require('co');
 const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
@@ -26,6 +27,49 @@ module.exports = function expenseRoutes(express) {
       const result = yield expense.save();
 
       return resp.json(formatSuccess(result));
+    } catch (error) {
+      return next(error);
+    }
+  }));
+
+  router.get('/monthly/:year/:month', wrap(function* (req, resp, next) {
+    const months = moment.months().map(m => m.toLowerCase());
+    const { month, year } = req.params;
+
+    if (year.match(/\b[0-9]{4}\b/) === null) {
+      return next(createValidationError(':year', 'Invalid ":year" param passed when viewing monthly expenses'));
+    }
+
+    if (months.includes(month) === false) {
+      return next(createValidationError(':month', 'Invalid ":month" param passed when viewing monthly expenses'));
+    }
+
+    const currentMonth = moment().year(year).month(month);
+    const beginningOfMonth = moment(currentMonth).startOf('month');
+    const endOfMonth = moment(currentMonth).endOf('month');
+
+    try {
+      const categories = yield Models.ExpenseCategory.findAll({
+        attributes: ['id', 'name'],
+        where: {
+          createdAt: { $lte: endOfMonth }
+        },
+        include: [
+          {
+            attributes: ['id', 'name', 'createdAt', 'amount'],
+            required: false,
+            model: Models.Expense,
+            where: {
+              createdAt: {
+                $gte: beginningOfMonth,
+                $lte: endOfMonth
+              }
+            }
+          }
+        ]
+      });
+
+      return resp.send(formatSuccess(categories));
     } catch (error) {
       return next(error);
     }
