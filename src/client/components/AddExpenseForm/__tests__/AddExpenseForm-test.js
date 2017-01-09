@@ -5,6 +5,7 @@ import fetchMock from 'fetch-mock';
 import { mock, stub } from 'sinon';
 import AddExpenseForm from '../AddExpenseForm';
 import CategoriesList from '../../CategoriesList';
+import Submit from '../../Submit';
 import ENDPOINTS from '../../../constants/endpoints';
 
 const categories = [1, 2, 3];
@@ -16,7 +17,7 @@ describe('AddExpenseForm', function () {
   it('Should render with its initial state', function () {
     const form = shallow(<AddExpenseForm categories={categories} />);
 
-    const { amount, category, name, validationError, showName, requestDone } = form.state();
+    const { amount, category, name, validationError, showName, requestStatus } = form.state();
 
     expect(form.length).to.be.equal(1);
     expect(amount).to.be.equal('');
@@ -24,7 +25,7 @@ describe('AddExpenseForm', function () {
     expect(name).to.be.equal('');
     expect(category).to.be.equal(null);
     expect(validationError).to.be.equal(null);
-    expect(requestDone).to.be.equal(false);
+    expect(requestStatus).to.be.equal(null);
   });
 
   it('Should call renderNameInput() when the showName state is set', function () {
@@ -123,12 +124,44 @@ describe('AddExpenseForm', function () {
     });
   });
 
-  it.skip('Should show an error message when the validation error state is set', function () {
+  it('Should set the submit component to error when the request failed (validation)', function () {
+    const form = shallow(<AddExpenseForm categories={categories} />);
 
+    form.setState({
+      requestStatus: 'success',
+      validationError: 'one error here'
+    });
+
+    const submitButton = form.find(Submit);
+
+    expect(submitButton.props().status).to.be.equal('error');
+    expect(submitButton.props().disabled).to.be.equal(false);
   });
 
-  it.skip('Should show a success message when the requestDone state is set without errors', function () {
+  it('Should set the Submit component to success when the request is done and no error is found', function () {
+    const form = shallow(<AddExpenseForm categories={categories} />);
 
+    form.setState({
+      requestStatus: 'success',
+      validationError: null
+    });
+
+    const submitButton = form.find(Submit);
+
+    expect(submitButton.props().status).to.be.equal('success');
+    expect(submitButton.props().disabled).to.be.equal(false);
+  });
+
+  it('Should pass pending and disable the submit button when the request is pending', function () {
+    const form = shallow(<AddExpenseForm categories={categories} />);
+
+    form.setState({
+      requestStatus: 'pending'
+    });
+
+    const submitButton = form.find(Submit);
+
+    expect(submitButton.props().disabled).to.be.equal(true);
   });
 
   it('Should reset the states when a new expense has been added', function () {
@@ -142,18 +175,18 @@ describe('AddExpenseForm', function () {
       name: 'name',
       category: { id: 1 },
       validationError: 'hello',
-      requestDone: true
+      requestStatus: null
     });
 
     const request = form.instance().handleSubmit(eventMock);
 
-    expect(form.state('requestDone')).to.be.equal(false);
+    expect(form.state('requestStatus')).to.be.equal('pending');
     expect(form.state('validationError')).to.be.equal(null);
 
     return request.then(() => {
-      const { requestDone, amount, name, category } = form.state();
+      const { requestStatus, amount, name, category } = form.state();
 
-      expect(requestDone).to.be.equal(true);
+      expect(requestStatus).to.be.equal('success');
       expect(amount).to.be.equal('');
       expect(name).to.be.equal('');
       expect(category).to.be.equal(null);
