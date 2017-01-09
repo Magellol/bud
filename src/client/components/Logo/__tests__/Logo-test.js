@@ -9,6 +9,6 @@ describe('Logo', function () {
 
     expect(logo.length).to.be.equal(1);
     expect(logo.instance().props.size).to.be.equal('medium');
-    expect(logo.text()).to.be.equal('Bud.');
+    expect(logo.text()).to.be.equal('Bud');
   });
 });

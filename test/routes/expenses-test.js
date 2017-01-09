@@ -74,4 +74,44 @@ describe('/expenses/new', function () {
     expect(body.data.amount).to.be.equal('57.67');
     expect(body.data.name).to.be.equal('M-y super\' awesome expense');
   }));
+
+  it('Should throw an error when an invalid year is passed', wrap(function* () {
+    const userId = 1;
+    const agent = yield getAuthedAgent(userId);
+
+    const request = agent.get('/api/expenses/monthly/123/January');
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        const { body } = error.response;
+
+        expect(error.response).to.have.status(HttpCodes.validationError);
+        expect(body.status).to.be.equal('fail');
+        expect(body.data).to.be.deep.equal({
+          ':year': ['Invalid ":year" param passed when viewing monthly expenses']
+        });
+      });
+  }));
+
+  it('Should throw an error when an invalid month is passed', wrap(function* () {
+    const userId = 1;
+    const agent = yield getAuthedAgent(userId);
+
+    const request = agent.get('/api/expenses/monthly/2017/Nyan');
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        const { body } = error.response;
+
+        expect(error.response).to.have.status(HttpCodes.validationError);
+        expect(body.status).to.be.equal('fail');
+        expect(body.data).to.be.deep.equal({
+          ':month': ['Invalid ":month" param passed when viewing monthly expenses']
+        });
+      });
+  }));
+
+  it.skip('Should get all categories and expenses for the given month', function () {
+
+  });
 });

@@ -6,6 +6,7 @@ const expenseCategoryRoutes = require('./expense-categories');
 const expenseRoutes = require('./expenses');
 const session = require('express-session');
 const { createError } = require('../helpers/errors');
+const HttpCodes = require('../constants/httpStatus');
 const {
   formatError,
   formatFailure,
@@ -96,7 +97,7 @@ module.exports = function apiRoutes(express) {
    * The only way to get in here is through the general error middleware (the first one).
    */
   router.use((error, req, resp, next) => { // eslint-disable-line no-unused-vars
-    const status = 422;
+    const status = HttpCodes.validationError;
     const formatted = formatValidationErrors(error.errors);
     const response = formatFailure(formatted);
 

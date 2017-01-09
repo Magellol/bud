@@ -35,7 +35,7 @@ describe('AddUserForm', function () {
       validationError: 'this is an error'
     });
 
-    expect(form.childAt(1).html()).to.be.equal('<span>This is an error</span>');
+    expect(form.childAt(1).html()).to.be.equal('<p>This is an error</p>');
   });
 
   it('Should cancel the request is we already have one pending', function () {
