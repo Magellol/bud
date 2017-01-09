@@ -15,5 +15,20 @@
 }
 
 .dot {
-  color: yellow;
+  background-color: yellow;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 3px;
+  position: relative;
+}
+
+.logo.medium .dot {
+  width: 10px;
+  height: 10px;
+  top: 1px;
+}
+
+.logo.small .dot {
+  width: 7px;
+  height: 7px;
 }

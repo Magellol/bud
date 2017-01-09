@@ -10,6 +10,8 @@
 
 .dot {
   composes: dot from '../Logo/Logo.css';
+  width: 7px;
+  height: 7px;
 }
 
 .goBackHome {

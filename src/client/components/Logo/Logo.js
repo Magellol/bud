@@ -10,7 +10,7 @@ const Logo = (props) => {
 
   return (
     <div className={classes}>
-      Bud<span className={s.dot}>.</span>
+      Bud<span className={s.dot} />
     </div>
   );
 };
