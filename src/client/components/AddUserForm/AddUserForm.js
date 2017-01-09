@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import Icon from '../../components/Icon';
+import Icon from '../Icon';
+import ErrorMessage from '../ErrorMessage';
 import s from './AddUserForm.css';
 import { post } from '../../helpers/requests';
 import { ucfirst } from '../../helpers/strings';
@@ -93,7 +94,7 @@ const AddUserForm = React.createClass({
           />
         </div>
 
-        {validationError && <span className={s.errorMessage}>{ucfirst(validationError)}</span>}
+        {validationError && <ErrorMessage message={ucfirst(validationError)} />}
       </form>
     );
   }

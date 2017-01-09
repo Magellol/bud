@@ -82,9 +82,3 @@
   color: purple;
   font-weight: bold;
 }
-
-.errorMessage {
-  composes: errorMessage from '../AddUserForm/AddUserForm.css';
-  text-align: center;
-  margin-bottom: 0;
-}

@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import CategoriesList from '../CategoriesList';
 import s from './AddExpenseForm.css';
 import Submit from '../Submit';
+import ErrorMessage from '../ErrorMessage';
 import { post } from '../../helpers/requests';
 import ENDPOINTS from '../../constants/endpoints';
 
@@ -142,7 +143,7 @@ const AddExpenseForm = React.createClass({
             disabled={requestStatus === 'pending'}
           />
         </div>
-        {validationError && <p className={s.errorMessage}>{validationError}</p>}
+        {validationError && <ErrorMessage message={validationError} />}
 
       </form>
     );

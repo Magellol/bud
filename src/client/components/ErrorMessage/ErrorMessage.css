@@ -1,0 +1,12 @@
+@value sansSerif from '../../helpers/fonts.css';
+@value red from '../../helpers/colors.css';
+
+.message {
+  composes: fadeIn from '../../helpers/animations.css';
+  animation-duration: .2s;
+  color: red;
+  font-family: sansSerif;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+}
