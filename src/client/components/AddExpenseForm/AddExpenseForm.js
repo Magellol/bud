@@ -14,8 +14,26 @@ const AddExpenseForm = React.createClass({
       showName: false,
       category: null,
       validationError: null,
-      requestDone: false
+      requestStatus: null
     };
+  },
+
+  getRequestStatus() {
+    const { requestStatus, validationError } = this.state;
+
+    if (requestStatus === null) {
+      return 'default';
+    }
+
+    if (requestStatus === 'pending') {
+      return 'pending';
+    }
+
+    if (requestStatus === 'success' && validationError !== null) {
+      return 'error';
+    }
+
+    return 'success';
   },
 
   handleInputChange(event) {
@@ -39,7 +57,7 @@ const AddExpenseForm = React.createClass({
     event.preventDefault();
     const { amount, category, name, showName } = this.state;
 
-    this.setState({ requestDone: false, validationError: null });
+    this.setState({ requestStatus: 'pending', validationError: null });
 
     return post(ENDPOINTS.newExpense, {
       amount,
@@ -47,20 +65,22 @@ const AddExpenseForm = React.createClass({
       name: showName === true ? name : null
     })
     .then(({ status, data }) => {
-      if (status === 'success') {
-        return this.setState({
-          amount: '',
-          category: null,
-          name: '',
-          validationError: null,
-          requestDone: true,
-        });
+      if (status !== 'success') {
+        const [messages] = Object.keys(data).map(v => data[v]);
+        throw new Error(messages[0]); // Only show the first error message.
       }
 
-      const [messages] = Object.keys(data).map(v => data[v]);
-      throw new Error(messages[0]); // Only show the first error message.
+      this.setState({
+        amount: '',
+        category: null,
+        name: '',
+        validationError: null,
+        requestStatus: 'success'
+      });
+
+      return setTimeout(() => this.setState({ requestStatus: null }), 1500);
     })
-    .catch(error => this.setState({ validationError: error.message }));
+    .catch(error => this.setState({ validationError: error.message, requestStatus: 'success' }));
   },
 
   renderNameInput() {
@@ -79,12 +99,7 @@ const AddExpenseForm = React.createClass({
   },
 
   render() {
-    const { category: currentCategory, showName, validationError } = this.state;
-    const submitWrapperClasses = classnames({
-      [s.submitWrapper]: true,
-      [s.hasError]: validationError !== null
-    });
-
+    const { category: currentCategory, showName, validationError, requestStatus } = this.state;
     return (
       <form className={s.form} onSubmit={this.handleSubmit} noValidate={true}>
 
@@ -120,8 +135,12 @@ const AddExpenseForm = React.createClass({
           />
         </div>
 
-        <div className={submitWrapperClasses}>
-          <Submit label="Add expense" />
+        <div className={s.submitWrapper}>
+          <Submit
+            label="Add expense"
+            status={this.getRequestStatus()}
+            disabled={requestStatus === 'pending'}
+          />
         </div>
         {validationError && <p className={s.errorMessage}>{validationError}</p>}
 

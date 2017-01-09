@@ -1,4 +1,4 @@
-@value gray, grayLighter, purple from '../../helpers/colors.css';
+@value gray, grayLighter, purple, red, green from '../../helpers/colors.css';
 
 .button {
   background: transparent;
@@ -10,8 +10,36 @@
   transition: background .2s ease;
 }
 
+.button:after {
+  content: '';
+  font-size: 16px;
+}
+
+.pending {
+  background-color: gray;
+}
+
+.success {
+  color: green;
+}
+
+.success:after {
+  content: '✓';
+  color: green;
+  margin-left: 10px;
+}
+
+.error {
+  composes: shake from '../../helpers/animations.css';
+  animation-duration: .4s;
+}
+
 .button:hover {
   cursor: pointer;
+}
+
+.button:disabled:hover {
+  cursor: not-allowed;
 }
 
 .button:focus {

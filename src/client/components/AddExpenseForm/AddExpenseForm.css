@@ -68,11 +68,6 @@
   align-items: center;
 }
 
-.hasError {
-  composes: shake from '../../helpers/animations.css';
-  animation-duration: .4s;
-}
-
 .label {
   color: grayDarker;
   text-transform: uppercase;
