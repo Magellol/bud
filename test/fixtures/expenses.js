@@ -42,5 +42,13 @@ module.exports = [
     ExpenseCategoryId: 3,
     createdAt: moment(now).year(1979).month('december'),
     updatedAt: moment(now).year(1979).month('december')
+  },
+  {
+    id: 6,
+    amount: 50,
+    name: 'Expense 6',
+    ExpenseCategoryId: 4,
+    createdAt: moment(now).year(1979).month('december'),
+    updatedAt: moment(now).year(1979).month('december')
   }
 ];

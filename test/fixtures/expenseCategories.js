@@ -23,5 +23,12 @@ module.exports = [
     UserId: 1,
     createdAt: moment(now).year(1980).month('january'),
     updatedAt: moment(now).year(1980).month('january')
+  },
+  {
+    id: 4,
+    name: 'Category 4',
+    UserId: 1,
+    createdAt: moment(now).year(1979).month('december'),
+    updatedAt: moment(now).year(1979).month('december')
   }
 ];

@@ -120,10 +120,13 @@ describe('/expenses/new', function () {
 
     expect(response).to.have.status(HttpCodes.allGood);
     expect(body.status).to.be.equal('success');
-    expect(body.data.length).to.be.equal(1);
+
+    expect(body.data.length).to.be.equal(2);
     expect(body.data[0].id).to.be.equal(3);
+    expect(body.data[1].id).to.be.equal(4);
 
     expect(body.data[0].Expenses.length).to.be.equal(1);
     expect(body.data[0].Expenses[0].id).to.be.equal(3);
+    expect(body.data[1].Expenses.length).to.be.equal(0);
   }));
 });
