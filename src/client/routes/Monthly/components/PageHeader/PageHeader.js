@@ -4,7 +4,7 @@ import s from './PageHeader.css';
 
 const PageHeader = props => (
   <div className={s.wrapper}>
-    {props.month}
+    <span className={s.month}>{props.month}</span>
   </div>
 );
 
