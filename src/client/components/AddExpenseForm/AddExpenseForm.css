@@ -8,9 +8,9 @@
 }
 
 .inputWrapper {
-  border-bottom: 3px solid purple;
+  border-bottom: 5px solid purple;
   position: relative;
-  max-width: 60%;
+  max-width: 70%;
   margin-bottom: 5px;
   margin-top: 5px;
 }
@@ -32,6 +32,7 @@
 .addNameButtonWrapper {
   display: flex;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .inputWrapper.amount:before {
@@ -66,7 +67,7 @@
   height: 217px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  transition: height .1s ease;
+  transition: height .3s ease;
 }
 
 .categoryList.slideUp {
@@ -86,6 +87,7 @@
   font-family: sansSerif;
   font-size: 14px;
   margin-top: 2px;
+  margin-bottom: 0;
 }
 
 .categoryName {
