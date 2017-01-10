@@ -101,6 +101,11 @@ const AddExpenseForm = React.createClass({
 
   render() {
     const { category: currentCategory, showName, validationError, requestStatus } = this.state;
+    const categoryListClasses = classnames({
+      [s.categoryList]: true,
+      [s.slideUp]: showName
+    });
+
     return (
       <form className={s.form} onSubmit={this.handleSubmit} noValidate={true}>
 
@@ -130,7 +135,13 @@ const AddExpenseForm = React.createClass({
         { showName && this.renderNameInput() }
 
         <div className={s.categoriesWrapper}>
+          <p className={s.label} style={{ marginBottom: '10px' }}>
+            Goes in {
+              currentCategory && <span className={s.categoryName}>{currentCategory.name}</span>
+            }
+          </p>
           <CategoriesList
+            wrapperClasses={categoryListClasses}
             onSelection={this.handleCategorySelection}
             shouldCheck={id => (currentCategory ? currentCategory.id === id : false)}
           />

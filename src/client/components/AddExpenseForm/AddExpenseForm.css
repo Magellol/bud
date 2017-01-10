@@ -3,36 +3,36 @@
 
 .form {
   box-sizing: border-box;
-  margin-top: 30px;
+  margin-top: 15px;
   padding: 0 30px;
 }
 
 .inputWrapper {
-  border-bottom: 3px solid purple;
+  border-bottom: 5px solid purple;
   position: relative;
   max-width: 70%;
   margin-bottom: 5px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .name {
   composes: fadeInUp from '../../helpers/animations.css';
   animation-duration: .2s;
-  border-left: 3px solid grayLighter;
-  margin-top: 10px;
+  border-bottom: 1px solid grayLighter;
   transition: opacity .2s ease;
 }
 
 .addName {
   composes: button from '../Submit/Submit.css';
   font-size: 13px !important;
-  padding: 6px 12px !important; /* Css modules are messing with me...*/
+  padding: 3px 12px !important; /* Css modules are messing with me...*/
   margin-left: 15px;
 }
 
 .addNameButtonWrapper {
   display: flex;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .inputWrapper.amount:before {
@@ -63,8 +63,19 @@
   border-top: 1px solid grayLighter;
 }
 
+.categoryList {
+  height: 217px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: height .3s ease;
+}
+
+.categoryList.slideUp {
+  height: 165px;
+}
+
 .submitWrapper {
-  margin-top: 15px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,8 +85,9 @@
   color: grayDarker;
   text-transform: uppercase;
   font-family: sansSerif;
-  font-weight: lighter;
+  font-size: 14px;
   margin-top: 2px;
+  margin-bottom: 0;
 }
 
 .categoryName {
@@ -84,6 +96,6 @@
 }
 
 .errorWrapper {
-  margin-top: 15px;
+  margin-top: 10px;
   text-align: center;
 }
