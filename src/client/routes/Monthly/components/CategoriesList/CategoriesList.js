@@ -61,7 +61,7 @@ const CategoriesList = React.createClass({
             <Category
               key={category.id}
               name={category.name}
-              totalExpenses={category.totalExpenses}
+              totalExpenses={category.totalExpenses || 0}
             />
           ))
         }

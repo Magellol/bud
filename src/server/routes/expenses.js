@@ -1,6 +1,6 @@
 const moment = require('moment');
 const { wrap } = require('co');
-const { Models } = require('../models');
+const { Models, connection } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 const { createValidationError } = require('../helpers/errors');
 
@@ -50,13 +50,19 @@ module.exports = function expenseRoutes(express) {
 
     try {
       const categories = yield Models.ExpenseCategory.findAll({
-        attributes: ['id', 'name'],
+        attributes: [
+          'id',
+          'name',
+          'createdAt',
+          [connection.Sequelize.fn('SUM', connection.Sequelize.col('Expenses.amount')), 'totalExpenses']
+        ],
         where: {
           createdAt: { $lte: endOfMonth }
         },
+        group: [connection.Sequelize.col('id')],
         include: [
           {
-            attributes: ['id', 'name', 'createdAt', 'amount'],
+            attributes: [],
             required: false,
             model: Models.Expense,
             where: {
