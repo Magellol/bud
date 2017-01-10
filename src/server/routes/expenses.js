@@ -57,7 +57,8 @@ module.exports = function expenseRoutes(express) {
           [connection.Sequelize.fn('SUM', connection.Sequelize.col('Expenses.amount')), 'totalExpenses']
         ],
         where: {
-          createdAt: { $lte: endOfMonth }
+          createdAt: { $lte: endOfMonth },
+          UserId: req.session.user.id
         },
         group: [connection.Sequelize.col('id')],
         include: [

@@ -6,12 +6,12 @@ module.exports = function expenseCategoryRoutes(express) {
   const router = express.Router();
 
   router.get('/', wrap(function* (req, resp, next) {
-    const { id: userId } = req.session.user;
+    const { id: UserId } = req.session.user;
 
     try {
       const categories = yield Models.ExpenseCategory.findAll({
         attributes: ['id', 'name'],
-        where: { userId }
+        where: { UserId }
       }).map(category => category.get());
 
       return resp.json(formatSuccess(categories));
