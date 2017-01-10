@@ -22,7 +22,12 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       set(value) {
-        this.setDataValue('name', value.trim());
+        if (typeof value !== 'string') {
+          return this.setDataValue('name', value);
+        }
+
+        const updates = value.replace(/\s+/g, ' ').trim();
+        return this.setDataValue('name', updates);
       }
     }
   }, {
