@@ -1,4 +1,12 @@
 .wrapper {
   box-sizing: border-box;
   padding: 0 30px;
+  margin-top: 15px;
+  opacity: 0;
+}
+
+.show {
+  composes: fadeInUp from '../../../../helpers/animations.css';
+  animation-duration: .2s;
+  opacity: 1;
 }
