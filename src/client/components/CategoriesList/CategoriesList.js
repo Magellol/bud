@@ -7,6 +7,7 @@ import s from './CategoriesList.css';
 
 const CategoriesList = React.createClass({
   propTypes: {
+    wrapperClasses: PropTypes.string,
     onSelection: PropTypes.func.isRequired,
     // Function to know if the radio button must be checked. It'll get the current
     // radio button value as first argument
@@ -34,7 +35,7 @@ const CategoriesList = React.createClass({
 
   render() {
     const { categories, initiallyLoaded } = this.state;
-    const wrapperClasses = classnames({
+    const wrapperClasses = classnames(this.props.wrapperClasses, {
       [s.wrapper]: true,
       [s.show]: initiallyLoaded
     });
