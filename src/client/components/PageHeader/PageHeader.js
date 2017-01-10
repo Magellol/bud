@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import Logo from '../Logo';
 import s from './PageHeader.css';
 
-const currentMonth = moment().format('MMMM');
+const now = moment();
 
 const PageHeader = () => (
   <div className={s.wrapper}>
@@ -16,7 +16,7 @@ const PageHeader = () => (
       <Link to="/dashboard" className={s.link} activeClassName={s.active}>
         Add Expense
       </Link>
-      <Link to={`/monthly/${currentMonth}`} className={s.link} activeClassName={s.active}>
+      <Link to={`/monthly/${now.format('YYYY')}/${now.format('MMMM').toLowerCase()}`} className={s.link} activeClassName={s.active}>
         Monthly
       </Link>
     </div>

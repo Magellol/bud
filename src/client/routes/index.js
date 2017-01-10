@@ -15,7 +15,7 @@ module.exports = {
       getComponent: (nextState, callback) => loadIfAuthorized(Dashboard, callback)
     },
     {
-      path: '/monthly/:month',
+      path: '/monthly/:year/:month',
       getComponent: (nextState, callback) => loadIfAuthorized(Monthly, callback)
     },
     { path: '*', component: NotFoundError }

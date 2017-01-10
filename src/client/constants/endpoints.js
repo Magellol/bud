@@ -4,5 +4,6 @@ export default {
   allUsers: '/api/users',
   loginUser: '/api/users/login',
   allCategories: '/api/categories',
-  newCategory: '/api/categories/new'
+  newCategory: '/api/categories/new',
+  monthlyExpenses: '/api/expenses/monthly'
 };
