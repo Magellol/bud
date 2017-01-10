@@ -74,7 +74,9 @@ describe('/expenses/new', function () {
     expect(body.data.amount).to.be.equal('57.67');
     expect(body.data.name).to.be.equal('M-y super\' awesome expense');
   }));
+});
 
+describe('/expenses/monthly', function () {
   it('Should throw an error when an invalid year is passed', wrap(function* () {
     const userId = 1;
     const agent = yield getAuthedAgent(userId);
@@ -124,9 +126,5 @@ describe('/expenses/new', function () {
     expect(body.data.length).to.be.equal(2);
     expect(body.data[0].id).to.be.equal(3);
     expect(body.data[1].id).to.be.equal(4);
-
-    expect(body.data[0].Expenses.length).to.be.equal(1);
-    expect(body.data[0].Expenses[0].id).to.be.equal(3);
-    expect(body.data[1].Expenses.length).to.be.equal(0);
   }));
 });
