@@ -8,6 +8,11 @@ import s from './Home.css';
 import { post, get } from '../../../../helpers/requests';
 import ENDPOINTS from '../../../../constants/endpoints';
 
+/**
+ * TODO
+ * Could reduce the complexity of this components
+ * by extracting the login behaviour onto another component.
+ */
 const Home = React.createClass({
   getInitialState() {
     return {

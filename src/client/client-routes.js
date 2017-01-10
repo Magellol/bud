@@ -51,13 +51,15 @@ module.exports = function clientRoutes(express) {
    * to display proper routes based on the authentification.
    * We basically query twice the same url when we do server side loading.
    */
-  router.get('/dashboard', (req, resp, next) => {
+  router.get([
+    '/dashboard',
+    '/monthly/:month'
+  ], (req, resp, next) => {
     const url = `${config.get('app.host')}:${config.get('port')}/api/users/me`;
 
     const toPipe = request(url, function (error, response) {
       if (error || response.statusCode !== 200) {
-        const errorResponse = createError('Ressource does not exist', 404);
-        return next(errorResponse);
+        return next(createError('Ressource does not exist', 404));
       }
 
       return resp.send(getLayout());
