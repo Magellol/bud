@@ -50,7 +50,7 @@
 }
 
 .input {
-  composes: input from '../AddUserForm/AddUserForm.css';
+  composes: input from '../OneFieldForm/OneFieldForm.css';
   padding: 15px;
   border: 0;
 }
