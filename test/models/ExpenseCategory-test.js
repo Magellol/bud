@@ -37,4 +37,13 @@ describe('ExpenseCategory', function () {
       fieldToTest: 'name'
     });
   });
+
+  it('Should trim() the name before saving it into the DB', function () {
+    const category = Models.ExpenseCategory.build({
+      name: '   hello    World ',
+      UserId: 1
+    });
+
+    expect(category.get('name')).to.be.equal('hello World');
+  });
 });

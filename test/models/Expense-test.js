@@ -64,4 +64,14 @@ describe('Expense', function () {
       fieldToTest: 'name'
     });
   });
+
+  it('Should trim() the name before saving it into the DB', function () {
+    const expense = Models.Expense.build({
+      name: '   hello    World ',
+      amount: 5.88,
+      ExpenseCategoryId: 1
+    });
+
+    expect(expense.get('name')).to.be.equal('hello World');
+  });
 });

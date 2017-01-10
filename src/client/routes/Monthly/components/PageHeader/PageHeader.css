@@ -1,0 +1,15 @@
+@value purple, white from '../../../../helpers/colors.css';
+@value sansSerif from '../../../../helpers/fonts.css';
+
+.wrapper {
+  background-color: purple;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 2px;
+}
+
+.month {
+  color: white;
+  font-family: sansSerif;
+  font-weight: lighter;
+}

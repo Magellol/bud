@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
           args: [3, 30],
           msg: 'The category name must be between 3 and 30 characters long'
         }
+      },
+      set(value) {
+        if (typeof value !== 'string') {
+          return this.setDataValue('name', value);
+        }
+
+        const updates = value.replace(/\s+/g, ' ').trim();
+        return this.setDataValue('name', updates);
       }
     }
   }, {
