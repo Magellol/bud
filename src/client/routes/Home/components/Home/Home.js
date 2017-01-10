@@ -3,7 +3,7 @@ import classnames from 'classnames';
 // import Transition from 'react-addons-css-transition-group';
 import Logo from '../../../../components/Logo';
 import User from '../User';
-import AddUserForm from '../../../../components/AddUserForm';
+import OneFieldForm from '../../../../components/OneFieldForm';
 import s from './Home.css';
 import { post, get } from '../../../../helpers/requests';
 import ENDPOINTS from '../../../../constants/endpoints';
@@ -98,7 +98,12 @@ const Home = React.createClass({
         </div>
 
         <div className={this.getClasses('formWrapper')}>
-          <AddUserForm afterCreate={this.handleAfterCreateUser} />
+          <OneFieldForm
+            placeholder="Add new user"
+            fieldName="username"
+            endpoint={ENDPOINTS.newUser}
+            afterCreate={this.handleAfterCreateUser}
+          />
         </div>
       </div>
     );

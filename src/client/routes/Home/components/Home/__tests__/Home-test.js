@@ -5,7 +5,7 @@ import { mock } from 'sinon';
 import fetchMock from 'fetch-mock';
 import Home from '../Home';
 import Logo from '../../../../../components/Logo';
-import AddUserForm from '../../../../../components/AddUserForm';
+import OneFieldForm from '../../../../../components/OneFieldForm';
 import User from '../../User';
 
 describe('Home', function () {
@@ -20,9 +20,9 @@ describe('Home', function () {
     expect(logo.length).to.be.equal(1);
   });
 
-  it('Should have an instance of AddUserForm', function () {
+  it('Should have an instance of OneFieldForm', function () {
     const home = shallow(<Home />);
-    const form = home.find(AddUserForm);
+    const form = home.find(OneFieldForm);
 
     expect(form.length).to.be.equal(1);
   });
