@@ -10,3 +10,11 @@
   animation-duration: .2s;
   opacity: 1;
 }
+
+.emptyCategories {
+  composes: emptyCategories from '../../../../components/CategoriesList/CategoriesList.css';
+  position: static;
+  padding: 30px 0;
+  display: inline-block;
+  transform: translateY(0);
+}

@@ -14,7 +14,7 @@ const PageHeader = () => (
         Logout
       </Link>
       <Link to="/dashboard" className={s.link} activeClassName={s.active}>
-        Add Expense
+        New
       </Link>
       <Link to={`/monthly/${now.format('YYYY')}/${now.format('MMMM').toLowerCase()}`} className={s.link} activeClassName={s.active}>
         Monthly

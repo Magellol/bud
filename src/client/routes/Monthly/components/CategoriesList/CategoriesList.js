@@ -48,7 +48,15 @@ const CategoriesList = React.createClass({
     }));
   },
 
+  renderEmptyMessage() {
+    return (
+      <span className={s.emptyCategories}>You don’t have any categories :(</span>
+    );
+  },
+
   render() {
+    const { categories, requestStatus } = this.state;
+
     const wrapperClasses = classnames({
       [s.wrapper]: true,
       [s.show]: this.state.requestStatus === 'done'
@@ -57,14 +65,18 @@ const CategoriesList = React.createClass({
     return (
       <div className={wrapperClasses}>
         {
-          this.state.categories.map(category => (
-            <Category
-              key={category.id}
-              name={category.name}
-              totalExpenses={category.totalExpenses || 0}
-            />
-          ))
+          requestStatus === 'done' && categories.length === 0
+          ? this.renderEmptyMessage()
+          : null
         }
+
+        {categories.map(category => (
+          <Category
+            key={category.id}
+            name={category.name}
+            totalExpenses={category.totalExpenses || 0}
+          />
+        ))}
 
         {this.isCurrentMonth() &&
           <OneFieldForm

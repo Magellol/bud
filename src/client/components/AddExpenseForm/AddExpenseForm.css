@@ -24,8 +24,9 @@
 
 .addName {
   composes: button from '../Submit/Submit.css';
+  border: 0 !important;
   font-size: 13px !important;
-  padding: 3px 12px !important; /* Css modules are messing with me...*/
+  padding: 0 !important; /* Css modules are messing with me...*/
   margin-top: 6px;
 }
 

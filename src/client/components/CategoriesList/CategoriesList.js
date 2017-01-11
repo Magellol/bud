@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
+import moment from 'moment';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 import RadioButton from '../RadioButton';
 import { get } from '../../helpers/requests';
 import ENDPOINTS from '../../constants/endpoints';
@@ -44,21 +46,22 @@ const CategoriesList = React.createClass({
       <div className={wrapperClasses}>
         {
           (initiallyLoaded && categories.length === 0)
-          ? <span className={s.emptyCategories}>You don’t have any categories :(</span>
+          ? <span className={s.emptyCategories}>
+            <p>You don’t have any categories.</p>
+            <Link to={`/monthly/${moment().format('YYYY/MMMM').toLowerCase()}`}>Create your first one</Link>
+          </span>
           : null
         }
 
-        {
-          this.state.categories.map(category => (
-            <RadioButton
-              key={category.id}
-              label={category.name}
-              value={category.id}
-              onChange={event => this.props.onSelection(category, event)}
-              checked={this.props.shouldCheck(category.id)}
-            />
-          ))
-        }
+        {this.state.categories.map(category => (
+          <RadioButton
+            key={category.id}
+            label={category.name}
+            value={category.id}
+            onChange={event => this.props.onSelection(category, event)}
+            checked={this.props.shouldCheck(category.id)}
+          />
+        ))}
       </div>
     );
   }
