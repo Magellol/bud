@@ -26,7 +26,7 @@
   composes: button from '../Submit/Submit.css';
   font-size: 13px !important;
   padding: 3px 12px !important; /* Css modules are messing with me...*/
-  margin-left: 15px;
+  margin-top: 6px;
 }
 
 .addNameButtonWrapper {
@@ -56,7 +56,7 @@
 }
 
 .categoriesWrapper {
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .categoriesWrapper label:first-child {

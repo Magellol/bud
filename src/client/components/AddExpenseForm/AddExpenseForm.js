@@ -111,13 +111,6 @@ const AddExpenseForm = React.createClass({
 
         <div className={s.addNameButtonWrapper}>
           <p className={s.label} style={{ marginBottom: 0 }}>Expense</p>
-          <button
-            type="button"
-            className={s.addName}
-            onClick={this.handleToggleName}
-          >
-            {showName ? 'Remove description' : 'Add description'}
-          </button>
         </div>
 
         <div className={classnames({ [s.inputWrapper]: true, [s.amount]: true })}>
@@ -133,6 +126,13 @@ const AddExpenseForm = React.createClass({
         </div>
 
         { showName && this.renderNameInput() }
+        <button
+          type="button"
+          className={s.addName}
+          onClick={this.handleToggleName}
+        >
+          {showName ? '- Remove description' : '+ Add description'}
+        </button>
 
         <div className={s.categoriesWrapper}>
           <p className={s.label} style={{ marginBottom: '10px' }}>

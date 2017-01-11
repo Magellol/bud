@@ -76,7 +76,17 @@ module.exports = function expenseRoutes(express) {
         ]
       });
 
-      return resp.send(formatSuccess(categories));
+      const result = categories
+        .map(category => category.get())
+        .sort((a, b) => {
+          if (a.totalExpenses < b.totalExpenses) {
+            return 1;
+          }
+
+          return a.totalExpenses > b.totalExpenses ? -1 : 0;
+        });
+
+      return resp.send(formatSuccess(result));
     } catch (error) {
       return next(error);
     }
