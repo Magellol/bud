@@ -9,7 +9,10 @@ module.exports = function userRoutes(express) {
   const router = express.Router();
 
   router.get('/', wrap(function* (req, resp) {
-    const users = yield Models.User.findAll();
+    const users = yield Models.User.findAll({
+      attributes: ['id', 'username']
+    });
+
     const response = users.map(user => user.get());
 
     return resp.json(formatSuccess(response));
