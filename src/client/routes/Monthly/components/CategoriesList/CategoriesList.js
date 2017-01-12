@@ -21,9 +21,20 @@ const CategoriesList = React.createClass({
   },
 
   componentDidMount() {
-    const { month, year } = this.props;
-    const endpoint = `${ENDPOINTS.monthlyExpenses}/${year}/${month}`;
+    return this.getAndSetCategories(this.props.year, this.props.month);
+  },
 
+  componentWillReceiveProps(nextProps) {
+    const { year: currentYear, month: currentMonth } = this.props;
+    if (currentYear === nextProps.year && currentMonth === nextProps.month) {
+      return false;
+    }
+
+    return this.getAndSetCategories(nextProps.year, nextProps.month);
+  },
+
+  getAndSetCategories(year, month) {
+    const endpoint = `${ENDPOINTS.monthlyExpenses}/${year}/${month}`;
     return get(endpoint)
       .then(({ status, data }) => {
         if (status === 'success') {

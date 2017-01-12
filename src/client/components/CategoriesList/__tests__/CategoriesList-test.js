@@ -1,6 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import { Link } from 'react-router';
 import fetchMock from 'fetch-mock';
 import CategoriesList from '../CategoriesList';
 import RadioButton from '../../RadioButton';
@@ -48,7 +50,12 @@ describe('CategoriesList', function () {
     list.setState({ categories: [], initiallyLoaded: true });
 
     const child = list.childAt(0);
-    expect(child.text()).to.be.equal('You don’t have any categories :(');
+    const link = child.find(Link);
+
+
+    expect(link.length).to.be.equal(1);
+    expect(link.props().children).to.be.equal('Create your first one');
+    expect(link.props().to).to.be.equal(`/monthly/${moment().format('YYYY/MMMM').toLowerCase()}`);
   });
 
   it('It should not have any RadioButton at mounting', function () {
