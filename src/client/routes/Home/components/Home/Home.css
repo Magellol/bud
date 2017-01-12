@@ -4,7 +4,7 @@
 }
 
 .loaded {
-  transform: translate3d(0, -70%, 0);
+  transform: translate3d(0, -30%, 0);
 }
 
 .wrapper {
