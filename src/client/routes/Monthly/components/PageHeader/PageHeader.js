@@ -20,12 +20,16 @@ function getPreviousView(momentObject) {
   return formatLink(then);
 }
 
+function shouldDisplayNextLink(then) {
+  return then.isBefore(moment(), 'month');
+}
+
 const PageHeader = (props) => {
-  const current = moment().month(props.month).year(props.year);
+  const currentMoment = moment().month(props.month).year(props.year);
 
   return (
     <div className={s.wrapper}>
-      <Link to={`/monthly/${getPreviousView(current)}`}>
+      <Link to={`/monthly/${getPreviousView(currentMoment)}`}>
         <Icon
           className={s.chevron}
           icon={SVGs.chevronLeft}
@@ -35,7 +39,10 @@ const PageHeader = (props) => {
 
       <span className={s.month}>{ucfirst(props.month)}</span>
 
-      <Link to={`/monthly/${getNextView(current)}`}>
+      <Link
+        to={`/monthly/${getNextView(currentMoment)}`}
+        className={shouldDisplayNextLink(currentMoment) === false ? s.hide : ''}
+      >
         <Icon
           className={s.chevron}
           icon={SVGs.chevronRight}
