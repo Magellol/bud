@@ -3,16 +3,19 @@ import PageHeader from '../../../../components/PageHeader';
 import MonthlyHeader from '../PageHeader';
 import CategoriesList from '../CategoriesList';
 
-const Monthly = props => (
-  <div>
-    <PageHeader />
-    <MonthlyHeader month={props.router.params.month} />
-    <CategoriesList
-      year={props.router.params.year}
-      month={props.router.params.month}
-    />
-  </div>
-);
+const Monthly = (props) => {
+  const { year, month } = props.router.params;
+  return (
+    <div>
+      <PageHeader />
+      <MonthlyHeader month={month} year={year} />
+      <CategoriesList
+        year={year}
+        month={month}
+      />
+    </div>
+  );
+};
 
 Monthly.propTypes = {
   router: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types

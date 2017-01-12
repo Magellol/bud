@@ -6,10 +6,18 @@
   text-align: center;
   padding: 15px 0;
   margin-top: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .month {
   color: white;
   font-family: sansSerif;
   font-weight: lighter;
+}
+
+.chevron {
+  fill: white;
 }
