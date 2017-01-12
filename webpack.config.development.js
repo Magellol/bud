@@ -7,7 +7,11 @@ config.module.loaders = [
   ...config.module.loaders,
   {
     test: /\.css$/,
-    loaders: ['style', 'css?modules&sourceMap', 'postcss']
+    loaders: [
+      'style',
+      'css?modules&sourceMap&localIdentName=[name]_[local]_[hash:base64:5]',
+      'postcss'
+    ]
   }
 ];
 
