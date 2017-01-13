@@ -5,14 +5,12 @@
 import React from 'react';
 import s from './App.css';
 
-const App = props => (
-  <div className={s.wrapper}>
-    {props.children}
-  </div>
-);
-
-App.propTypes = {
-  children: React.PropTypes.element.isRequired
+const App = props => {
+  return (
+    <div className={s.wrapper}>
+      {props.children}
+    </div>
+  );
 };
 
 export default App;
