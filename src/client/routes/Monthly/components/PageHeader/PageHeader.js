@@ -29,7 +29,7 @@ const PageHeader = (props) => {
 
   return (
     <div className={s.wrapper}>
-      <Link to={`/monthly/${getPreviousView(currentMoment)}`}>
+      <Link className={s.link} to={`/monthly/${getPreviousView(currentMoment)}`}>
         <Icon
           className={s.chevron}
           icon={SVGs.chevronLeft}
@@ -41,7 +41,7 @@ const PageHeader = (props) => {
 
       <Link
         to={`/monthly/${getNextView(currentMoment)}`}
-        className={shouldDisplayNextLink(currentMoment) === false ? s.hide : ''}
+        className={shouldDisplayNextLink(currentMoment) === false ? s.hide : s.link}
       >
         <Icon
           className={s.chevron}
