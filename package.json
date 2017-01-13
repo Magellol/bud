@@ -6,6 +6,9 @@
   "repository": "git@github.com:Magellol/bud.git",
   "author": "Thomas Lefebvre <lefebvre515@gmail.com>",
   "scripts": {
+    "coverage": "yarn run coverage:client && yarn run coverage:server && istanbul report --dir ./coverage/build --root ./coverage",
+    "coverage:client": "NODE_ENV=${NODE_ENV:-'test'} istanbul cover _mocha ./src/client/**/*-test.js --report json --dir ./coverage/client -- --require ./src/scripts/null-compiler --require ./src/scripts/jsdom-node --require babel-core/register",
+    "coverage:server": "NODE_ENV=${NODE_ENV:-'test'} istanbul cover _mocha ./test  --report json --dir ./coverage/server",
     "dev": "NODE_ENV='development' nodemon ./src/server",
     "test:server": "NODE_ENV=${NODE_ENV:-'test'} mocha ./test",
     "test:client": "NODE_ENV=${NODE_ENV:-'test'} mocha ./src/client/**/*-test.js --require ./src/scripts/null-compiler --require ./src/scripts/jsdom-node --require babel-core/register",
@@ -31,6 +34,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
     "fetch-mock": "^5.8.1",
+    "istanbul": "v1.1.0-alpha.1",
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
