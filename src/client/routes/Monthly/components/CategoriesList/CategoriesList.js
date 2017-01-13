@@ -96,11 +96,11 @@ const CategoriesList = React.createClass({
 
           {categories.map(category => (
             <Link
+              key={category.id}
               className={s.link}
               to={`/monthly/${this.props.year}/${this.props.month}/${category.id}`}
             >
               <Category
-                key={category.id}
                 name={category.name}
                 totalExpenses={category.totalExpenses || 0}
               />
