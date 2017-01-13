@@ -18,8 +18,7 @@ module.exports = {
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
-    // store: new Error('Session store must be defined'),
-    store: false, // It's temporary, just to test a production env. We're going to use Redis.
+    store: new Error('Session store must be defined'),
     cookie: {
       maxAge: (2 * 86400000) // 2 days.
     }

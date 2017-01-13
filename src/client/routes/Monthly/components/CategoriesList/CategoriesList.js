@@ -93,6 +93,7 @@ const CategoriesList = React.createClass({
 
           {categories.map(category => (
             <Category
+              id={category.id}
               key={category.id}
               name={category.name}
               totalExpenses={category.totalExpenses || 0}

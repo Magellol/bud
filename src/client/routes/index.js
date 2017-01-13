@@ -6,6 +6,7 @@ module.exports = {
   indexRoute: require('./Home'),
   childRoutes: [
     require('./Dashboard'),
-    require('./Monthly')
+    require('./Monthly'),
+    { path: '*', component: require('../components/NotFoundError').default }
   ]
 };

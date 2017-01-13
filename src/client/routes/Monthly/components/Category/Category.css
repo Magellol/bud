@@ -9,6 +9,7 @@
   padding-right: 0;
   padding-left: 0;
   flex-wrap: wrap;
+  text-decoration: none;
 }
 
 .name,
