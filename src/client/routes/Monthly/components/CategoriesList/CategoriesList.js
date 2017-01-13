@@ -80,7 +80,7 @@ const CategoriesList = React.createClass({
       <div>
         {requestStatus === null &&
           <div className={s.loader}>
-            <Loader delay={500} />
+            <Loader delay={400} />
           </div>
         }
 
