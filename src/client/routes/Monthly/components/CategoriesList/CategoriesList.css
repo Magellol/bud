@@ -35,9 +35,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid grayLighter;
 }
 
 .chevron {
   fill: grayLighter;
-  margin-left: 2px;
+  margin-left: 5px;
 }

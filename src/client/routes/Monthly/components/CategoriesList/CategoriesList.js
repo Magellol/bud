@@ -108,7 +108,7 @@ const CategoriesList = React.createClass({
               <Icon
                 className={s.chevron}
                 icon={SVGs.chevronRight}
-                size={25}
+                size={20}
               />
             </Link>
           ))}
