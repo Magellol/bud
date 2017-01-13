@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import isSameMonth from 'date-fns/is_same_month';
 import classnames from 'classnames';
 import OneFieldForm from '../../../../components/OneFieldForm';
@@ -92,12 +93,16 @@ const CategoriesList = React.createClass({
           }
 
           {categories.map(category => (
-            <Category
-              id={category.id}
-              key={category.id}
-              name={category.name}
-              totalExpenses={category.totalExpenses || 0}
-            />
+            <Link
+              className={s.link}
+              to={`/monthly/${this.props.year}/${this.props.month}/${category.id}`}
+            >
+              <Category
+                key={category.id}
+                name={category.name}
+                totalExpenses={category.totalExpenses || 0}
+              />
+            </Link>
           ))}
 
           {this.isCurrentMonth() &&
