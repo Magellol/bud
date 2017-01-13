@@ -1,10 +1,8 @@
 import React from 'react';
-import moment from 'moment';
+import formatDate from 'date-fns/format';
 import { Link } from 'react-router';
 import Logo from '../Logo';
 import s from './PageHeader.css';
-
-const now = moment();
 
 const PageHeader = () => (
   <div className={s.wrapper}>
@@ -16,7 +14,7 @@ const PageHeader = () => (
       <Link to="/dashboard" className={s.link} activeClassName={s.active}>
         New
       </Link>
-      <Link to={`/monthly/${now.format('YYYY')}/${now.format('MMMM').toLowerCase()}`} className={s.link} activeClassName={s.active}>
+      <Link to={`/monthly/${formatDate(Date.now(), 'YYYY/MMMM').toLowerCase()}`} className={s.link} activeClassName={s.active}>
         Monthly
       </Link>
     </div>

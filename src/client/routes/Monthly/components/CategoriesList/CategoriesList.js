@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import moment from 'moment';
+import isSameMonth from 'date-fns/is_same_month';
 import classnames from 'classnames';
 import OneFieldForm from '../../../../components/OneFieldForm';
 import Category from '../Category';
@@ -51,9 +51,9 @@ const CategoriesList = React.createClass({
 
   isCurrentMonth() {
     const { month, year } = this.props;
-    const then = moment().year(year).month(month);
+    const then = new Date(`${month} 01, ${year}`);
 
-    return then.isSame(moment(), 'month');
+    return isSameMonth(then, new Date());
   },
 
   afterCreateCategory(category) {

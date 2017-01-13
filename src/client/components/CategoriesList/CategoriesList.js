@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import moment from 'moment';
+import formatDate from 'date-fns/format';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 import RadioButton from '../RadioButton';
@@ -48,7 +48,7 @@ const CategoriesList = React.createClass({
           (initiallyLoaded && categories.length === 0)
           ? <span className={s.emptyCategories}>
             <p>You don’t have any categories.</p>
-            <Link to={`/monthly/${moment().format('YYYY/MMMM').toLowerCase()}`}>Create your first one</Link>
+            <Link to={`/monthly/${formatDate(Date.now(), 'YYYY/MMMM').toLowerCase()}`}>Create your first one</Link>
           </span>
           : null
         }

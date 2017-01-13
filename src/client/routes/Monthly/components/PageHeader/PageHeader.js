@@ -1,35 +1,38 @@
 import React, { PropTypes } from 'react';
-import moment from 'moment';
+import formatDate from 'date-fns/format';
+import subMonths from 'date-fns/sub_months';
+import addMonths from 'date-fns/add_months';
+import isThisMonth from 'date-fns/is_this_month'
 import { Link } from 'react-router';
 import { ucfirst } from '../../../../helpers/strings';
 import Icon from '../../../../components/Icon';
 import SVGs from '../../../../constants/svgs';
 import s from './PageHeader.css';
 
-function formatLink(momentObject) {
-  return momentObject.format('YYYY/MMMM').toLowerCase();
+function formatLink(date) {
+  return formatDate(date, 'YYYY/MMMM').toLowerCase();
 }
 
-function getNextView(momentObject) {
-  const then = moment(momentObject).add(1, 'months');
+function getNextView(nowDate) {
+  const then = addMonths(nowDate, 1);
   return formatLink(then);
 }
 
-function getPreviousView(momentObject) {
-  const then = moment(momentObject).subtract(1, 'months');
+function getPreviousView(nowDate) {
+  const then = subMonths(nowDate, 1);
   return formatLink(then);
 }
 
 function shouldDisplayNextLink(then) {
-  return then.isBefore(moment(), 'month');
+  return isThisMonth(then) === false;
 }
 
 const PageHeader = (props) => {
-  const currentMoment = moment().month(props.month).year(props.year);
+  const viewingDate = new Date(`${props.month} 01, ${props.year}`);
 
   return (
     <div className={s.wrapper}>
-      <Link className={s.link} to={`/monthly/${getPreviousView(currentMoment)}`}>
+      <Link className={s.link} to={`/monthly/${getPreviousView(viewingDate)}`}>
         <Icon
           className={s.chevron}
           icon={SVGs.chevronLeft}
@@ -40,8 +43,8 @@ const PageHeader = (props) => {
       <span className={s.month}>{ucfirst(props.month)}</span>
 
       <Link
-        to={`/monthly/${getNextView(currentMoment)}`}
-        className={shouldDisplayNextLink(currentMoment) === false ? s.hide : s.link}
+        to={`/monthly/${getNextView(viewingDate)}`}
+        className={shouldDisplayNextLink(viewingDate) === false ? s.hide : s.link}
       >
         <Icon
           className={s.chevron}
@@ -53,10 +56,9 @@ const PageHeader = (props) => {
   );
 };
 
-const allMonths = moment.months().map(m => m.toLowerCase());
 PageHeader.propTypes = {
   year: PropTypes.string.isRequired,
-  month: PropTypes.oneOf(allMonths).isRequired
+  month: PropTypes.string.isRequired
 };
 
 export default PageHeader;

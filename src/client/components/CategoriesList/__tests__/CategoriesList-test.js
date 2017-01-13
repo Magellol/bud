@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import formatDate from 'date-fns/format';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import { Link } from 'react-router';
@@ -55,7 +55,7 @@ describe('CategoriesList', function () {
 
     expect(link.length).to.be.equal(1);
     expect(link.props().children).to.be.equal('Create your first one');
-    expect(link.props().to).to.be.equal(`/monthly/${moment().format('YYYY/MMMM').toLowerCase()}`);
+    expect(link.props().to).to.be.equal(`/monthly/${formatDate(Date.now(), 'YYYY/MMMM').toLowerCase()}`);
   });
 
   it('It should not have any RadioButton at mounting', function () {
