@@ -55,7 +55,7 @@ module.exports = function clientRoutes(express) {
     '/dashboard',
     '/monthly/:year/:month'
   ], (req, resp, next) => {
-    const url = `${config.get('app.host')}:${config.get('port')}/api/users/me`;
+    const url = `${config.get('app.host')}/api/users/me`;
 
     const toPipe = request(url, function (error, response) {
       if (error || response.statusCode !== 200) {
