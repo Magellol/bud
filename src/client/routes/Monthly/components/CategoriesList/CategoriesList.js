@@ -3,6 +3,7 @@ import moment from 'moment';
 import classnames from 'classnames';
 import OneFieldForm from '../../../../components/OneFieldForm';
 import Category from '../Category';
+import Loader from '../../../../components/Loader';
 import ENDPOINTS from '../../../../constants/endpoints';
 import s from './CategoriesList.css';
 import { get } from '../../../../helpers/requests';
@@ -35,6 +36,8 @@ const CategoriesList = React.createClass({
 
   getAndSetCategories(year, month) {
     const endpoint = `${ENDPOINTS.monthlyExpenses}/${year}/${month}`;
+
+    this.setState({ requestStatus: null });
     return get(endpoint)
       .then(({ status, data }) => {
         if (status === 'success') {
@@ -74,29 +77,37 @@ const CategoriesList = React.createClass({
     });
 
     return (
-      <div className={wrapperClasses}>
-        {
-          requestStatus === 'done' && categories.length === 0
-          ? this.renderEmptyMessage()
-          : null
+      <div>
+        {requestStatus === null &&
+          <div className={s.loader}>
+            <Loader delay={500} />
+          </div>
         }
 
-        {categories.map(category => (
-          <Category
-            key={category.id}
-            name={category.name}
-            totalExpenses={category.totalExpenses || 0}
-          />
-        ))}
+        <div className={wrapperClasses}>
+          {
+            requestStatus === 'done' && categories.length === 0
+            ? this.renderEmptyMessage()
+            : null
+          }
 
-        {this.isCurrentMonth() &&
-          <OneFieldForm
-            afterCreate={this.afterCreateCategory}
-            endpoint={ENDPOINTS.newCategory}
-            fieldName="name"
-            placeholder="Add new category"
-          />
-        }
+          {categories.map(category => (
+            <Category
+              key={category.id}
+              name={category.name}
+              totalExpenses={category.totalExpenses || 0}
+            />
+          ))}
+
+          {this.isCurrentMonth() &&
+            <OneFieldForm
+              afterCreate={this.afterCreateCategory}
+              endpoint={ENDPOINTS.newCategory}
+              fieldName="name"
+              placeholder="Add new category"
+            />
+          }
+        </div>
       </div>
     );
   }
