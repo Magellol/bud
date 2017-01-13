@@ -40,7 +40,9 @@ const PageHeader = (props) => {
         />
       </Link>
 
-      <span className={s.month}>{ucfirst(props.month)}</span>
+      <span className={s.month}>
+        {`${ucfirst(props.month)} ${props.year}`}
+      </span>
 
       <Link
         to={`/monthly/${getNextView(viewingDate)}`}
