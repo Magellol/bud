@@ -1,66 +1,50 @@
 import React, { PropTypes } from 'react';
-import formatDate from 'date-fns/format';
-import subMonths from 'date-fns/sub_months';
-import addMonths from 'date-fns/add_months';
-import isThisMonth from 'date-fns/is_this_month';
+import classnames from 'classnames';
 import { Link } from 'react-router';
-import { ucfirst } from '../../../../helpers/strings';
 import Icon from '../../../../components/Icon';
 import SVGs from '../../../../constants/svgs';
 import s from './PageHeader.css';
 
-function formatLink(date) {
-  return formatDate(date, 'YYYY/MMMM').toLowerCase();
+function getLinkClasses(shouldDisplay) {
+  return classnames({
+    [s.link]: true,
+    [s.hide]: shouldDisplay === false
+  });
 }
 
-function getNextView(nowDate) {
-  const then = addMonths(nowDate, 1);
-  return formatLink(then);
-}
-
-function getPreviousView(nowDate) {
-  const then = subMonths(nowDate, 1);
-  return formatLink(then);
-}
-
-function shouldDisplayNextLink(then) {
-  return isThisMonth(then) === false;
-}
-
-const PageHeader = (props) => {
-  const viewingDate = new Date(`${props.month} 01, ${props.year}`);
+function renderLink(chevron, to) {
+  const linkClasses = getLinkClasses(!!to);
 
   return (
-    <div className={s.wrapper}>
-      <Link className={s.link} to={`/monthly/${getPreviousView(viewingDate)}`}>
-        <Icon
-          className={s.chevron}
-          icon={SVGs.chevronLeft}
-          size={20}
-        />
-      </Link>
-
-      <span className={s.month}>
-        {`${ucfirst(props.month)} ${props.year}`}
-      </span>
-
-      <Link
-        to={`/monthly/${getNextView(viewingDate)}`}
-        className={shouldDisplayNextLink(viewingDate) === false ? s.hide : s.link}
-      >
-        <Icon
-          className={s.chevron}
-          icon={SVGs.chevronRight}
-          size={20}
-        />
-      </Link>
-    </div>
+    <Link
+      to={to}
+      className={linkClasses}
+    >
+      <Icon
+        className={s.chevron}
+        icon={chevron}
+        size={20}
+      />
+    </Link>
   );
-};
+}
+
+const PageHeader = props => (
+  <div className={s.wrapper}>
+    {renderLink(SVGs.chevronLeft, props.prevLinkDestination)}
+
+    <span className={s.label}>
+      {props.label}
+    </span>
+
+    {renderLink(SVGs.chevronRight, props.nextLinkDestination)}
+  </div>
+);
 
 PageHeader.propTypes = {
-  year: PropTypes.string.isRequired,
-  month: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  prevLinkDestination: PropTypes.string,
+  nextLinkDestination: PropTypes.string
 };
 
 export default PageHeader;

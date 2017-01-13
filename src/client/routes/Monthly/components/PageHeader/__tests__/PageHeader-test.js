@@ -5,7 +5,7 @@ import PageHeader from '../PageHeader';
 
 describe('Monthly/PageHeader', function () {
   it('Should render', function () {
-    const header = shallow(<PageHeader month="january" year="2016" />);
+    const header = shallow(<PageHeader label="hello" />);
 
     expect(header.length).to.be.equal(1);
   });

@@ -12,18 +12,20 @@
   align-items: center;
 }
 
-.month {
+.label {
   color: white;
   font-family: sansSerif;
   font-weight: lighter;
-}
-
-.hide {
-  visibility: hidden;
+  padding: 15px 0;
 }
 
 .link {
   padding: 15px 0;
+}
+
+.link.hide {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .chevron {
