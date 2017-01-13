@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import formatDate from 'date-fns/format';
 import subMonths from 'date-fns/sub_months';
 import addMonths from 'date-fns/add_months';
-import isThisMonth from 'date-fns/is_this_month'
+import isThisMonth from 'date-fns/is_this_month';
 import { Link } from 'react-router';
 import { ucfirst } from '../../../../helpers/strings';
 import Icon from '../../../../components/Icon';

@@ -1,7 +1,5 @@
 import React from 'react';
-import fetchMock from 'fetch-mock';
 import { shallow } from 'enzyme';
-import { stub } from 'sinon';
 import { expect } from 'chai';
 import CategoriesList from '../CategoriesList';
 
