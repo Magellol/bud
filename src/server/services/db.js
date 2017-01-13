@@ -10,6 +10,7 @@ module.exports = new Sequelize(
     host: config.get('datasource.host'),
     logging: config.get('debug') ? console.log : false, // eslint-disable-line no-console
     benchmark: config.get('debug') === true,
+    port: config.get('datasource.port'),
     pool: {
       max: 5,
       min: 0

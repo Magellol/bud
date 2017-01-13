@@ -10,6 +10,7 @@ module.exports = {
     host: process.env.DATASOURCE_HOST,
     username: process.env.DATASOURCE_USERNAME,
     password: process.env.DATASOURCE_PASSWORD,
+    port: process.env.DATASOURCE_PORT,
     dialect: 'mysql'
   },
   session: {
