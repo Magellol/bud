@@ -16,7 +16,8 @@
     "lint": "eslint ./",
     "db:migrate": "sequelize db:migrate",
     "db:rollback": "sequelize db:migrate:undo",
-    "db:seed": "sequelize db:seed:all"
+    "db:seed": "sequelize db:seed:all",
+    "heroku-postbuild": "yarn run build && yarn run db:migrate"
   },
   "devDependencies": {
     "chai": "^3.5.0",
