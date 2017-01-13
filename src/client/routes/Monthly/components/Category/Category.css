@@ -9,6 +9,7 @@
   padding-right: 0;
   padding-left: 0;
   flex-wrap: wrap;
+  flex-grow: 1;
 }
 
 .name,
@@ -19,4 +20,8 @@
 
 .name {
   font-size: 18px;
+}
+
+.amount {
+  font-size: 20px;
 }

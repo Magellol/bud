@@ -5,7 +5,9 @@ import classnames from 'classnames';
 import OneFieldForm from '../../../../components/OneFieldForm';
 import Category from '../Category';
 import Loader from '../../../../components/Loader';
+import Icon from '../../../../components/Icon';
 import ENDPOINTS from '../../../../constants/endpoints';
+import SVGs from '../../../../constants/svgs';
 import s from './CategoriesList.css';
 import { get } from '../../../../helpers/requests';
 
@@ -101,6 +103,12 @@ const CategoriesList = React.createClass({
                 key={category.id}
                 name={category.name}
                 totalExpenses={category.totalExpenses || 0}
+              />
+
+              <Icon
+                className={s.chevron}
+                icon={SVGs.chevronRight}
+                size={25}
               />
             </Link>
           ))}

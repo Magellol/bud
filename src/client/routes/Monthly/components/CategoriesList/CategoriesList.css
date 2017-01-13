@@ -1,3 +1,5 @@
+@value grayLighter from '../../../../helpers/colors.css';
+
 .wrapper {
   box-sizing: border-box;
   padding: 0 30px;
@@ -29,4 +31,13 @@
 
 .link {
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chevron {
+  fill: grayLighter;
+  margin-left: 2px;
 }
