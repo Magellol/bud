@@ -4,7 +4,7 @@ import s from './ErrorPage.css';
 
 const ErrorPage = props => (
   <div>
-    <PageHeader />
+    <PageHeader showNavigation={false} />
     <div className={s.wrapper}>
       {props.children}
     </div>
