@@ -19,14 +19,15 @@
   composes: wrapper from '../../../../components/CategoriesList/CategoriesList.css';
   animation-duration: .2s;
   opacity: 1 !important;
-  padding: 0;
 }
 
 .categoryName {
   border-bottom: 1px solid grayLighter;
-  padding: 0 30px;
+  padding-bottom: 10px;
 }
 
 .expensesWrapper {
-  padding: 15px 30px 30px;
+  padding: 15px 0 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid grayLighter;
 }
