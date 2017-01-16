@@ -1,6 +1,6 @@
 const moment = require('moment');
 const { wrap } = require('co');
-const { Models } = require('../models');
+const { Models, connection } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 const { createError } = require('../helpers/errors');
 
@@ -47,7 +47,10 @@ module.exports = function expenseCategoryRoutes(express) {
 
     try {
       const category = yield Models.ExpenseCategory.findOne({
-        attributes: ['id', 'name'],
+        attributes: [
+          'id',
+          'name'
+        ],
         where: { id, UserId: req.session.user.id },
         order: [[Models.Expense, 'createdAt', 'DESC']],
         include: {

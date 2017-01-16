@@ -1,0 +1,33 @@
+@value grayDarker, gray from '../../../../../../helpers/colors.css';
+@value sansSerif from '../../../../../../helpers/fonts.css';
+
+.wrapper {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.nameAndDate > span {
+  display: block;
+  font-family: sansSerif;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: lighter;
+  color: grayDarker;
+  margin-right: 5px;
+}
+
+.date {
+  color: gray;
+  font-size: 15px;
+}
+
+.amount {
+  font-family: sansSerif;
+  color: grayDarker;
+  font-weight: lighter;
+}
