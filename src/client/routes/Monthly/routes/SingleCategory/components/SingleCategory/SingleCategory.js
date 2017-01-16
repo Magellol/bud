@@ -1,6 +1,8 @@
 import React from 'react';
 import PageHeader from '../../../../../../components/PageHeader';
 import MonthlyHeader from '../../../../components/PageHeader';
+import { ucfirst } from '../../../../../../helpers/strings';
+import s from './SingleCategory.css';
 
 const SingleCategory = React.createClass({
   render() {
@@ -10,7 +12,8 @@ const SingleCategory = React.createClass({
       <div>
         <PageHeader />
         <MonthlyHeader
-          label="Single cat"
+          wrapperClasses={s.pageHeader}
+          label={`${ucfirst(month)} ${year}`}
           prevLinkDestination={`/monthly/${year}/${month}`}
         />
       </div>

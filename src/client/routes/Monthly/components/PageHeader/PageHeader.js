@@ -12,6 +12,10 @@ function getLinkClasses(shouldDisplay) {
   });
 }
 
+function getWrapperClasses(classesInProps) {
+  return classnames(classesInProps, s.wrapper);
+}
+
 function renderLink(chevron, to) {
   const linkClasses = getLinkClasses(!!to);
 
@@ -30,7 +34,7 @@ function renderLink(chevron, to) {
 }
 
 const PageHeader = props => (
-  <div className={s.wrapper}>
+  <div className={getWrapperClasses(props.wrapperClasses)}>
     {renderLink(SVGs.chevronLeft, props.prevLinkDestination)}
 
     <span className={s.label}>
@@ -44,7 +48,8 @@ const PageHeader = props => (
 PageHeader.propTypes = {
   label: PropTypes.string.isRequired,
   prevLinkDestination: PropTypes.string,
-  nextLinkDestination: PropTypes.string
+  nextLinkDestination: PropTypes.string,
+  wrapperClasses: PropTypes.string
 };
 
 export default PageHeader;
