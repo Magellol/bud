@@ -53,7 +53,8 @@ module.exports = function clientRoutes(express) {
    */
   router.get([
     '/dashboard',
-    '/monthly/:year/:month'
+    '/monthly/:year/:month',
+    '/monthly/:year/:month/:categoryId'
   ], (req, resp, next) => {
     const url = `${config.get('app.host')}/api/users/me`;
 
