@@ -68,3 +68,33 @@ describe('/categories/new', function () {
     });
   }));
 });
+
+describe('/categories/:year/:month/:id', function () {
+  it('Should return an error when we try to get a category that does not belong to the logged in user', wrap(function* () {
+    const loggedInUserId = 1;
+    const agent = yield getAuthedAgent(loggedInUserId);
+
+    const request = agent.get('/api/categories/2017/january/2');
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        const { body } = error.response;
+
+        expect(error.response).to.have.status(404);
+        expect(body.status).to.be.equal('error');
+        expect(body.message).to.be.equal('The requested category does not exist');
+      });
+  }));
+
+  it('Should return the requested category + its monthly expenses', wrap(function* () {
+    const loggedInUserId = 1;
+    const agent = yield getAuthedAgent(loggedInUserId);
+
+    const { body } = yield agent.get('/api/categories/1980/january/3');
+    const expectedIds = [3, 7];
+    const expenseIds = body.data.Expenses.map(expense => expense.id);
+
+    expect(body.status).to.be.equal('success');
+    expect(expenseIds).to.be.deep.equal(expectedIds);
+  }));
+});

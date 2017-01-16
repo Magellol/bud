@@ -3,19 +3,21 @@ const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 const { createValidationError } = require('../helpers/errors');
 
-// TODO
-// Do some try...catch to these routes to handle DB level errors for example, to avoid crashing node.
 module.exports = function userRoutes(express) {
   const router = express.Router();
 
-  router.get('/', wrap(function* (req, resp) {
-    const users = yield Models.User.findAll({
-      attributes: ['id', 'username']
-    });
+  router.get('/', wrap(function* (req, resp, next) {
+    try {
+      const users = yield Models.User.findAll({
+        attributes: ['id', 'username']
+      });
 
-    const response = users.map(user => user.get());
+      const response = users.map(user => user.get());
 
-    return resp.json(formatSuccess(response));
+      return resp.json(formatSuccess(response));
+    } catch (error) {
+      return next(error);
+    }
   }));
 
   router.get('/me', (req, resp) => (

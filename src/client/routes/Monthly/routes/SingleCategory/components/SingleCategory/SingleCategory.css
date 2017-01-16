@@ -1,0 +1,32 @@
+@value grayLighter, grayBackground from '../../../../../../helpers/colors.css';
+
+.pageHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.loaderWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.categoryWrapper {
+  composes: fadeInUp from '../../../../../../helpers/animations.css';
+  composes: wrapper from '../../../../components/CategoriesList/CategoriesList.css';
+  animation-duration: .2s;
+  opacity: 1 !important;
+  padding: 0;
+}
+
+.categoryName {
+  border-bottom: 1px solid grayLighter;
+  padding: 0 30px;
+}
+
+.expensesWrapper {
+  padding: 15px 30px 30px;
+}
