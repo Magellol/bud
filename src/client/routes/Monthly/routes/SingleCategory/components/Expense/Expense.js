@@ -7,7 +7,7 @@ const Expense = props => (
   <div className={s.wrapper}>
     <div className={s.nameAndDate}>
       <span className={s.name}>{ucfirst(props.name)}</span>
-      <span className={s.date}>{formatDate(props.createdAt, 'MMM Qo, YYYY')}</span>
+      <span className={s.date}>{formatDate(props.createdAt, 'MMM Do, YYYY')}</span>
     </div>
     <div className={s.amount}>${props.amount.toFixed(2)}</div>
   </div>
