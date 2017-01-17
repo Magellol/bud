@@ -21,7 +21,6 @@ config.module.loaders = [
 config.plugins = [
   ...config.plugins,
   new ExtractTextPlugin('main.[hash].css'),
-  new ExtractTextPlugin('main.css'),
   new webpack.optimize.UglifyJsPlugin({
     compress: { warnings: false },
     comments: false
