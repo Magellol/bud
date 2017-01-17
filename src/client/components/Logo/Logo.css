@@ -1,5 +1,5 @@
-@value purple, yellow from '../../helpers/colors.css';
 @value sansSerif from '../../helpers/fonts.css';
+@value purple, yellow from '../../helpers/colors.css';
 
 .logo {
   color: purple;
