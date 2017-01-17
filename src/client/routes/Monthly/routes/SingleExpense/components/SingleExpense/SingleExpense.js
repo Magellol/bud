@@ -7,6 +7,7 @@ import CategoriesList from '../../../../../../components/CategoriesList';
 import Submit from '../../../../../../components/Submit';
 import { get } from '../../../../../../helpers/requests';
 import ENDPOINTS from '../../../../../../constants/endpoints';
+import STRINGS from '../../../../../../constants/strings';
 import s from './SingleExpense.css';
 
 const SingleExpense = React.createClass({
@@ -59,14 +60,14 @@ const SingleExpense = React.createClass({
           <div className={s.formWrapper}>
             <div className={s.expenseWrapper}>
               <Expense
-                name={expense.name || 'Unnamed Item'}
+                name={expense.name || STRINGS.unnamedExpense}
                 amount={expense.amount}
                 createdAt={new Date(expense.createdAt)}
               />
             </div>
 
             <p className={s.label}>
-              Goes in
+              Is in
               <span className={s.categoryName}>
                 {selectedCategory ? selectedCategory.name : expense.ExpenseCategory.name || null}
               </span>

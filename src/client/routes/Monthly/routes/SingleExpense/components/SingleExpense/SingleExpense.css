@@ -25,7 +25,7 @@
 
 .label {
   composes: label from '../../../../../../components/AddExpenseForm/AddExpenseForm.css';
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .categoryName {

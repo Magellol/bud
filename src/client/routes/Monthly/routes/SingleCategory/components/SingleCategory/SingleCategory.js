@@ -12,6 +12,7 @@ import s from './SingleCategory.css';
 import { get } from '../../../../../../helpers/requests';
 import ENDPOINTS from '../../../../../../constants/endpoints';
 import SVGs from '../../../../../../constants/svgs';
+import STRINGS from '../../../../../../constants/strings';
 
 const SingleCategory = React.createClass({
   getInitialState() {
@@ -72,6 +73,10 @@ const SingleCategory = React.createClass({
             </div>
 
             <div className={s.expensesWrapper}>
+              <span className={s.label}>
+                Expenses <span className={s.expenseCount}>({category.Expenses.length})</span>
+              </span>
+
               {category.Expenses.map(expense => (
                 <Link
                   className={s.link}
@@ -80,7 +85,7 @@ const SingleCategory = React.createClass({
                 >
                   <Expense
                     amount={expense.amount}
-                    name={expense.name || 'Unnamed Item'}
+                    name={expense.name || STRINGS.unnamedExpense}
                     createdAt={new Date(expense.createdAt)}
                   />
 

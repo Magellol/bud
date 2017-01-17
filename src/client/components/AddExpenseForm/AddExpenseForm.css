@@ -65,7 +65,7 @@
 }
 
 .categoryList {
-  height: 217px;
+  height: 222px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   transition: height .3s ease;

@@ -1,4 +1,4 @@
-@value grayLighter, grayBackground from '../../../../../../helpers/colors.css';
+@value gray, grayLighter, grayBackground from '../../../../../../helpers/colors.css';
 
 .pageHeader {
   display: flex;
@@ -29,7 +29,6 @@
 .expensesWrapper {
   padding: 15px 0;
   margin-bottom: 30px;
-  border-bottom: 1px solid grayLighter;
 }
 
 .link {
@@ -45,4 +44,19 @@
   margin-left: 10px;
   position: relative;
   top: 3px;
+}
+
+.label {
+  composes: label from '../../../../../../components/AddExpenseForm/AddExpenseForm.css';
+  margin-bottom: 5px;
+  display: block;
+  color: gray;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.expenseCount {
+  font-size: 13px;
+  margin-left: 5px;
 }
