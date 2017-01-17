@@ -42,6 +42,7 @@
     "sinon": "^1.17.7"
   },
   "dependencies": {
+    "assets-webpack-plugin": "^3.5.0",
     "autoprefixer": "^6.6.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",

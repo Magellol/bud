@@ -1,4 +1,5 @@
 const path = require('path');
+const AssetsPlugin = require('assets-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'client', 'index.js'),
@@ -25,5 +26,10 @@ module.exports = {
       browsers: '> 1%'
     })
   ],
-  plugins: []
+  plugins: [
+    new AssetsPlugin({
+      filename: 'assets.json',
+      fullPath: false
+    })
+  ]
 };

@@ -21,11 +21,17 @@ const { createError } = require('../server/helpers/errors');
 function getLayout(variables = {}) {
   const location = path.join(__dirname, 'index.html');
   const file = fs.readFileSync(location, 'utf8');
+  const assets = JSON.parse(fs.readFileSync(path.join(__dirname, '../..', 'assets.json'), 'utf8'));
 
-  return Object.keys(variables).reduce((html, variable) => {
+  const allVariables = Object.assign({}, variables, {
+    CSS_PATH: `/${assets.main.css}` || null,
+    JS_PATH: `/${assets.main.js}`
+  });
+
+  return Object.keys(allVariables).reduce((html, variable) => {
     const tag = `#${variable}#`;
     const regex = new RegExp(tag, 'g');
-    return html.replace(regex, variables[variable]);
+    return html.replace(regex, allVariables[variable]);
   }, file);
 }
 
