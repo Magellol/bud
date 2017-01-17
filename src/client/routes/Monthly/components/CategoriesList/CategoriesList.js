@@ -71,6 +71,38 @@ const CategoriesList = React.createClass({
     );
   },
 
+  renderCategory(category) {
+    if (category.totalExpenses) {
+      return (
+        <Link
+          key={category.id}
+          className={s.link}
+          to={`/monthly/${this.props.year}/${this.props.month}/${category.id}`}
+        >
+          <Category
+            name={category.name}
+            totalExpenses={category.totalExpenses}
+          />
+
+          <Icon
+            className={s.chevron}
+            icon={SVGs.chevronRight}
+            size={20}
+          />
+        </Link>
+      );
+    }
+
+    return (
+      <div className={classnames(s.link, s.emptyCategory)}>
+        <Category
+          name={category.name}
+          totalExpenses={0}
+        />
+      </div>
+    );
+  },
+
   render() {
     const { categories, requestStatus } = this.state;
 
@@ -94,24 +126,7 @@ const CategoriesList = React.createClass({
             : null
           }
 
-          {categories.map(category => (
-            <Link
-              key={category.id}
-              className={s.link}
-              to={`/monthly/${this.props.year}/${this.props.month}/${category.id}`}
-            >
-              <Category
-                name={category.name}
-                totalExpenses={category.totalExpenses || 0}
-              />
-
-              <Icon
-                className={s.chevron}
-                icon={SVGs.chevronRight}
-                size={20}
-              />
-            </Link>
-          ))}
+          {categories.map(category => this.renderCategory(category))}
 
           {this.isCurrentMonth() &&
             <OneFieldForm

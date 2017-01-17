@@ -38,6 +38,11 @@
   border-bottom: 1px solid grayLighter;
 }
 
+.emptyCategory {
+  opacity: .5;
+  padding-right: 30px;
+}
+
 .chevron {
   fill: grayLighter;
   margin-left: 10px;
