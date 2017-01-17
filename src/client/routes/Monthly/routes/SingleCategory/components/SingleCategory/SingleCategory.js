@@ -1,14 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Link } from 'react-router';
 import PageHeader from '../../../../../../components/PageHeader';
 import MonthlyHeader from '../../../../components/PageHeader';
 import Loader from '../../../../../../components/Loader';
 import Category from '../../../../components/Category';
 import Expense from '../Expense';
+import Icon from '../../../../../../components/Icon';
 import { ucfirst } from '../../../../../../helpers/strings';
 import s from './SingleCategory.css';
 import { get } from '../../../../../../helpers/requests';
 import ENDPOINTS from '../../../../../../constants/endpoints';
+import SVGs from '../../../../../../constants/svgs';
 
 const SingleCategory = React.createClass({
   getInitialState() {
@@ -42,7 +45,7 @@ const SingleCategory = React.createClass({
 
   render() {
     const { requestStatus, category } = this.state;
-    const { year, month } = this.props.router.params;
+    const { year, month, categoryId } = this.props.router.params;
 
     return (
       <div>
@@ -70,12 +73,23 @@ const SingleCategory = React.createClass({
 
             <div className={s.expensesWrapper}>
               {category.Expenses.map(expense => (
-                <Expense
+                <Link
+                  className={s.link}
+                  to={`/monthly/${year}/${month}/${categoryId}/${expense.id}`}
                   key={expense.id}
-                  amount={expense.amount}
-                  name={expense.name || category.name}
-                  createdAt={new Date(expense.createdAt)}
-                />
+                >
+                  <Expense
+                    amount={expense.amount}
+                    name={expense.name || 'Unnamed Item'}
+                    createdAt={new Date(expense.createdAt)}
+                  />
+
+                  <Icon
+                    className={s.chevron}
+                    icon={SVGs.chevronRight}
+                    size={20}
+                  />
+                </Link>
               ))}
             </div>
           </div>

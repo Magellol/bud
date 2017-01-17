@@ -36,7 +36,7 @@ module.exports = function expenseRoutes(express) {
   router.get('/:id', wrap(function* (req, resp, next) {
     try {
       const expense = yield Models.Expense.findOne({
-        attributes: ['id', 'name', 'createdAt'],
+        attributes: ['id', 'name', 'createdAt', 'amount'],
         where: { id: req.params.id },
         include: [
           {

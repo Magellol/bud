@@ -1,3 +1,35 @@
-.expenseWrapper {
+@value grayLighter, purple from '../../../../../../helpers/colors.css';
+
+.formWrapper {
   padding: 0 30px;
+}
+
+.expenseWrapper {
+  padding: 15px 0;
+}
+
+.categoriesWrapper {
+  composes: categoryList from '../../../../../../components/AddExpenseForm/AddExpenseForm.css';
+}
+
+.form {
+  border-top: 1px solid grayLighter;
+  margin-top: 20px;
+}
+
+.headerLabel {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.label {
+  composes: label from '../../../../../../components/AddExpenseForm/AddExpenseForm.css';
+  margin-top: 20px;
+}
+
+.categoryName {
+  color: purple;
+  font-weight: bold;
+  margin-left: 4px;
 }

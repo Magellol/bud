@@ -31,3 +31,18 @@
   margin-bottom: 30px;
   border-bottom: 1px solid grayLighter;
 }
+
+.link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.chevron {
+  fill: grayLighter;
+  margin-left: 10px;
+  position: relative;
+  top: 3px;
+}

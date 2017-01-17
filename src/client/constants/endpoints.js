@@ -6,5 +6,6 @@ export default {
   allCategories: '/api/categories',
   newCategory: '/api/categories/new',
   monthlyExpenses: '/api/expenses/monthly',
-  monthlyCategory: '/api/categories'
+  monthlyCategory: '/api/categories',
+  singleExpense: '/api/expenses'
 };
