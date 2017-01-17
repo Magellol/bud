@@ -2,7 +2,6 @@
 @value sansSerif from '../../../../../../helpers/fonts.css';
 
 .wrapper {
-  align-items: baseline;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -19,7 +18,7 @@
   font-size: 17px;
   font-weight: lighter;
   color: grayDarker;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .date {

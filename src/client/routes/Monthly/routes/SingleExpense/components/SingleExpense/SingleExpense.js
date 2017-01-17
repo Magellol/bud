@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import isSameMonth from 'date-fns/is_same_month';
 import PageHeader from '../../../../../../components/PageHeader';
 import MonthlyHeader from '../../../../../Monthly/components/PageHeader';
 import Expense from '../../../SingleCategory/components/Expense';
@@ -44,6 +45,12 @@ const SingleExpense = React.createClass({
     return categoryId === selectedCategory.id;
   },
 
+  isCurrentMonth(month, year) {
+    const then = new Date(`${month} 01, ${year}`);
+
+    return isSameMonth(then, new Date());
+  },
+
   render() {
     const { expense, selectedCategory } = this.state;
     const { year, month } = this.props.router.params;
@@ -58,6 +65,7 @@ const SingleExpense = React.createClass({
 
         {expense &&
           <div className={s.formWrapper}>
+            <p className={s.label}>Expense</p>
             <div className={s.expenseWrapper}>
               <Expense
                 name={expense.name || STRINGS.unnamedExpense}
@@ -66,19 +74,27 @@ const SingleExpense = React.createClass({
               />
             </div>
 
-            <p className={s.label}>
-              Is in
-              <span className={s.categoryName}>
-                {selectedCategory ? selectedCategory.name : expense.ExpenseCategory.name || null}
-              </span>
-            </p>
-            <form className={s.form}>
-              <CategoriesList
-                wrapperClasses={s.categoriesWrapper}
-                onSelection={category => this.setState({ selectedCategory: category })}
-                shouldCheck={this.shouldCheckRadioButton}
-              />
-            </form>
+            {this.isCurrentMonth(month, year) &&
+              <div>
+                <p className={s.label}>
+                  Is in
+                  <span className={s.categoryName}>
+                    {selectedCategory
+                      ? selectedCategory.name
+                      : expense.ExpenseCategory.name || null
+                    }
+                  </span>
+                </p>
+
+                <form className={s.form}>
+                  <CategoriesList
+                    wrapperClasses={s.categoriesWrapper}
+                    onSelection={category => this.setState({ selectedCategory: category })}
+                    shouldCheck={this.shouldCheckRadioButton}
+                  />
+                </form>
+              </div>
+            }
           </div>
         }
       </div>

@@ -1,11 +1,11 @@
-@value grayLighter, purple from '../../../../../../helpers/colors.css';
+@value gray, grayLighter, purple from '../../../../../../helpers/colors.css';
 
 .formWrapper {
   padding: 0 30px;
 }
 
 .expenseWrapper {
-  padding: 15px 0;
+  padding: 5px 0;
 }
 
 .categoriesWrapper {
@@ -26,6 +26,7 @@
 .label {
   composes: label from '../../../../../../components/AddExpenseForm/AddExpenseForm.css';
   margin-top: 25px;
+  color: gray;
 }
 
 .categoryName {
