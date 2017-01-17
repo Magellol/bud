@@ -29,7 +29,7 @@ function formatFailure(data = null) {
   return format(RESPONSE_STATUSES.failure, data);
 }
 
-function formatError(message, code = null) {
+function formatError(message, code = null, id = null) {
   if (typeof message !== 'string') {
     throw new Error(
       'Could not format an error message. ' +
@@ -51,6 +51,10 @@ function formatError(message, code = null) {
 
   if (code !== null) {
     error.code = code;
+  }
+
+  if (id !== null) {
+    error.id = id;
   }
 
   return error;

@@ -1,5 +1,6 @@
 const config = require('config');
 const bodyParser = require('body-parser');
+const Raven = require('../services/sentry');
 const { connection: DbConnection } = require('../models');
 const userRoutes = require('./users');
 const expenseCategoryRoutes = require('./expense-categories');
@@ -22,6 +23,7 @@ const publicRoutes = {
 module.exports = function apiRoutes(express) {
   const router = express.Router();
 
+  router.use(Raven.requestHandler());
   router.use(bodyParser.json());
   router.use(session(config.get('session')));
 
@@ -71,6 +73,13 @@ module.exports = function apiRoutes(express) {
   });
 
   /**
+   * Sentry error handler.
+   * Will process them and make the error bubbles up to the other
+   * error middlewares.
+   */
+  router.use(Raven.errorHandler());
+
+  /**
    * Error middleware being executed every time the next() method is being called with
    * an error object in it. This will format a JSON response with a message and an error code.
    *
@@ -82,7 +91,7 @@ module.exports = function apiRoutes(express) {
     }
 
     const status = error.status || 500;
-    const response = formatError(error.message, status);
+    const response = formatError(error.message, status, resp.sentry);
 
     if (config.debug) {
       console.error(error.stack); // eslint-disable-line no-console
