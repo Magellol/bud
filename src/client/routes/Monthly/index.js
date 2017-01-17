@@ -11,6 +11,7 @@ module.exports = {
     });
   },
   childRoutes: [
-    require('./routes/SingleCategory')
+    require('./routes/SingleCategory'),
+    require('./routes/SingleExpense')
   ]
 };

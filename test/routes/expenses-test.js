@@ -76,6 +76,35 @@ describe('/expenses/new', function () {
   }));
 });
 
+describe('/expenses/:id', function () {
+  it('Should return an error response when trying to display an expense that does not belong to the user', wrap(function* () {
+    const agent = yield getAuthedAgent(1);
+    const request = agent.get('/api/expenses/8');
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        const { body } = error.response;
+
+        expect(error.response).to.have.status(HttpCodes.notFound);
+        expect(body.status).to.be.equal('error');
+        expect(body.message).to.be.equal('This expense does not exist');
+      });
+  }));
+
+  it('Should return an expense object with its category included', wrap(function* () {
+    const agent = yield getAuthedAgent(1);
+    const response = yield agent.get('/api/expenses/1');
+
+    const { status } = response.body;
+    const { id, ExpenseCategory } = response.body.data;
+
+    expect(response).to.have.status(200);
+    expect(status).to.be.equal('success');
+    expect(id).to.be.equal(1);
+    expect(ExpenseCategory.id).to.be.equal(1);
+  }));
+});
+
 describe('/expenses/monthly', function () {
   it('Should throw an error when an invalid year is passed', wrap(function* () {
     const userId = 1;

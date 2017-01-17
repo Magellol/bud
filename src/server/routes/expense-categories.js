@@ -1,8 +1,9 @@
 const moment = require('moment');
 const { wrap } = require('co');
-const { Models, connection } = require('../models');
+const { Models } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
 const { createError } = require('../helpers/errors');
+const HttpCodes = require('../constants/httpStatus');
 
 module.exports = function expenseCategoryRoutes(express) {
   const router = express.Router();
@@ -67,7 +68,7 @@ module.exports = function expenseCategoryRoutes(express) {
       });
 
       if (category === null) {
-        return next(createError('The requested category does not exist', 404));
+        return next(createError('The requested category does not exist', HttpCodes.notFound));
       }
 
       return resp.json(formatSuccess(category));

@@ -1,4 +1,5 @@
 module.exports = {
   allGood: 200,
-  validationError: 422
+  validationError: 422,
+  notFound: 404
 };

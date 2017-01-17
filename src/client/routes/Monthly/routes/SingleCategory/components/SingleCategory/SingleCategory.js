@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import React from 'react';
 import PageHeader from '../../../../../../components/PageHeader';
 import MonthlyHeader from '../../../../components/PageHeader';
@@ -20,9 +19,9 @@ const SingleCategory = React.createClass({
   },
 
   componentDidMount() {
-    const { year, month, id } = this.props.router.params;
+    const { year, month, categoryId } = this.props.router.params;
 
-    return get(`${ENDPOINTS.monthlyCategory}/${year}/${month}/${id}`)
+    return get(`${ENDPOINTS.monthlyCategory}/${year}/${month}/${categoryId}`)
       .then(({ status, data }) => {
         if (status !== 'success') {
           throw new Error('Could not initially fetch the category with its expenses');

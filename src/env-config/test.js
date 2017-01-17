@@ -8,6 +8,9 @@ module.exports = {
   datasource: {
     database: process.env.DATASOURCE_TEST_DATABASE
   },
+  sentry: {
+    DSN: ''
+  },
   session: {
     store: false
   }

@@ -1,4 +1,4 @@
-@value grayDarker, gray, grayLighter from '../../../../../../helpers/colors.css';
+@value grayDarker, gray from '../../../../../../helpers/colors.css';
 @value sansSerif from '../../../../../../helpers/fonts.css';
 
 .wrapper {
@@ -17,12 +17,12 @@
 .name {
   font-size: 20px;
   font-weight: lighter;
-  color: gray;
+  color: grayDarker;
   margin-right: 5px;
 }
 
 .date {
-  color: grayLighter;
+  color: gray;
   font-size: 13px;
   margin-top: 5px;
 }
@@ -30,6 +30,6 @@
 .amount {
   font-size: 20px;
   font-family: sansSerif;
-  color: gray;
+  color: grayDarker;
   font-weight: lighter;
 }

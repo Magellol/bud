@@ -2,7 +2,8 @@ const moment = require('moment');
 const { wrap } = require('co');
 const { Models, connection } = require('../models');
 const { formatSuccess } = require('../helpers/responses');
-const { createValidationError } = require('../helpers/errors');
+const { createValidationError, createError } = require('../helpers/errors');
+const HttpCodes = require('../constants/httpStatus');
 
 module.exports = function expenseRoutes(express) {
   const router = express.Router();
@@ -27,6 +28,31 @@ module.exports = function expenseRoutes(express) {
       const result = yield expense.save();
 
       return resp.json(formatSuccess(result));
+    } catch (error) {
+      return next(error);
+    }
+  }));
+
+  router.get('/:id', wrap(function* (req, resp, next) {
+    try {
+      const expense = yield Models.Expense.findOne({
+        attributes: ['id', 'name', 'createdAt'],
+        where: { id: req.params.id },
+        include: [
+          {
+            attributes: ['id', 'name'],
+            model: Models.ExpenseCategory,
+            where: { UserId: req.session.user.id },
+            required: true
+          }
+        ]
+      });
+
+      if (expense === null) {
+        return next(createError('This expense does not exist', HttpCodes.notFound));
+      }
+
+      return resp.json(formatSuccess(expense));
     } catch (error) {
       return next(error);
     }

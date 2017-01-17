@@ -94,7 +94,7 @@ const CategoriesList = React.createClass({
     }
 
     return (
-      <div className={classnames(s.link, s.emptyCategory)}>
+      <div key={category.id} className={classnames(s.link, s.emptyCategory)}>
         <Category
           name={category.name}
           totalExpenses={0}
