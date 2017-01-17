@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import NotFoundError from '../NotFoundError';
 import ErrorPage from '../../ErrorPage';
 

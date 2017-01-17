@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import formatDate from 'date-fns/format';
 import classnames from 'classnames';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import RadioButton from '../RadioButton';
 import Loader from '../Loader';
 import { get } from '../../helpers/requests';

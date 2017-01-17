@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import formatDate from 'date-fns/format';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import Logo from '../Logo';
 import s from './PageHeader.css';
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import isSameMonth from 'date-fns/is_same_month';
 import classnames from 'classnames';
 import OneFieldForm from '../../../../components/OneFieldForm';

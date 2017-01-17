@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import Icon from '../../../../components/Icon';
 import SVGs from '../../../../constants/svgs';
 import s from './PageHeader.css';

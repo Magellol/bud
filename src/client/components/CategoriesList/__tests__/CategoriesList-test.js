@@ -2,7 +2,7 @@ import React from 'react';
 import formatDate from 'date-fns/format';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import fetchMock from 'fetch-mock';
 import CategoriesList from '../CategoriesList';
 import RadioButton from '../../RadioButton';

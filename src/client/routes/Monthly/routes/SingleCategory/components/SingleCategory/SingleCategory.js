@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import PageHeader from '../../../../../../components/PageHeader';
 import MonthlyHeader from '../../../../components/PageHeader';
 import Loader from '../../../../../../components/Loader';
