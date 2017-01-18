@@ -91,10 +91,9 @@ describe('/categories/:year/:month/:id', function () {
     const agent = yield getAuthedAgent(loggedInUserId);
 
     const { body } = yield agent.get('/api/categories/1980/january/3');
-    const expectedIds = [3, 7];
     const expenseIds = body.data.Expenses.map(expense => expense.id);
 
     expect(body.status).to.be.equal('success');
-    expect(expenseIds).to.be.deep.equal(expectedIds);
+    expect(expenseIds).to.be.have.members([3, 7]);
   }));
 });
