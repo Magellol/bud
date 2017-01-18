@@ -14,13 +14,15 @@
 }
 
 .form {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .submitWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 8px;
 }
 
 .headerLabel {

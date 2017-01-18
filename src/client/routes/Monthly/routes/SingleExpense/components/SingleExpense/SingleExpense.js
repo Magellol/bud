@@ -16,7 +16,8 @@ const SingleExpense = React.createClass({
     return {
       expense: null,
       selectedCategory: null,
-      requestStatus: null
+      requestStatus: null,
+      deleteStatus: null
     };
   },
 
@@ -30,6 +31,18 @@ const SingleExpense = React.createClass({
         return this.setState({ expense: data });
       })
       .catch(error => console.error(error)); // TODO error handling.
+  },
+
+  getSubmitButtonStatus(status) {
+    if (status === null) {
+      return 'default';
+    }
+
+    if (status === 'pending') {
+      return 'pending';
+    }
+
+    return 'success';
   },
 
   shouldCheckRadioButton(categoryId) {
@@ -52,21 +65,26 @@ const SingleExpense = React.createClass({
     return isSameMonth(then, new Date());
   },
 
-  getSubmitButtonStatus() {
-    const { requestStatus } = this.state;
+  handleDeleteSubmit(event) {
+    event.preventDefault();
 
-    if (requestStatus === null) {
-      return 'default';
-    }
+    this.setState({ deleteStatus: 'pending' });
+    return post(ENDPOINTS.deleteExpense, { id: this.state.expense.id })
+      .then(({ status }) => {
+        if (status !== 'success') {
+          throw new Error('Could not delete the expense');
+        }
 
-    if (requestStatus === 'pending') {
-      return 'pending';
-    }
+        const { year, month, categoryId } = this.props.router.params;
 
-    return 'success';
+        this.setState({ deleteStatus: 'success' });
+
+        return setTimeout(() => this.props.router.push(`/monthly/${year}/${month}/${categoryId}`), 800);
+      })
+      .catch(error => console.error(error)); // TODO error handling.
   },
 
-  handleSubmit(event) {
+  handleChangeCategorySubmit(event) {
     event.preventDefault();
 
     const selectedCategory = this.state.selectedCategory !== null
@@ -126,7 +144,7 @@ const SingleExpense = React.createClass({
                   </span>
                 </p>
 
-                <form className={s.form} onSubmit={this.handleSubmit}>
+                <form className={s.form} onSubmit={this.handleChangeCategorySubmit}>
                   <CategoriesList
                     wrapperClasses={s.categoriesWrapper}
                     onSelection={category => this.setState({ selectedCategory: category })}
@@ -135,14 +153,24 @@ const SingleExpense = React.createClass({
 
                   <div className={s.submitWrapper}>
                     <Submit
-                      label="Update"
-                      status={this.getSubmitButtonStatus()}
+                      label={this.state.requestStatus === 'success' ? 'Updated' : 'Update'}
+                      status={this.getSubmitButtonStatus(this.state.requestStatus)}
                       disabled={this.state.requestStatus === 'pending'}
+                      block={true}
                     />
                   </div>
                 </form>
               </div>
             }
+
+            <form className={s.deleteForm} onSubmit={this.handleDeleteSubmit}>
+              <Submit
+                label={this.state.deleteStatus === 'success' ? 'Deleted' : 'Delete'}
+                status={this.getSubmitButtonStatus(this.state.deleteStatus)}
+                disabled={this.state.deleteStatus === 'pending'}
+                block={true}
+              />
+            </form>
           </div>
         }
       </div>

@@ -225,3 +225,38 @@ describe('/expenses/update', function () {
     expect(updatedExpense.get('ExpenseCategoryId')).to.be.equal(newCategory.get('id'));
   }));
 });
+
+describe('/expenses/delete', function () {
+  it('Should error out if we\'re trying to delete an expense that does not belong to the current user', wrap(function* () {
+    const loggedInUserId = 1;
+    const agent = yield getAuthedAgent(loggedInUserId);
+
+    const request = agent.post('/api/expenses/delete')
+      .send({
+        payload: { id: 8 }
+      });
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        expect(error.response).to.have.status(404);
+        expect(error.response.body.message).to.be.equal('Expense with id: "8" does not exist');
+      });
+  }));
+
+  it('Should delete the expense from the surface of earth', wrap(function* () {
+    const loggedInUserId = 1;
+    const agent = yield getAuthedAgent(loggedInUserId);
+
+    const response = yield agent.post('/api/expenses/delete')
+      .send({
+        payload: { id: 1 }
+      });
+
+    const deletedExpense = yield Models.Expense.findById(1);
+
+    expect(response).to.have.status(200);
+    expect(response.body.status).to.be.equal('success');
+    expect(response.body.data).to.be.equal(null);
+    expect(deletedExpense).to.be.equal(null);
+  }));
+});
