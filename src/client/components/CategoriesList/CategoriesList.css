@@ -7,6 +7,7 @@
 
 .generalWrapper {
   border-top: 1px solid grayLighter;
+  box-shadow: inset 0px 16px 34px -19px rgba(0, 0, 0, 0.09)
 }
 
 .show {

@@ -8,5 +8,6 @@ export default {
   monthlyExpenses: '/api/expenses/monthly',
   monthlyCategory: '/api/categories',
   singleExpense: '/api/expenses',
-  updateExpense: '/api/expenses/update'
+  updateExpense: '/api/expenses/update',
+  deleteExpense: '/api/expenses/delete'
 };

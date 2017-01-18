@@ -5,7 +5,7 @@
   font-size: 20px;
   border: 1px solid grayLighter;
   border-radius: 50px;
-  padding: 10px 35px;
+  padding: 5px 30px;
   color: purple;
 }
 
@@ -43,4 +43,8 @@
 
 .button:focus {
   outline: 0;
+}
+
+.block {
+  width: 100%;
 }
