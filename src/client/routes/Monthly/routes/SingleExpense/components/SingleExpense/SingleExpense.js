@@ -6,7 +6,7 @@ import MonthlyHeader from '../../../../../Monthly/components/PageHeader';
 import Expense from '../../../SingleCategory/components/Expense';
 import CategoriesList from '../../../../../../components/CategoriesList';
 import Submit from '../../../../../../components/Submit';
-import { get } from '../../../../../../helpers/requests';
+import { get, post } from '../../../../../../helpers/requests';
 import ENDPOINTS from '../../../../../../constants/endpoints';
 import STRINGS from '../../../../../../constants/strings';
 import s from './SingleExpense.css';
@@ -15,7 +15,8 @@ const SingleExpense = React.createClass({
   getInitialState() {
     return {
       expense: null,
-      selectedCategory: null
+      selectedCategory: null,
+      requestStatus: null
     };
   },
 
@@ -51,6 +52,20 @@ const SingleExpense = React.createClass({
     return isSameMonth(then, new Date());
   },
 
+  getSubmitButtonStatus() {
+    const { requestStatus } = this.state;
+
+    if (requestStatus === null) {
+      return 'default';
+    }
+
+    if (requestStatus === 'pending') {
+      return 'pending';
+    }
+
+    return 'success';
+  },
+
   handleSubmit(event) {
     event.preventDefault();
 
@@ -58,7 +73,21 @@ const SingleExpense = React.createClass({
       ? this.state.selectedCategory.id
       : this.state.expense.ExpenseCategory.id;
 
-    // TODO Proceed to the rest.
+    this.setState({ requestStatus: 'pending' });
+
+    return post(ENDPOINTS.updateExpense, {
+      id: this.state.expense.id,
+      ExpenseCategoryId: selectedCategory
+    })
+    .then(({ status }) => {
+      if (status !== 'success') {
+        throw new Error('Could not update the expense\'s category.');
+      }
+
+      this.setState({ requestStatus: 'success' });
+      return setTimeout(() => this.setState({ requestStatus: null }), 1500);
+    })
+    .catch(error => console.error(error)); // TODO error handling.
   },
 
   render() {
@@ -107,6 +136,8 @@ const SingleExpense = React.createClass({
                   <div className={s.submitWrapper}>
                     <Submit
                       label="Update"
+                      status={this.getSubmitButtonStatus()}
+                      disabled={this.state.requestStatus === 'pending'}
                     />
                   </div>
                 </form>
