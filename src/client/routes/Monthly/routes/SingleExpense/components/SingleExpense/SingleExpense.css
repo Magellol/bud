@@ -10,11 +10,18 @@
 
 .categoriesWrapper {
   composes: categoryList from '../../../../../../components/AddExpenseForm/AddExpenseForm.css';
+  margin-bottom: 10px;
 }
 
 .form {
   border-top: 1px solid grayLighter;
   margin-top: 20px;
+}
+
+.submitWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .headerLabel {

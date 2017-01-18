@@ -65,14 +65,14 @@
 }
 
 .categoryList {
-  height: 222px;
+  max-height: 222px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   transition: height .3s ease;
 }
 
 .categoryList.slideUp {
-  height: 165px;
+  max-height: 165px;
 }
 
 .submitWrapper {

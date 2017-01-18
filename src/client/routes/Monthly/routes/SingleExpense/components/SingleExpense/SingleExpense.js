@@ -51,9 +51,20 @@ const SingleExpense = React.createClass({
     return isSameMonth(then, new Date());
   },
 
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const selectedCategory = this.state.selectedCategory !== null
+      ? this.state.selectedCategory.id
+      : this.state.expense.ExpenseCategory.id;
+
+    // TODO Proceed to the rest.
+  },
+
   render() {
     const { expense, selectedCategory } = this.state;
     const { year, month } = this.props.router.params;
+
     return (
       <div>
         <PageHeader />
@@ -86,12 +97,18 @@ const SingleExpense = React.createClass({
                   </span>
                 </p>
 
-                <form className={s.form}>
+                <form className={s.form} onSubmit={this.handleSubmit}>
                   <CategoriesList
                     wrapperClasses={s.categoriesWrapper}
                     onSelection={category => this.setState({ selectedCategory: category })}
                     shouldCheck={this.shouldCheckRadioButton}
                   />
+
+                  <div className={s.submitWrapper}>
+                    <Submit
+                      label="Update"
+                    />
+                  </div>
                 </form>
               </div>
             }
