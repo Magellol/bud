@@ -118,5 +118,42 @@ module.exports = function expenseRoutes(express) {
     }
   }));
 
+  router.post('/update', wrap(function* (req, resp, next) {
+    const { id, ExpenseCategoryId } = req.body.payload;
+
+    try {
+      const expense = yield Models.Expense.findOne({
+        attributes: ['id'],
+        where: { id },
+        include: [
+          {
+            attributes: ['id', 'UserId'],
+            model: Models.ExpenseCategory,
+            where: { UserId: req.session.user.id }
+          }
+        ]
+      });
+
+      if (expense === null) {
+        return next(createError('This expense does not exist', 404));
+      }
+
+      const category = yield Models.ExpenseCategory.findOne({
+        attributes: ['id'],
+        where: { id: ExpenseCategoryId, UserId: req.session.user.id }
+      });
+
+      if (category === null) {
+        return next(createError('The updated category does not exist', 404));
+      }
+
+      yield expense.update({ ExpenseCategoryId });
+
+      return resp.json(formatSuccess());
+    } catch (error) {
+      return next(error);
+    }
+  }));
+
   return router;
 };

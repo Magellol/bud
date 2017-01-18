@@ -157,3 +157,71 @@ describe('/expenses/monthly', function () {
     expect(body.data[1].id).to.be.equal(4);
   }));
 });
+
+describe('/expenses/update', function () {
+  it('Should error out when the expense does not exist or belong to the user', wrap(function* () {
+    const loggedInUserId = 1;
+    const agent = yield getAuthedAgent(loggedInUserId);
+
+    const request = agent.post('/api/expenses/update')
+      .send({
+        payload: { id: 8 }
+      });
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        expect(error.response).to.have.status(HttpCodes.notFound);
+        expect(error.response.body.status).to.be.equal('error');
+        expect(error.response.body.message).to.be.equal('This expense does not exist');
+      });
+  }));
+
+  it('Should error out when the new category does not exists or belong to the user', wrap(function* () {
+    const loggedInUserId = 1;
+    const agent = yield getAuthedAgent(loggedInUserId);
+
+    const request = agent.post('/api/expenses/update')
+      .send({
+        payload: { id: 1, ExpenseCategoryId: 2 }
+      });
+
+    return expect(request).to.be.rejected
+      .then((error) => {
+        expect(error.response).to.have.status(HttpCodes.notFound);
+        expect(error.response.body.status).to.be.equal('error');
+        expect(error.response.body.message).to.be.equal('The updated category does not exist');
+      });
+  }));
+
+  it('Should set the new category for the passed in Expense id', wrap(function* () {
+    const loggedInUserId = 1;
+    const agent = yield getAuthedAgent(loggedInUserId);
+
+    const expense = yield Models.Expense.findOne({
+      attributes: ['id', 'ExpenseCategoryId'],
+      where: { ExpenseCategoryId: 1 }
+    });
+
+    const newCategory = yield Models.ExpenseCategory.findOne({
+      attributes: ['id'],
+      where: {
+        UserId: loggedInUserId,
+        id: {
+          $ne: 1
+        }
+      }
+    });
+
+    const request = yield agent.post('/api/expenses/update')
+      .send({
+        payload: { id: expense.get('id'), ExpenseCategoryId: newCategory.get('id') }
+      });
+
+    const updatedExpense = yield Models.Expense.findById(expense.get('id'));
+
+    expect(request).to.have.status(200);
+    expect(request.body.status).to.be.equal('success');
+    expect(request.body.data).to.be.equal(null);
+    expect(updatedExpense.get('ExpenseCategoryId')).to.be.equal(newCategory.get('id'));
+  }));
+});
