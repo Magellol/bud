@@ -22,7 +22,9 @@ const publicRoutes = {
 };
 
 const sessionConfig = Object.assign({}, config.get('session'), {
-  store: process.env.NODE_ENV === 'production' ? new RedisStore(config.get('redis')) : false
+  store: process.env.NODE_ENV === 'production' && config.get('app.ci') === false
+    ? new RedisStore(config.get('redis'))
+    : false
 });
 
 module.exports = function apiRoutes(express) {

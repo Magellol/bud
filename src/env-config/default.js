@@ -26,7 +26,8 @@ module.exports = {
     DSN: process.env.SENTRY_DSN
   },
   app: {
-    host: process.env.APP_HOST
+    host: process.env.APP_HOST,
+    ci: process.env.CI || false
   },
   redis: {
     url: process.env.REDIS_URL
