@@ -18,7 +18,6 @@ module.exports = {
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
-    store: new Error('Session store must be defined'),
     cookie: {
       maxAge: (2 * 86400000) // 2 days.
     }
@@ -28,5 +27,8 @@ module.exports = {
   },
   app: {
     host: process.env.APP_HOST
+  },
+  redis: {
+    url: process.env.REDIS_URL
   }
 };

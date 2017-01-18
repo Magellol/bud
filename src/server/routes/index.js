@@ -6,6 +6,7 @@ const userRoutes = require('./users');
 const expenseCategoryRoutes = require('./expense-categories');
 const expenseRoutes = require('./expenses');
 const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 const { createError } = require('../helpers/errors');
 const HttpCodes = require('../constants/httpStatus');
 const {
@@ -20,12 +21,16 @@ const publicRoutes = {
   '/api/users/new': 'POST'
 };
 
+const sessionConfig = Object.assign({}, config.get('session'), {
+  store: process.env.NODE_ENV === 'production' ? new RedisStore(config.get('redis')) : false
+});
+
 module.exports = function apiRoutes(express) {
   const router = express.Router();
 
   router.use(Raven.requestHandler());
   router.use(bodyParser.json());
-  router.use(session(config.get('session')));
+  router.use(session(sessionConfig));
 
   /**
    * Middleware validating if we're trying to access public or private routes.

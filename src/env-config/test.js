@@ -10,8 +10,5 @@ module.exports = {
   },
   sentry: {
     DSN: ''
-  },
-  session: {
-    store: false
   }
 };
