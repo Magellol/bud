@@ -1,3 +1,5 @@
+![Build status](https://travis-ci.org/Magellol/bud.svg?branch=master)
+
 # Bud.
 Bud is your simple budget management buddy.
 
