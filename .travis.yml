@@ -7,5 +7,3 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS bud_test;'
-
-install: npm install
