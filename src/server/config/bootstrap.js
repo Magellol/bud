@@ -9,7 +9,7 @@ if (validEnvironments.includes(process.env.NODE_ENV) === false) {
   );
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && process.env.CI !== true) {
   // eslint-disable-next-line global-require, import/no-extraneous-dependencies
   require('dotenv').config();
 }
