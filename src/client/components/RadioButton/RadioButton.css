@@ -13,7 +13,6 @@
   position: relative;
   display: block;
   transition: color .2s ease;
-  border: none;
 }
 
 .label:hover {
