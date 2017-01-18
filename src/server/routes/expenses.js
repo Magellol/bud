@@ -155,5 +155,37 @@ module.exports = function expenseRoutes(express) {
     }
   }));
 
+  router.post('/delete', wrap(function* (req, resp, next) {
+    const { id } = req.body.payload;
+
+    try {
+      const expense = yield Models.Expense.findOne({
+        attributes: ['id'],
+        where: { id },
+        include: [
+          {
+            required: true,
+            attributes: ['id'],
+            model: Models.ExpenseCategory,
+            where: { UserId: req.session.user.id }
+          }
+        ]
+      });
+
+      if (expense === null) {
+        return next(createError(
+          `Expense with id: "${id}" does not exist`,
+          404
+        ));
+      }
+
+      yield expense.destroy();
+
+      return resp.json(formatSuccess());
+    } catch (error) {
+      return next(error);
+    }
+  }));
+
   return router;
 };
