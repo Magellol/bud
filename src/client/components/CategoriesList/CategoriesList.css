@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.generalWrapper {
+  border-top: 1px solid grayLighter;
+}
+
 .show {
   composes: fadeIn from '../../helpers/animations.css';
   animation-duration: .3s;

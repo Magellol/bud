@@ -44,7 +44,7 @@ const CategoriesList = React.createClass({
     });
 
     return (
-      <div>
+      <div className={s.generalWrapper}>
         {initiallyLoaded === false &&
           <div className={s.loaderWrapper}>
             <Loader delay={500} />
